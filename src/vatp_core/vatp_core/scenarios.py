@@ -61,9 +61,9 @@ class Scenario:
 
 
 # ---------------------------------------------------------------- world base
-def base_world(rng: random.Random, name: str) -> World:
+def base_world(rng: random.Random, name: str, jitter: bool = True) -> World:
     """Warehouse with a keep-out aisle that forces the loading bay to be the only legal corridor."""
-    j = lambda v, a=0.25: round(v + rng.uniform(-a, a), 2)  # noqa: E731
+    j = lambda v, a=0.25: round(v + (rng.uniform(-a, a) if jitter else 0.0), 2)  # noqa: E731
     ko_x = j(7.0)
     zones = {
         "dock": Zone("dock", (0, 0, 2, 2), (1.5, 1.0), placeable=False),
@@ -145,10 +145,10 @@ _SCHEDULE = ["none"] * 8 + ["obstacle_spawn", "grasp_fail", "obstacle_spawn", "g
 _TEMPLATE_CYCLE = ["conditional_clear_deliver", "simple_delivery", "two_item", "geofence"]
 
 
-def make_scenario(index: int, seed: int = 0) -> Scenario:
+def make_scenario(index: int, seed: int = 0, jitter: bool = True) -> Scenario:
     rng = random.Random(f"{seed}:{index}")
     tmpl = _TEMPLATE_CYCLE[index % len(_TEMPLATE_CYCLE)]
-    w = base_world(rng, f"scenario_{index:02d}")
+    w = base_world(rng, f"scenario_{index:02d}", jitter)
     instruction, goals = TEMPLATES[tmpl](rng, w)
     kind = _SCHEDULE[index % len(_SCHEDULE)]
     fault = _fault_for(rng, tmpl, w, kind)
@@ -159,5 +159,5 @@ def make_scenario(index: int, seed: int = 0) -> Scenario:
     return sc
 
 
-def generate_suite(n: int = 20, seed: int = 0) -> list[Scenario]:
-    return [make_scenario(i, seed) for i in range(n)]
+def generate_suite(n: int = 20, seed: int = 0, jitter: bool = True) -> list[Scenario]:
+    return [make_scenario(i, seed, jitter) for i in range(n)]
