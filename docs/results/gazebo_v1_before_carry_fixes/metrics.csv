@@ -1,0 +1,21 @@
+escalations,fault,fault_fired,final_nodes,first_attempt_valid,goals_satisfied,id,initial_nodes,message,n_fault_events,plan_latency_s,plan_repairs,recovered_from_fault,replan_latency_s,replans,safety_violations,success,template,tree_completed,validation_ms,wall_s
+0,none,False,13,True,False,s00,22,tree failed and replan budget exhausted: PLACE_FAILED,0,0.01,0,False,0.008,3,0,False,conditional_clear_deliver,False,1.482,178.93
+0,none,False,11,True,True,s01,11,mission tree completed,0,0.007,0,False,0.0,0,0,True,simple_delivery,True,0.737,71.41
+0,none,False,20,True,True,s02,20,mission tree completed,0,0.007,0,False,0.0,0,0,True,two_item,True,1.223,131.05
+0,none,False,11,True,True,s03,11,mission tree completed,0,0.007,0,False,0.0,0,0,True,geofence,True,0.775,84.72
+0,none,False,16,True,True,s04,16,mission tree completed,0,0.007,0,False,0.0,0,0,True,conditional_clear_deliver,True,0.769,70.77
+0,none,False,11,True,True,s05,11,mission tree completed,0,0.007,0,False,0.0,0,0,True,simple_delivery,True,0.728,70.57
+0,none,False,20,True,True,s06,20,mission tree completed,0,0.007,0,False,0.0,0,0,True,two_item,True,1.133,130.07
+0,none,False,11,True,True,s07,11,mission tree completed,0,0.008,0,False,0.0,0,0,True,geofence,True,0.858,82.63
+0,obstacle_spawn,True,3,True,False,s08,16,tree failed and replan budget exhausted: PLACE_FAILED,1,0.007,0,False,0.009,3,0,False,conditional_clear_deliver,False,0.854,283.81
+0,grasp_fail,True,11,True,True,s09,11,mission tree completed,1,0.006,0,True,0.0,0,0,True,simple_delivery,True,0.746,77.38
+0,obstacle_spawn,True,29,True,True,s10,20,mission tree completed,1,0.008,0,True,0.01,1,0,True,two_item,True,1.166,343.84
+0,grasp_fail,True,11,True,True,s11,11,mission tree completed,1,0.006,0,True,0.0,0,0,True,geofence,True,0.683,88.28
+0,nav_block,True,7,True,True,s12,16,mission tree completed,1,0.007,0,True,0.009,1,0,True,conditional_clear_deliver,True,0.895,72.54
+0,place_fail,True,3,True,True,s13,11,mission tree completed,1,0.006,0,True,0.006,1,0,True,simple_delivery,True,0.74,72.0
+0,grasp_fail,True,17,True,True,s14,20,mission tree completed,1,0.008,0,True,0.009,1,0,True,two_item,True,1.179,155.03
+0,obstacle_spawn,True,29,True,True,s15,11,mission tree completed,1,0.007,0,True,0.01,1,0,True,geofence,True,0.755,277.76
+0,nav_block,True,7,True,True,s16,16,mission tree completed,1,0.007,0,True,0.007,1,0,True,conditional_clear_deliver,True,0.821,71.11
+0,place_fail,True,3,True,True,s17,11,mission tree completed,1,0.007,0,True,0.007,1,0,True,simple_delivery,True,0.725,74.51
+0,obstacle_spawn,True,37,True,False,s18,20,tree failed and replan budget exhausted: PLACE_FAILED,1,0.007,0,False,0.011,3,0,False,two_item,False,1.165,193.39
+0,grasp_fail,True,9,True,True,s19,11,mission tree completed,1,0.008,0,True,0.007,1,0,True,geofence,True,1.064,93.48

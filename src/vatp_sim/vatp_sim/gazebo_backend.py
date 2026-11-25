@@ -13,11 +13,13 @@ import time
 
 from geometry_msgs.msg import PoseStamped
 from nav2_msgs.action import NavigateToPose
+from rcl_interfaces.msg import Parameter as ParamMsg, ParameterType, ParameterValue
+from rcl_interfaces.srv import SetParameters
 from rclpy.action import ActionClient
 from rclpy.time import Time
 from tf2_ros import Buffer, TransformListener
 
-from vatp_core.geometry import segment_hits_rect
+from vatp_core.geometry import rect_center, segment_hits_rect
 from vatp_core.scenarios import Fault, Scenario
 from vatp_core.symbolic_sim import SkillResult
 from vatp_core.world import World, WorldObject
@@ -32,6 +34,12 @@ NAV_TIMEOUT_S = 120.0
 CARRIED_Z = 0.30  # an object whose centre is above this is considered lifted/carried
 
 
+def _rect_dist(r, x: float, y: float) -> float:
+    dx = max(r[0] - x, 0.0, x - r[2])
+    dy = max(r[1] - y, 0.0, y - r[3])
+    return math.hypot(dx, dy)
+
+
 class GazeboBackend:
     def __init__(self, node, callback_group):
         self.node = node
@@ -39,6 +47,8 @@ class GazeboBackend:
         TransformListener(self.buf, node)
         self.arm = ArmControl(node)
         self.nav = ActionClient(node, NavigateToPose, "navigate_to_pose", callback_group=callback_group)
+        self._setp = node.create_client(SetParameters, "/controller_server/set_parameters", callback_group=callback_group)
+        self._slow = False
         self.scenario: Scenario | None = None
         self.holding: str | None = None
         self.robot_zone = "dock"
@@ -78,15 +88,28 @@ class GazeboBackend:
     def perceive(self) -> World:
         w = self.scenario.world.copy()
         w.objects = {}
-        for name, (x, y, z) in gzp.object_poses().items():
+        poses = gzp.object_poses()
+        if self.holding and poses.get(self.holding, (0, 0, 9))[2] < CARRIED_Z - 0.1:
+            self.node.get_logger().warn(f"DROPPED {self.holding}: no longer in the gripper")
+            self.holding = None
+        for name, (x, y, z) in poses.items():
             mass = self.scenario.world.objects[name].mass if name in self.scenario.world.objects else self.fault.obstacle_mass
-            zone = None if (name == self.holding or z > CARRIED_Z) else zone_of_xy(w, x, y, 0.15)
+            zone = None if (name == self.holding or z > CARRIED_Z) else self._nearest_zone(w, x, y)
             w.objects[name] = WorldObject(name, mass, zone)
         rx, ry = self.robot_xy()
         near = min(w.zones.values(), key=lambda z: math.dist(z.access, (rx, ry)))
         self.robot_zone = near.name if math.dist(near.access, (rx, ry)) < 0.5 else self.robot_zone
         w.robot_zone, w.robot_pos, w.holding = self.robot_zone, (rx, ry), self.holding
         return w
+
+    @staticmethod
+    def _nearest_zone(w: World, x: float, y: float) -> str | None:
+        """Zone containing the point (0.15 m margin) or, for a stray object, the nearest zone within 1.0 m."""
+        z = zone_of_xy(w, x, y, 0.15)
+        if z:
+            return z
+        best = min(w.zones.values(), key=lambda q: _rect_dist(q.rect, x, y))
+        return best.name if _rect_dist(best.rect, x, y) <= 1.0 else None
 
     def world_dict(self) -> dict:
         d = self.perceive().to_dict()
@@ -150,6 +173,58 @@ class GazeboBackend:
             res.success, res.code, res.message = False, "PLAN_INVALID", f"bad argument {e}"
         return res
 
+    # ------------------------------------------------------------------- nav speed
+    def _set_nav_speed(self, slow: bool) -> None:
+        if slow == self._slow or not self._setp.wait_for_service(timeout_sec=2.0):
+            return
+        vals = ({"FollowPath.desired_linear_vel": 0.22, "FollowPath.rotate_to_heading_angular_vel": 0.45,
+                 "FollowPath.max_angular_accel": 0.8} if slow else
+                {"FollowPath.desired_linear_vel": 0.5, "FollowPath.rotate_to_heading_angular_vel": 1.0,
+                 "FollowPath.max_angular_accel": 2.0})
+        req = SetParameters.Request()
+        for k, v in vals.items():
+            req.parameters.append(ParamMsg(name=k, value=ParameterValue(type=ParameterType.PARAMETER_DOUBLE, double_value=float(v))))
+        fut = self._setp.call_async(req)
+        t_end = time.time() + 3
+        while not fut.done() and time.time() < t_end:
+            time.sleep(0.02)
+        self._slow = slow
+
+    def _goto(self, x: float, y: float, yaw: float, timeout: float = NAV_TIMEOUT_S) -> tuple[bool, str]:
+        goal = NavigateToPose.Goal()
+        goal.pose = PoseStamped()
+        goal.pose.header.frame_id = "map"
+        goal.pose.pose.position.x, goal.pose.pose.position.y = x, y
+        goal.pose.pose.orientation.z, goal.pose.pose.orientation.w = math.sin(yaw / 2), math.cos(yaw / 2)
+        if not self.nav.wait_for_server(timeout_sec=10.0):
+            return False, "Nav2 not available"
+        gf = self.nav.send_goal_async(goal)
+        t_end = time.time() + 15
+        while not gf.done() and time.time() < t_end:
+            time.sleep(0.05)
+        gh = gf.result() if gf.done() else None
+        if gh is None or not gh.accepted:
+            return False, "Nav2 rejected the goal"
+        rf = gh.get_result_async()
+        t_end = time.time() + timeout
+        while not rf.done() and time.time() < t_end:
+            time.sleep(0.1)
+        if not rf.done():
+            gh.cancel_goal_async()
+            return False, f"no result in {timeout:.0f}s"
+        return (rf.result().status == 4), f"Nav2 status {rf.result().status}"
+
+    def _ensure_in_reach(self, x: float, y: float) -> None:
+        """Nav2 stops within tolerance of the access pose; stray objects can lie further away.
+        If the target is outside the arm's comfortable window, re-position facing it at a 0.6 m standoff."""
+        rx, ry = world_to_robot(self.buf, x, y)
+        if 0.50 <= rx <= 0.70 and abs(ry) <= 0.16:
+            return
+        px, py = self.robot_xy()
+        d = math.dist((px, py), (x, y)) or 1.0
+        ux, uy = (x - px) / d, (y - py) / d
+        self._goto(x - 0.60 * ux, y - 0.60 * uy, math.atan2(uy, ux), 60.0)
+
     # ------------------------------------------------------------------ skills
     def _navigate(self, zone: str, res: SkillResult) -> None:
         w = self.perceive()
@@ -163,33 +238,15 @@ class GazeboBackend:
                 res.success, res.code = False, "UNEXPECTED_OBSTACLE"
                 res.message = f"path to {zone} blocked in {tz.name} by {blockers}"
                 return
-        yaw = access_yaw(w, zone)
-        goal = NavigateToPose.Goal()
-        goal.pose = PoseStamped()
-        goal.pose.header.frame_id = "map"
-        goal.pose.pose.position.x, goal.pose.pose.position.y = z.access
-        goal.pose.pose.orientation.z, goal.pose.pose.orientation.w = math.sin(yaw / 2), math.cos(yaw / 2)
-        if not self.nav.wait_for_server(timeout_sec=10.0):
-            res.success, res.code, res.message = False, "NAV_TIMEOUT", "Nav2 not available"
+        self._set_nav_speed(self.holding is not None)
+        ok, msg = self._goto(z.access[0], z.access[1], access_yaw(w, zone))
+        self.perceive()  # detects a dropped payload
+        if self.holding is None and w.holding is not None:
+            res.success, res.code, res.message = False, "OBJECT_LOST", f"dropped {w.holding} while driving"
             return
-        gf = self.nav.send_goal_async(goal)
-        t_end = time.time() + 15
-        while not gf.done() and time.time() < t_end:
-            time.sleep(0.05)
-        gh = gf.result() if gf.done() else None
-        if gh is None or not gh.accepted:
-            res.success, res.code, res.message = False, "NAV_BLOCKED", "Nav2 rejected the goal"
-            return
-        rf = gh.get_result_async()
-        t_end = time.time() + NAV_TIMEOUT_S
-        while not rf.done() and time.time() < t_end:
-            time.sleep(0.1)
-        if not rf.done():
-            gh.cancel_goal_async()
-            res.success, res.code, res.message = False, "NAV_TIMEOUT", f"no result in {NAV_TIMEOUT_S}s"
-            return
-        if rf.result().status != 4:  # SUCCEEDED
-            res.success, res.code, res.message = False, "NAV_BLOCKED", f"Nav2 status {rf.result().status}"
+        if not ok:
+            res.success, res.code = False, "NAV_TIMEOUT" if "no result" in msg else "NAV_BLOCKED"
+            res.message = msg
             return
         self.robot_zone = zone
 
@@ -202,6 +259,8 @@ class GazeboBackend:
         if self.holding is not None or o.mass > w.payload_kg:
             res.success, res.code, res.message = False, "GRASP_FAILED", "gripper busy or object too heavy"
             return
+        x, y, z = gzp.object_poses()[obj]
+        self._ensure_in_reach(x, y)
         x, y, z = gzp.object_poses()[obj]
         rx, ry = world_to_robot(self.buf, x, y)
         zg = grasp_height(obj, z)

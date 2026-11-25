@@ -23,3 +23,7 @@ When replanning mid-mission, produce a tree for the REMAINING mission only, star
 ## RP-06 Escalation
 tags: escalate human help abort safe unrecoverable
 If no safe recovery exists, finish with RequestHumanHelp and leave the robot stationary with the gripper state reported via ReportStatus. Never improvise skills outside the skill library.
+
+## RP-07 OBJECT_LOST dropped payload
+tags: OBJECT_LOST dropped lost slipped payload carrying floor gripper_empty
+The held object slipped out of the gripper while driving. The gripper is now empty and the object lies on the floor near the robot, listed in the nearest zone. Recovery: NavigateTo that zone, PickObject the object again (RetryUntilSuccessful, 3 attempts), then continue the remaining mission. Prefer fewer, shorter drives while carrying.

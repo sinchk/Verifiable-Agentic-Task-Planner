@@ -7,6 +7,7 @@ Nodes start staggered because the simulator needs ~30 s before Nav2 and the skil
 from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription, TimerAction
+from launch.conditions import IfCondition
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import LaunchConfiguration
 from launch_ros.actions import Node
@@ -21,6 +22,9 @@ def generate_launch_description():
         DeclareLaunchArgument("scenario", default_value="0"),
         DeclareLaunchArgument("gui", default_value="false"),
         DeclareLaunchArgument("defect_rate", default_value="0.0"),
+        DeclareLaunchArgument("dashboard", default_value="false", description="start foxglove_bridge on :8765"),
+        Node(package="foxglove_bridge", executable="foxglove_bridge", name="foxglove_bridge", output="screen",
+             parameters=[{"port": 8765, "use_sim_time": True}], condition=IfCondition(LaunchConfiguration("dashboard"))),
         inc("gazebo.launch.py", scenario=LaunchConfiguration("scenario"), gui=LaunchConfiguration("gui")),
         TimerAction(period=30.0, actions=[inc("nav.launch.py")]),
         TimerAction(period=34.0, actions=[

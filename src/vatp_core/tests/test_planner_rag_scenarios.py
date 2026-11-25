@@ -114,3 +114,7 @@ def test_metrics_shape():
     res = Planner(MockBackend()).plan(sc.instruction, sc.world, sc.required_goals)
     m = res.metrics()
     assert m["ok"] and m["nodes"] > 3 and m["first_attempt_valid"]
+
+
+def test_rag_object_lost_procedure():
+    assert Retriever().search("OBJECT_LOST dropped while driving", k=1, prefix="RP-")[0].id == "RP-07"
