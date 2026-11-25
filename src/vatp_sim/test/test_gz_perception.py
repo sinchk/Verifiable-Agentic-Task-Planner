@@ -41,4 +41,4 @@ def test_parse(monkeypatch):
 def test_grasp_height_clears_palm_and_floor():
     from vatp_sim.world_gen import grasp_height
     assert abs(grasp_height("crate_1", 0.1) - 0.16) < 1e-9      # top 0.20 -> palm bottom 0.22 > top
-    assert abs(grasp_height("small_box_1", 0.05) - 0.075) < 1e-9  # clamped: fingertips above floor
+    assert abs(grasp_height("small_box_1", 0.05) - 0.09) < 1e-9  # clamped: fingertips 2 cm above the floor

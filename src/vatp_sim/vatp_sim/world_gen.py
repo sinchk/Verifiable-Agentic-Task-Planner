@@ -130,7 +130,7 @@ def grasp_height(name: str, z_center: float) -> float:
 
     The palm underside is 0.06 m above the grasp frame and the fingertips 0.07 m below it, so the
     palm clears the object top when grasp_z >= top - 0.05, and fingertips stay above the floor when
-    grasp_z >= 0.075.
+    grasp_z >= 0.09 (a 2 cm margin).
     """
     h = OBJECT_STYLE[object_kind(name)][0][2]
-    return max(0.075, z_center + h / 2 - 0.04)
+    return max(0.09, z_center + h / 2 - 0.04)
