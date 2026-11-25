@@ -95,6 +95,10 @@ def world_sdf(w: World, with_objects: bool = True) -> str:
       <visual name="v"><geometry><plane><normal>0 0 1</normal><size>30 30</size></plane></geometry>
         <material><ambient>0.35 0.35 0.38 1</ambient><diffuse>0.35 0.35 0.38 1</diffuse></material></visual></link></model>
     {''.join(parts)}
+    <model name="overview_cam"><static>true</static><pose>7.0 -6.5 9.5 0 0.66 1.5708</pose><link name="l">
+      <sensor name="cam" type="camera"><topic>/overview_cam/image</topic><update_rate>5</update_rate><always_on>true</always_on>
+        <camera><horizontal_fov>1.25</horizontal_fov><image><width>1280</width><height>720</height><format>R8G8B8</format></image>
+        <clip><near>0.1</near><far>60</far></clip></camera></sensor></link></model>
     {objs}
   </world>
 </sdf>"""

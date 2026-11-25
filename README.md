@@ -16,6 +16,30 @@ instruction ─► RAG(safety + recovery) ─► LLM (schema-constrained BT) ─
                     validated patch ◄── Replan(failure, re-perceived world) ◄── FAILURE ◄── skill servers (Nav2 · arm · perception)
 ```
 
+## See it work
+A real run in Gazebo Harmonic (scenario s08). An unexpected obstacle appears in the loading bay while the robot is
+carrying the crate; navigation fails, the recovery supervisor re-perceives the scene, the planner returns a **validated
+patch**, and the robot parks the crate, clears the obstacle, re-fetches the crate and delivers it. All overlays come from
+the live executor event stream.
+
+[![Recovery moment](docs/media/gazebo_recovery_moment.jpg)](docs/media/demo_fault_recovery.mp4)
+*Click for the full 60 s recording ([`docs/media/demo_fault_recovery.mp4`](docs/media/demo_fault_recovery.mp4)). Planner in this recording: the offline reference planner (no LLM).*
+
+| the tree, before and after the fault | the benchmark |
+|---|---|
+| ![BT before/after](docs/media/bt_before_after_replan.png) | ![results](docs/media/results_overview.png) |
+
+Regenerate everything: `scripts/record_demo.sh 8` → `scripts/make_video.py` · `scripts/render_bt.py` · `scripts/render_results.py`.
+
+### Where the LLM fits
+The model is a *proposer* inside the loop below. The Claude backend (`backend:=anthropic`) is implemented, uses
+schema-constrained output and refusal fallbacks. The planner → validator → repair pipeline is tested with the offline
+backend; the Claude backend itself has **not yet returned a successful response** (the API key used during development
+had no credits). The recorded runs above therefore use the offline reference planner.
+The figure is a **concept illustration, not measured output**.
+
+![LLM loop concept (illustrative)](docs/media/concept_llm_loop_ILLUSTRATIVE.png)
+
 ## What is in the box
 | capability | where |
 |---|---|
@@ -85,7 +109,7 @@ Each scenario carries one fault, fired when a chosen skill is called for the n-t
 * Full tables: [run 1](docs/results/gazebo_v1_before_carry_fixes/summary.md) ·
   [run 2](docs/results/gazebo_v2_offline_planner_20/summary.md) ·
   [symbolic baseline](docs/results/baseline_offline_planner_symbolic_20.md).
-* **Real-LLM numbers are not in yet**: the Claude backend is implemented and unit-tested through the validator, but the
+* **Real-LLM numbers are not in yet**: the Claude backend is implemented (the pipeline around it is tested with the offline backend), but it has not been run: the
   API key used during development had no credits. Run `backend:=anthropic` to produce them.
 
 ## Limitations (stated up front)

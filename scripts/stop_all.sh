@@ -7,7 +7,7 @@ PATTERNS=(
   "static_transform_publisher" "ground_truth_localizer" "controller_manager" "spawner"
   "move_group" "nav2_" "lifecycle_manager" "map_server" "planner_server" "controller_server"
   "behavior_server" "bt_navigator" "planner_node" "skill_server" "bt_executor"
-  "gazebo_skill_server" "foxglove_bridge" "component_container" "rviz2"
+  "gazebo_skill_server" "frame_recorder" "foxglove_bridge" "component_container" "rviz2"
 )
 for p in "${PATTERNS[@]}"; do
   pkill -f -- "$p" 2>/dev/null

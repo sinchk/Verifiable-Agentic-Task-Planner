@@ -5,3 +5,5 @@
 - {ros_topic_name: /scan, gz_topic_name: /scan, ros_type_name: sensor_msgs/msg/LaserScan, gz_type_name: gz.msgs.LaserScan, direction: GZ_TO_ROS}
 - {ros_topic_name: /gz/dynamic_poses, gz_topic_name: /world/vatp_warehouse/dynamic_pose/info, ros_type_name: tf2_msgs/msg/TFMessage, gz_type_name: gz.msgs.Pose_V, direction: GZ_TO_ROS}
 - {ros_topic_name: /robot_pose, gz_topic_name: /model/vatp_amr/pose, ros_type_name: geometry_msgs/msg/PoseStamped, gz_type_name: gz.msgs.Pose, direction: GZ_TO_ROS}
+- {ros_topic_name: /overview_cam/image, gz_topic_name: /overview_cam/image, ros_type_name: sensor_msgs/msg/Image, gz_type_name: gz.msgs.Image, direction: GZ_TO_ROS}
+- {ros_topic_name: /chase_cam/image, gz_topic_name: /chase_cam/image, ros_type_name: sensor_msgs/msg/Image, gz_type_name: gz.msgs.Image, direction: GZ_TO_ROS}

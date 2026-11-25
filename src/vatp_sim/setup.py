@@ -22,5 +22,6 @@ setup(
     maintainer_email="sinchugk@gmail.com",
     description="Gazebo Harmonic warehouse and mobile manipulator for the VATP project.",
     license="Apache-2.0",
-    entry_points={"console_scripts": ["ground_truth_localizer = vatp_sim.ground_truth_localizer:main"]},
+    entry_points={"console_scripts": ["ground_truth_localizer = vatp_sim.ground_truth_localizer:main",
+        "frame_recorder = vatp_sim.frame_recorder:main"]},
 )
