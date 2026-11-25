@@ -130,11 +130,11 @@ def _fault_for(rng, template: str, w: World, kind: str) -> Fault:
     if kind == "obstacle_spawn":  # unexpected box appears in the bay as the robot heads there
         return Fault("obstacle_spawn", "loading_bay", "NavigateTo", 1, obstacle_mass=round(rng.uniform(0.3, 0.8), 2))
     if kind == "nav_block":
-        return Fault("nav_block", "loading_bay", "NavigateTo", 2)
+        return Fault("nav_block", "loading_bay", "NavigateTo", 2, fail_attempts=2)
     if kind == "grasp_fail":
-        return Fault("grasp_fail", None, "PickObject", 1, fail_attempts=rng.choice([1, 2]))
+        return Fault("grasp_fail", None, "PickObject", 1, fail_attempts=rng.choice([2, 3]))
     if kind == "place_fail":
-        return Fault("place_fail", None, "PlaceObject", 1, fail_attempts=1)
+        return Fault("place_fail", None, "PlaceObject", 1, fail_attempts=2)
     raise ValueError(kind)
 
 

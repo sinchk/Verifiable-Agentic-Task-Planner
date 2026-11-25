@@ -1,0 +1,11 @@
+# One call to one skill of the skill library (condition or action).
+string skill
+string[] arg_names
+string[] arg_values
+---
+bool success
+string code        # "" on success, else a failure code from the skill library
+string message
+---
+string status
+float32 progress

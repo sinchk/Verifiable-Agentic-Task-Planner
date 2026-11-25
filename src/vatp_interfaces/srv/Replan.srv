@@ -1,0 +1,13 @@
+string instruction
+string world_yaml            # CURRENT belief state (re-perceived after the failure)
+string failed_node
+string failed_skill
+string failure_code
+string failure_message
+string required_goals_json   # full mission goals; the planner keeps only the unsatisfied ones
+---
+bool ok
+string bt_xml
+string plan_json
+string metrics_json
+string issues_json

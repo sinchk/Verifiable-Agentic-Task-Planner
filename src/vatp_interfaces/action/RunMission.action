@@ -1,0 +1,15 @@
+# Plan (LLM -> validated BT.CPP XML), execute, and recover from failures.
+string instruction
+string required_goals_json   # JSON list of {predicate,args}; verified by the validator ("" = use planner-declared goals)
+uint8 max_replans
+---
+bool success
+string message
+uint32 replans
+float64 first_plan_latency_s
+float64 total_replan_latency_s
+uint32 initial_nodes
+string final_bt_xml
+---
+string status
+uint32 replans

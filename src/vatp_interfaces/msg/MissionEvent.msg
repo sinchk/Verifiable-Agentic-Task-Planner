@@ -1,0 +1,4 @@
+builtin_interfaces/Time stamp
+string type        # PLAN_REQUEST PLAN_READY NODE_STATUS SKILL_FAILED FALLBACK_TRIGGERED REPLAN_REQUEST REPLAN_READY TREE_SWAPPED MISSION_END FAULT_INJECTED
+string node
+string detail      # JSON payload

@@ -1,0 +1,9 @@
+string instruction
+string world_yaml
+string required_goals_json
+---
+bool ok
+string bt_xml
+string plan_json
+string metrics_json      # attempts, repairs, llm/validation latency, tokens, nodes
+string issues_json       # validator issues of the final (or last rejected) attempt
