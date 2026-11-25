@@ -123,3 +123,14 @@ def write_nav_map(w: World, out_dir: Path, name: str = "warehouse", res: float =
     yml.write_text(f"image: {pgm.name}\nmode: trinary\nresolution: {res}\norigin: [{x0}, {y0}, 0.0]\n"
                    f"negate: 0\noccupied_thresh: 0.65\nfree_thresh: 0.25\n")
     return yml
+
+
+def grasp_height(name: str, z_center: float) -> float:
+    """Grasp-frame height for a top-down grasp.
+
+    The palm underside is 0.06 m above the grasp frame and the fingertips 0.07 m below it, so the
+    palm clears the object top when grasp_z >= top - 0.05, and fingertips stay above the floor when
+    grasp_z >= 0.075.
+    """
+    h = OBJECT_STYLE[object_kind(name)][0][2]
+    return max(0.075, z_center + h / 2 - 0.04)

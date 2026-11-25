@@ -99,7 +99,7 @@
   <xacro:arm_link name="wrist_3_link" length="0.05" radius="0.026" mass="0.3"/>
 
   <xacro:arm_joint name="arm_joint_1" parent="arm_base_link" child="shoulder_link" xyz="0 0 0.03" axis="0 0 1" lo="-3.0" hi="3.0"/>
-  <xacro:arm_joint name="arm_joint_2" parent="shoulder_link" child="upper_arm_link" xyz="0.08 0 0" axis="0 1 0" lo="-1.7" hi="1.7" effort="120"/>
+  <xacro:arm_joint name="arm_joint_2" parent="shoulder_link" child="upper_arm_link" xyz="0.08 0 0" axis="0 1 0" lo="-2.1" hi="1.7" effort="120"/>
   <xacro:arm_joint name="arm_joint_3" parent="upper_arm_link" child="forearm_link" xyz="0.38 0 0" axis="0 1 0" lo="-2.6" hi="2.6" effort="80"/>
   <xacro:arm_joint name="arm_joint_4" parent="forearm_link" child="wrist_1_link" xyz="0.36 0 0" axis="1 0 0" lo="-3.0" hi="3.0" effort="30"/>
   <xacro:arm_joint name="arm_joint_5" parent="wrist_1_link" child="wrist_2_link" xyz="0.07 0 0" axis="0 1 0" lo="-2.2" hi="2.2" effort="30"/>
@@ -128,7 +128,7 @@
     </link>
     <joint name="${name}_finger_joint" type="prismatic">
       <parent link="gripper_link"/><child link="${name}_finger"/>
-      <origin xyz="0.08 ${sign*0.045} 0"/><axis xyz="0 ${-sign} 0"/>
+      <origin xyz="0.08 ${sign*0.095} 0"/><axis xyz="0 ${-sign} 0"/>
       <limit lower="0" upper="0.06" effort="40" velocity="0.2"/>
       <dynamics damping="0.5" friction="0.1"/>
     </joint>
@@ -147,10 +147,10 @@
       </joint>
     </xacro:macro>
     <xacro:pos_joint name="arm_joint_1"/>
-    <xacro:pos_joint name="arm_joint_2" initial="-0.5"/>
-    <xacro:pos_joint name="arm_joint_3" initial="0.9"/>
+    <xacro:pos_joint name="arm_joint_2" initial="-1.6"/>
+    <xacro:pos_joint name="arm_joint_3" initial="2.6"/>
     <xacro:pos_joint name="arm_joint_4"/>
-    <xacro:pos_joint name="arm_joint_5" initial="0.0"/>
+    <xacro:pos_joint name="arm_joint_5" initial="-2.2"/>
     <xacro:pos_joint name="arm_joint_6"/>
     <xacro:pos_joint name="left_finger_joint"/>
     <xacro:pos_joint name="right_finger_joint"/>
