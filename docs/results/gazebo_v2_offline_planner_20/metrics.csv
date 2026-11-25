@@ -1,0 +1,21 @@
+escalations,fault,fault_fired,final_nodes,first_attempt_valid,goals_satisfied,id,initial_nodes,message,n_fault_events,plan_latency_s,plan_repairs,recovered_from_fault,replan_latency_s,replans,safety_violations,success,template,tree_completed,validation_ms,wall_s
+0,none,False,22,True,True,s00,22,mission tree completed,0,0.007,0,False,0.0,0,0,True,conditional_clear_deliver,True,1.128,173.46
+0,none,False,11,True,True,s01,11,mission tree completed,0,0.007,0,False,0.0,0,0,True,simple_delivery,True,0.703,96.51
+0,none,False,20,True,True,s02,20,mission tree completed,0,0.007,0,False,0.0,0,0,True,two_item,True,1.143,174.27
+0,none,False,11,True,True,s03,11,mission tree completed,0,0.007,0,False,0.0,0,0,True,geofence,True,1.013,117.67
+0,none,False,16,True,True,s04,16,mission tree completed,0,0.007,0,False,0.0,0,0,True,conditional_clear_deliver,True,0.782,103.92
+0,none,False,11,True,True,s05,11,mission tree completed,0,0.007,0,False,0.0,0,0,True,simple_delivery,True,0.778,96.91
+0,none,False,20,True,True,s06,20,mission tree completed,0,0.007,0,False,0.0,0,0,True,two_item,True,1.156,172.84
+0,none,False,11,True,True,s07,11,mission tree completed,0,0.007,0,False,0.0,0,0,True,geofence,True,0.709,117.62
+0,obstacle_spawn,True,13,True,True,s08,16,mission tree completed,1,0.006,0,True,0.008,2,0,True,conditional_clear_deliver,True,0.773,387.65
+0,grasp_fail,True,11,True,True,s09,11,mission tree completed,1,0.006,0,True,0.0,0,0,True,simple_delivery,True,0.69,105.49
+0,obstacle_spawn,True,29,True,True,s10,20,mission tree completed,1,0.008,0,True,0.01,1,0,True,two_item,True,1.161,444.46
+0,grasp_fail,True,11,True,True,s11,11,mission tree completed,1,0.007,0,True,0.0,0,0,True,geofence,True,0.854,121.79
+0,nav_block,True,7,True,True,s12,16,mission tree completed,1,0.008,0,True,0.007,1,0,True,conditional_clear_deliver,True,1.082,99.06
+0,place_fail,True,3,True,True,s13,11,mission tree completed,1,0.007,0,True,0.006,1,0,True,simple_delivery,True,0.774,96.98
+0,grasp_fail,True,20,True,True,s14,20,mission tree completed,1,0.008,0,True,0.0,0,0,True,two_item,True,1.192,180.64
+0,obstacle_spawn,True,29,True,True,s15,11,mission tree completed,1,0.008,0,True,0.01,1,0,True,geofence,True,1.088,366.57
+0,nav_block,True,7,True,True,s16,16,mission tree completed,1,0.007,0,True,0.008,1,0,True,conditional_clear_deliver,True,0.922,97.26
+0,place_fail,True,3,True,True,s17,11,mission tree completed,1,0.006,0,True,0.006,1,0,True,simple_delivery,True,0.685,101.54
+0,obstacle_spawn,True,29,True,True,s18,20,mission tree completed,1,0.009,0,True,0.01,1,0,True,two_item,True,1.297,464.17
+0,grasp_fail,True,9,True,True,s19,11,mission tree completed,1,0.007,0,True,0.008,1,0,True,geofence,True,0.833,125.13

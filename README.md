@@ -64,7 +64,29 @@ Each scenario carries one fault, fired when a chosen skill is called for the n-t
 | `place_fail` | placement fails while holding the object | replan: handle held object, then re-place |
 
 ## Results
-See [docs/results/](docs/results/). Offline-planner numbers validate the pipeline and are **not** LLM latencies.
+20 randomised scenarios (4 task templates × 5 fault types), Gazebo Harmonic + Nav2 + physical grasping,
+**offline reference planner** (the real-LLM run needs API credits — see below).
+
+| | run 1 (before carry fixes) | run 2 (after) |
+|---|---|---|
+| mission success | 17/20 (85%) | **20/20 (100%)** |
+| injected faults recovered | 10/12 | **12/12** |
+| scenarios needing replanning | 11 | 9 |
+| geofence / safety violations | 0 | **0** |
+| first-attempt plans passing the validator | 20/20 | 20/20 |
+| BT size (initial, median) | 13.5 nodes | 13.5 nodes |
+
+![run 2](docs/results/gazebo_v2_offline_planner_20/metrics.png)
+
+* Run 1 failed only where the small box slipped out of the gripper *while driving* and the backend kept believing it
+  was held. Fixes: real finger friction, slower/gentler carrying, drop detection (`OBJECT_LOST` + RAG procedure), and
+  re-positioning for stray objects. Run 2 still drops the box occasionally — but now **detects it, replans and recovers**.
+* Replanning latency for the offline planner is ~10 ms (meaningless as an LLM figure); the validator takes 1–2 ms per plan.
+* Full tables: [run 1](docs/results/gazebo_v1_before_carry_fixes/summary.md) ·
+  [run 2](docs/results/gazebo_v2_offline_planner_20/summary.md) ·
+  [symbolic baseline](docs/results/baseline_offline_planner_symbolic_20.md).
+* **Real-LLM numbers are not in yet**: the Claude backend is implemented and unit-tested through the validator, but the
+  API key used during development had no credits. Run `backend:=anthropic` to produce them.
 
 ## Limitations (stated up front)
 * Localisation and perception use simulator ground truth (stand-ins for AMCL and a VLM); the VLM hook is the scene graph given to the planner.

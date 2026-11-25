@@ -1,0 +1,48 @@
+<root BTCPP_format="4" main_tree_to_execute="MainTree">
+  <BehaviorTree ID="MainTree">
+    <Sequence name="n29">
+      <RetryUntilSuccessful name="n2" num_attempts="2">
+        <NavigateTo name="n1" zone="staging" />
+      </RetryUntilSuccessful>
+      <RetryUntilSuccessful name="n4" num_attempts="2">
+        <PlaceObject name="n3" object="crate_1" zone="staging" />
+      </RetryUntilSuccessful>
+      <RetryUntilSuccessful name="n6" num_attempts="2">
+        <NavigateTo name="n5" zone="loading_bay" />
+      </RetryUntilSuccessful>
+      <RetryUntilSuccessful name="n8" num_attempts="3">
+        <PickObject name="n7" object="obstacle_1" />
+      </RetryUntilSuccessful>
+      <RetryUntilSuccessful name="n10" num_attempts="2">
+        <NavigateTo name="n9" zone="staging" />
+      </RetryUntilSuccessful>
+      <RetryUntilSuccessful name="n12" num_attempts="2">
+        <PlaceObject name="n11" object="obstacle_1" zone="staging" />
+      </RetryUntilSuccessful>
+      <RetryUntilSuccessful name="n14" num_attempts="2">
+        <NavigateTo name="n13" zone="loading_bay" />
+      </RetryUntilSuccessful>
+      <RetryUntilSuccessful name="n16" num_attempts="2">
+        <NavigateTo name="n15" zone="zone_b" />
+      </RetryUntilSuccessful>
+      <RetryUntilSuccessful name="n18" num_attempts="2">
+        <NavigateTo name="n17" zone="loading_bay" />
+      </RetryUntilSuccessful>
+      <RetryUntilSuccessful name="n20" num_attempts="2">
+        <NavigateTo name="n19" zone="staging" />
+      </RetryUntilSuccessful>
+      <RetryUntilSuccessful name="n22" num_attempts="3">
+        <PickObject name="n21" object="crate_1" />
+      </RetryUntilSuccessful>
+      <RetryUntilSuccessful name="n24" num_attempts="2">
+        <NavigateTo name="n23" zone="loading_bay" />
+      </RetryUntilSuccessful>
+      <RetryUntilSuccessful name="n26" num_attempts="2">
+        <NavigateTo name="n25" zone="zone_b" />
+      </RetryUntilSuccessful>
+      <RetryUntilSuccessful name="n28" num_attempts="2">
+        <PlaceObject name="n27" object="crate_1" zone="zone_b" />
+      </RetryUntilSuccessful>
+    </Sequence>
+  </BehaviorTree>
+</root>
