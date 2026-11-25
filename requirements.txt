@@ -1,0 +1,7 @@
+# Python deps for the planner / benchmark (ROS python packages come from apt).
+anthropic>=2.14
+pyyaml>=6
+pytest>=8
+# The venv is created with --system-site-packages (to see rclpy); Ubuntu's apt `brotli` 1.1.0
+# is too old for the Anthropic SDK's HTTP client, so pin a newer one inside the venv.
+brotli>=1.2

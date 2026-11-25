@@ -1,0 +1,123 @@
+# Skill library: the ONLY vocabulary an LLM-generated behavior tree may use.
+# This file is the single source of truth shared by
+#   * the LLM prompt / JSON schema          (planner)
+#   * the pre-execution validator           (validator)
+#   * the C++ BT executor's node registry   (vatp_bt, checked by a unit test)
+#
+# Port types:  zone | object | float | int | string
+# `pre`  : predicates that must hold in the symbolic state before the skill runs
+# `eff`  : effects applied to the symbolic state when the skill SUCCEEDS
+# Failure never changes the symbolic state (skills are transactional).
+
+version: 1
+
+control_nodes:
+  Sequence:               {min_children: 1, max_children: null}
+  Fallback:               {min_children: 2, max_children: null}
+  ReactiveSequence:       {min_children: 2, max_children: null}
+  RetryUntilSuccessful:   {min_children: 1, max_children: 1, ports: {num_attempts: {type: int, min: 1, max: 5, required: true}}}
+  Timeout:                {min_children: 1, max_children: 1, ports: {msec: {type: int, min: 1000, max: 300000, required: true}}}
+  Inverter:               {min_children: 1, max_children: 1}
+  ForceSuccess:           {min_children: 1, max_children: 1}
+
+skills:
+  # ---------------------------------------------------------------- conditions
+  CheckZoneClear:
+    kind: condition
+    description: "SUCCESS if no object is detected inside the zone, FAILURE otherwise. Pure sensing."
+    ports:
+      zone: {type: zone, required: true}
+    pre: []
+    eff: []
+
+  CheckHolding:
+    kind: condition
+    description: "SUCCESS if the gripper currently holds the given object."
+    ports:
+      object: {type: object, required: true}
+    pre: []
+    eff: []
+
+  CheckObjectAt:
+    kind: condition
+    description: "SUCCESS if the object is currently located in the zone."
+    ports:
+      object: {type: object, required: true}
+      zone: {type: zone, required: true}
+    pre: []
+    eff: []
+
+  # ------------------------------------------------------------------- actions
+  NavigateTo:
+    kind: action
+    description: "Drive the base to the access pose of a zone using Nav2. Zone must be navigable and not restricted."
+    ports:
+      zone: {type: zone, required: true}
+    pre:
+      - zone_navigable(zone)
+      - path_avoids_keepout(zone)
+    eff:
+      - robot_at(zone)
+
+  PickObject:
+    kind: action
+    description: "Grasp an object using the arm (MoveIt). Robot must be at the zone containing the object with an empty gripper."
+    ports:
+      object: {type: object, required: true}
+    pre:
+      - gripper_empty
+      - robot_at_object(object)
+      - graspable(object)
+      - within_payload(object)
+    eff:
+      - holding(object)
+      - not_located(object)
+
+  PlaceObject:
+    kind: action
+    description: "Place the held object at the given zone. Robot must be at that zone."
+    ports:
+      object: {type: object, required: true}
+      zone: {type: zone, required: true}
+    pre:
+      - holding(object)
+      - robot_at(zone)
+      - zone_placeable(zone)
+    eff:
+      - located(object, zone)
+      - gripper_empty
+
+  ReportStatus:
+    kind: action
+    description: "Publish a human-readable status message to the operator. Always succeeds."
+    ports:
+      message: {type: string, required: true}
+    pre: []
+    eff: []
+
+  RequestHumanHelp:
+    kind: action
+    description: "Escalate to a human operator. Terminal recovery option; mission is aborted safely."
+    ports:
+      reason: {type: string, required: true}
+    pre: []
+    eff: []
+
+  Wait:
+    kind: action
+    description: "Wait in place for a bounded time (seconds)."
+    ports:
+      seconds: {type: float, min: 0.5, max: 30.0, required: true}
+    pre: []
+    eff: []
+
+# Failure codes a skill may report; used by RAG recovery retrieval.
+failure_codes:
+  - NAV_BLOCKED
+  - NAV_TIMEOUT
+  - GRASP_FAILED
+  - OBJECT_NOT_FOUND
+  - PLACE_FAILED
+  - ZONE_OCCUPIED
+  - UNEXPECTED_OBSTACLE
+  - PLAN_INVALID

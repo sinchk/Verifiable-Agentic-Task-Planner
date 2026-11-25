@@ -1,0 +1,14 @@
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+*.egg-info/
+# colcon
+build/
+install/
+log/
+# runtime outputs (kept out of git; curated results live in docs/results)
+runs/
+*.bag
+*.mcap
+.env
