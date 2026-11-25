@@ -60,9 +60,17 @@ class SkillServer(Node):
 
     # --------------------------------------------------------------- lifecycle
     def on_configure(self, state: State) -> TransitionCallbackReturn:
-        if self.get_parameter("backend").value != "symbolic":
-            self.get_logger().error("only the 'symbolic' backend is implemented in this launch; "
-                                    "use the Gazebo skill nodes for backend:=gazebo")
+        self.gz = None
+        backend = self.get_parameter("backend").value
+        if backend == "gazebo":
+            try:
+                from vatp_sim.gazebo_backend import GazeboBackend
+            except ImportError as e:
+                self.get_logger().error(f"gazebo backend unavailable (is vatp_sim built/sourced?): {e}")
+                return TransitionCallbackReturn.FAILURE
+            self.gz = GazeboBackend(self, self._cg)
+        elif backend != "symbolic":
+            self.get_logger().error(f"unknown backend '{backend}' (symbolic|gazebo)")
             return TransitionCallbackReturn.FAILURE
         self.events = self.create_publisher(MissionEvent, "/vatp/events", 50)
         self.create_service(GetWorld, "/vatp/get_world", self._get_world, callback_group=self._cg)
@@ -98,17 +106,24 @@ class SkillServer(Node):
         except Exception as e:  # noqa: BLE001 — report any parse problem to the caller
             resp.ok, resp.message = False, f"bad scenario: {e}"
             return resp
-        with self._lock:
-            self.sim = SymbolicSim(sc)
+        if self.gz is not None:
+            self.gz.load(sc)
+            self.sim = self.gz  # truthiness marks "scenario loaded"
+        else:
+            with self._lock:
+                self.sim = SymbolicSim(sc)
         self.get_logger().info(f"loaded scenario {sc.id} ({sc.template}, fault={sc.fault.type})")
         resp.ok, resp.message = True, sc.id
         return resp
 
     def _get_world(self, req, resp: GetWorld.Response):
+        if self.sim is None:
+            resp.world_yaml = ""
+            return resp
+        if self.gz is not None:
+            resp.world_yaml = yaml.safe_dump(self.gz.world_dict(), sort_keys=False)
+            return resp
         with self._lock:
-            if self.sim is None:
-                resp.world_yaml = ""
-                return resp
             d = self.sim.world.to_dict()
             d["sim_stats"] = {
                 "safety_violations": self.sim.safety_violations,
@@ -134,8 +149,11 @@ class SkillServer(Node):
     def _execute(self, skill: str, gh):
         req = gh.request
         args = dict(zip(req.arg_names, req.arg_values))
-        with self._lock:
-            res = self.sim.execute(skill, args)
+        if self.gz is not None:
+            res = self.gz.execute(skill, args)  # real time: Nav2 / arm motion happen inside
+        else:
+            with self._lock:
+                res = self.sim.execute(skill, args)
         for ev in res.events:
             self._emit(ev["type"], skill, ev["detail"])
             self.get_logger().warn(f"{ev['type']}: {ev['detail']}")

@@ -10,6 +10,7 @@
   <exec_depend>vatp_interfaces</exec_depend>
   <exec_depend>vatp_core</exec_depend>
   <exec_depend>launch_ros</exec_depend>
+  <exec_depend>vatp_sim</exec_depend>
   <test_depend>python3-pytest</test_depend>
   <export>
     <build_type>ament_python</build_type>

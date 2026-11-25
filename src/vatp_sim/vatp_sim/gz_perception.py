@@ -28,3 +28,26 @@ def object_poses(prefixes=("crate", "small_box", "obstacle"), timeout: float = 8
         v = dict(_VAL.findall(pos))
         poses[name] = (float(v.get("x", 0)), float(v.get("y", 0)), float(v.get("z", 0)))
     return poses
+
+
+# ---------------------------------------------------------------- world control (gz services)
+def _gz_service(service: str, reqtype: str, reptype: str, req: str, timeout_ms: int = 5000) -> bool:
+    r = subprocess.run(["gz", "service", "-s", service, "--reqtype", reqtype, "--reptype", reptype,
+                        "--timeout", str(timeout_ms), "--req", req], capture_output=True, text=True, timeout=timeout_ms / 1000 + 5)
+    return "true" in r.stdout
+
+
+def spawn_model(sdf: str) -> bool:
+    one_line = " ".join(sdf.split()).replace("\\", "\\\\").replace('"', '\\"')
+    return _gz_service(f"/world/{WORLD_NAME}/create", "gz.msgs.EntityFactory", "gz.msgs.Boolean", f'sdf: "{one_line}"')
+
+
+def remove_model(name: str) -> bool:
+    return _gz_service(f"/world/{WORLD_NAME}/remove", "gz.msgs.Entity", "gz.msgs.Boolean", f'name: "{name}" type: MODEL')
+
+
+def set_pose(name: str, x: float, y: float, z: float, yaw: float = 0.0) -> bool:
+    import math
+    req = (f'name: "{name}" position {{x: {x} y: {y} z: {z}}} '
+           f'orientation {{z: {math.sin(yaw / 2)} w: {math.cos(yaw / 2)}}}')
+    return _gz_service(f"/world/{WORLD_NAME}/set_pose", "gz.msgs.Pose", "gz.msgs.Boolean", req)

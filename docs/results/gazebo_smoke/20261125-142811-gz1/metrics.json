@@ -1,0 +1,25 @@
+[
+ {
+  "id": "s01",
+  "template": "simple_delivery",
+  "fault": "none",
+  "success": true,
+  "tree_completed": true,
+  "goals_satisfied": true,
+  "fault_fired": false,
+  "n_fault_events": 0,
+  "recovered_from_fault": false,
+  "replans": 0,
+  "plan_latency_s": 0.008,
+  "replan_latency_s": 0.0,
+  "initial_nodes": 11,
+  "final_nodes": 11,
+  "plan_repairs": 0,
+  "first_attempt_valid": true,
+  "validation_ms": 0.892,
+  "safety_violations": 0,
+  "escalations": 0,
+  "wall_s": 71.81,
+  "message": "mission tree completed"
+ }
+]

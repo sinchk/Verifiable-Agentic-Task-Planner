@@ -8,6 +8,8 @@ from typing import Any
 
 import yaml
 
+import re
+
 SPEC_PATH = Path(__file__).parent / "spec" / "skills.yaml"
 
 
@@ -101,3 +103,8 @@ def load_library(path: str | None = None) -> SkillLibrary:
         controls=controls,
         failure_codes=tuple(raw["failure_codes"]),
     )
+
+
+def skill_action_name(skill: str) -> str:
+    """CamelCase skill -> ROS action name (matches the C++ executor)."""
+    return "/vatp/skills/" + re.sub(r"(?<!^)(?=[A-Z])", "_", skill).lower()

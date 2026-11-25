@@ -48,7 +48,7 @@ class Bench(Node):
         return all(c.wait_for_service(timeout) for c in (self.load, self.world)) and \
             self.mission.wait_for_server(timeout)
 
-    def call(self, cli, req, timeout=30.0):
+    def call(self, cli, req, timeout=180.0):
         fut = cli.call_async(req)
         t_end = time.time() + timeout
         while not fut.done() and time.time() < t_end:
@@ -165,6 +165,8 @@ def main(args=None) -> None:
     ap.add_argument("--max-replans", type=int, default=3)
     ap.add_argument("--timeout", type=float, default=240.0)
     ap.add_argument("--tag", default="")
+    ap.add_argument("--physical", action="store_true", help="Gazebo backend: fixed (un-jittered) geometry matching the world")
+    ap.add_argument("--only", type=int, nargs="*", help="run only these scenario indices")
     a, ros_args = ap.parse_known_args(args)
     rclpy.init(args=ros_args)
     node = Bench()
@@ -177,7 +179,8 @@ def main(args=None) -> None:
     out = Path(a.out) / (time.strftime("%Y%m%d-%H%M%S") + (f"-{a.tag}" if a.tag else ""))
     out.mkdir(parents=True, exist_ok=True)
     rows = []
-    for sc in generate_suite(a.n, a.seed):
+    suite = generate_suite(a.n, a.seed, jitter=not a.physical)
+    for sc in ([suite[i] for i in a.only] if a.only else suite):
         node.get_logger().info(f"=== {sc.id} [{sc.template}] fault={sc.fault.type}: {sc.instruction}")
         row = node.run_one(sc, a.max_replans, a.timeout)
         rows.append(row)

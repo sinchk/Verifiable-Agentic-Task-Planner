@@ -1,0 +1,31 @@
+{"scenario": "s01", "t": 1795597097.9165726, "type": "PLAN_REQUEST", "node": "", "detail": "{\"instruction\":\"Deliver the crate from zone A to zone B.\"}"}
+{"scenario": "s01", "t": 1795597097.9248078, "type": "PLAN_READY", "node": "", "detail": "{\"latency_s\":0.00801257,\"metrics\":{\"attempts\":1,\"first_attempt_valid\":true,\"input_tokens\":0,\"latency_s\":0.002,\"llm_latency_s\":0.001,\"mode\":\"plan\",\"nodes\":11,\"ok\":true,\"output_tokens\":0,\"repairs\":0,\"validation_ms\":0.892},\"ok\":true}"}
+{"scenario": "s01", "t": 1795597097.9262114, "type": "TREE_STARTED", "node": "", "detail": "{\"replans\":0}"}
+{"scenario": "s01", "t": 1795597097.92627, "type": "NODE_STATUS", "node": "n11", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s01", "t": 1795597097.9263039, "type": "NODE_STATUS", "node": "n2", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s01", "t": 1795597097.9264941, "type": "SKILL_START", "node": "n1", "detail": "{\"skill\":\"NavigateTo\",\"args\":{\"zone\":\"zone_a\"}}"}
+{"scenario": "s01", "t": 1795597097.9266105, "type": "NODE_STATUS", "node": "n1", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s01", "t": 1795597111.950916, "type": "NODE_STATUS", "node": "n1", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s01", "t": 1795597111.951009, "type": "NODE_STATUS", "node": "n2", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s01", "t": 1795597111.9510458, "type": "NODE_STATUS", "node": "n4", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s01", "t": 1795597111.9512825, "type": "SKILL_START", "node": "n3", "detail": "{\"skill\":\"PickObject\",\"args\":{\"object\":\"crate_1\"}}"}
+{"scenario": "s01", "t": 1795597111.951384, "type": "NODE_STATUS", "node": "n3", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s01", "t": 1795597130.3562572, "type": "NODE_STATUS", "node": "n3", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s01", "t": 1795597130.3563647, "type": "NODE_STATUS", "node": "n4", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s01", "t": 1795597130.3564575, "type": "NODE_STATUS", "node": "n6", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s01", "t": 1795597130.356684, "type": "SKILL_START", "node": "n5", "detail": "{\"skill\":\"NavigateTo\",\"args\":{\"zone\":\"loading_bay\"}}"}
+{"scenario": "s01", "t": 1795597130.356792, "type": "NODE_STATUS", "node": "n5", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s01", "t": 1795597140.4705815, "type": "NODE_STATUS", "node": "n5", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s01", "t": 1795597140.4706762, "type": "NODE_STATUS", "node": "n6", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s01", "t": 1795597140.4707317, "type": "NODE_STATUS", "node": "n8", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s01", "t": 1795597140.4709961, "type": "SKILL_START", "node": "n7", "detail": "{\"skill\":\"NavigateTo\",\"args\":{\"zone\":\"zone_b\"}}"}
+{"scenario": "s01", "t": 1795597140.471103, "type": "NODE_STATUS", "node": "n7", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s01", "t": 1795597153.4703925, "type": "NODE_STATUS", "node": "n7", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s01", "t": 1795597153.4704695, "type": "NODE_STATUS", "node": "n8", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s01", "t": 1795597153.4704955, "type": "NODE_STATUS", "node": "n10", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s01", "t": 1795597153.4707017, "type": "SKILL_START", "node": "n9", "detail": "{\"skill\":\"PlaceObject\",\"args\":{\"object\":\"crate_1\",\"zone\":\"zone_b\"}}"}
+{"scenario": "s01", "t": 1795597153.4708107, "type": "NODE_STATUS", "node": "n9", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s01", "t": 1795597169.5565825, "type": "NODE_STATUS", "node": "n9", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s01", "t": 1795597169.5566998, "type": "NODE_STATUS", "node": "n10", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s01", "t": 1795597169.5567896, "type": "NODE_STATUS", "node": "n11", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s01", "t": 1795597169.5569055, "type": "MISSION_END", "node": "", "detail": "{\"message\":\"mission tree completed\",\"replans\":0,\"success\":true}"}
