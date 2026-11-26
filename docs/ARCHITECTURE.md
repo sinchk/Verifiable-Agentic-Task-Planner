@@ -75,7 +75,8 @@ running tree is swapped at the failure boundary; completed steps are never re-ex
 * **Localisation** is ground truth (`map→odom` from Gazebo's pose) — the standard simulation stand-in for AMCL;
   wheel odometry drifts under slip.
 * **Geofences** are enforced three times: the validator (plan time), the Nav2 static map where keep-outs are occupied
-  (run time), and a physical barrier in the world.
+  (run time), and a physical barrier in the world. A fourth component *measures* rather than enforces: the runtime geofence monitor
+  (`vatp_core/geofence.py`, driven by the Gazebo backend) samples the real robot pose and reports contact and clearance-margin breaches.
 * **Perception** is Gazebo ground-truth pose snapshots (`gz topic`), not vision. The VLM hook point is the scene
   graph handed to the planner.
 * **Grasping** is physical (friction fingers, verified by lifting the object). Arm motion uses closed-form IK with a

@@ -8,7 +8,9 @@
 """
 from __future__ import annotations
 
+import collections
 import math
+import threading
 import time
 
 from geometry_msgs.msg import PoseStamped
@@ -19,6 +21,7 @@ from rclpy.action import ActionClient
 from rclpy.time import Time
 from tf2_ros import Buffer, TransformListener
 
+from vatp_core.geofence import GeofenceMonitor
 from vatp_core.geometry import rect_center, segment_hits_rect
 from vatp_core.scenarios import Fault, Scenario
 from vatp_core.symbolic_sim import SkillResult
@@ -55,7 +58,11 @@ class GazeboBackend:
         self.counts: dict[str, int] = {}
         self.fault_fired = False
         self.fail_remaining = 0
-        self.safety_violations = 0
+        # runtime geofence monitor: samples the robot's real pose (TF) and measures clearance to every keep-out
+        self.monitor = GeofenceMonitor({})
+        self._mon_lock = threading.Lock()
+        self._mon_events: collections.deque = collections.deque()
+        self._mon_thread: threading.Thread | None = None
         self.escalations: list[str] = []
         self.fault = Fault()
 
@@ -77,8 +84,44 @@ class GazeboBackend:
         self.scenario, self.fault = sc, sc.fault
         self.holding, self.robot_zone = None, "dock"
         self.counts, self.fault_fired, self.fail_remaining = {}, False, 0
-        self.safety_violations, self.escalations = 0, []
+        self.escalations = []
+        with self._mon_lock:
+            self.monitor.reset({k.name: k.rect for k in sc.world.keepouts.values()})
+            self.monitor.margin = sc.world.path_margin
+            self._mon_events.clear()
+        if self._mon_thread is None:
+            self._mon_thread = threading.Thread(target=self._monitor_loop, daemon=True, name="geofence_monitor")
+            self._mon_thread.start()
         time.sleep(1.5)
+
+    # ---------------------------------------------------------- runtime geofence monitor
+    MONITOR_HZ = 10.0
+
+    @property
+    def safety_violations(self) -> int:
+        return self.monitor.stats.violations
+
+    def _monitor_loop(self) -> None:
+        """Sample the robot pose from TF at MONITOR_HZ for the whole session and feed the monitor."""
+        while True:
+            try:
+                tr = self.buf.lookup_transform("map", "base_footprint", Time()).transform
+                q = tr.rotation
+                yaw = math.atan2(2 * (q.w * q.z + q.x * q.y), 1 - 2 * (q.y * q.y + q.z * q.z))
+                with self._mon_lock:
+                    if self.scenario is not None:
+                        for ev in self.monitor.update(tr.translation.x, tr.translation.y, yaw):
+                            self._mon_events.append(ev)
+            except Exception:  # noqa: BLE001 - TF not available yet (or during reset): just try again
+                pass
+            time.sleep(1.0 / self.MONITOR_HZ)
+
+    def _drain_monitor_events(self) -> list[dict]:
+        out = []
+        with self._mon_lock:
+            while self._mon_events:
+                out.append(self._mon_events.popleft())
+        return out
 
     # -------------------------------------------------------------- perception
     def robot_xy(self) -> tuple[float, float]:
@@ -113,7 +156,11 @@ class GazeboBackend:
 
     def world_dict(self) -> dict:
         d = self.perceive().to_dict()
-        d["sim_stats"] = {"safety_violations": self.safety_violations, "fault_fired": self.fault_fired,
+        with self._mon_lock:
+            g = self.monitor.stats.to_dict()
+        d["sim_stats"] = {"safety_violations": g["violations"], "margin_breaches": g["margin_breaches"],
+                          "min_center_clearance_m": g["min_center_clearance_m"], "min_footprint_clearance_m": g["min_footprint_clearance_m"],
+                          "geofence_samples": g["samples"], "fault_fired": self.fault_fired,
                           "escalations": list(self.escalations), "fault": self.fault.type}
         return d
 
@@ -141,6 +188,11 @@ class GazeboBackend:
 
     # ----------------------------------------------------------------- execute
     def execute(self, skill: str, args: dict[str, str]) -> SkillResult:
+        res = self._execute(skill, args)
+        res.events.extend(self._drain_monitor_events())  # GEOFENCE_VIOLATION / GEOFENCE_MARGIN episodes seen meanwhile
+        return res
+
+    def _execute(self, skill: str, args: dict[str, str]) -> SkillResult:
         res = SkillResult(True)
         try:
             if skill in ("NavigateTo", "PickObject", "PlaceObject"):

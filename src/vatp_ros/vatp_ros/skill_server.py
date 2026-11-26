@@ -127,6 +127,7 @@ class SkillServer(Node):
             d = self.sim.world.to_dict()
             d["sim_stats"] = {
                 "safety_violations": self.sim.safety_violations,
+                "margin_breaches": self.sim.margin_breaches,
                 "fault_fired": self.sim.fault_fired,
                 "escalations": list(self.sim.escalations),
                 "fault": self.sim.fault.type,

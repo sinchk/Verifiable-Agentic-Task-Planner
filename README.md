@@ -107,6 +107,11 @@ Each scenario carries one fault, fired when a chosen skill is called for the n-t
 * **Keep-out safety.** Every plan that executed was accepted by the validator, which proves that each `NavigateTo` leg clears
   the keep-out aisle with a 0.3 m margin. At run time the aisle is also occupied in Nav2's map and has a physical barrier in the
   world. In the symbolic backend the simulator counts actual crossings: 0 across the 20 scenarios.
+* **Runtime geofence monitor (Gazebo).** The Gazebo backend samples the robot's pose at 10 Hz and measures the clearance of its envelope (base plus stowed arm) to every
+  keep-out, counting *contact* (within 2 cm) and *margin breaches* (centre closer than the validator's 0.3 m) as episodes and publishing `GEOFENCE_VIOLATION` / `GEOFENCE_MARGIN`
+  events. Verified live ([check](docs/results/geofence_monitor_live_check/summary.md)): a parked robot registers nothing, a robot placed 0.25 m from the aisle registers one margin breach,
+  and a robot driven into the barrier registers contact (its stowed arm touches first, 0.51 m ahead of the base origin). In a validated mission (s03) the closest approach was 1.48 m with no events.
+  The 20-scenario Gazebo tables above were recorded before the monitor existed and carry no geofence measurement.
 * Plan and replan latencies come from the offline planner (~10 ms) and show the pipeline overhead; the validator takes 1–2 ms per plan.
 * Full tables: [run 1](docs/results/gazebo_v1_before_carry_fixes/summary.md) ·
   [run 2](docs/results/gazebo_v2_offline_planner_20/summary.md) ·
@@ -182,6 +187,7 @@ classes injected into the first answer of **every** plan and replan, symbolic sk
 ## Limitations (stated up front)
 * The LLM results are one run of one model on the symbolic backend; the Gazebo tables above use the offline reference planner. There is no
   no-validator comparison, so what the rejected plans would have done if executed is not measured.
+* The runtime geofence monitor has been verified live and in one validated mission; the full 20-scenario Gazebo suite has not been re-run with it.
 * The 20-scenario suite served both to find the run-1 failures and to confirm the run-2 fixes; it is a regression suite, not a held-out evaluation.
 * Localisation and perception use simulator ground truth (stand-ins for AMCL and a VLM); the VLM hook is the scene graph given to the planner.
 * Grasping uses closed-form IK with a high approach and vertical descent; MoveIt 2 is the planned replacement behind `ArmControl`.

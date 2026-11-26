@@ -1,0 +1,29 @@
+[
+ {
+  "not_evaluated": false,
+  "id": "s03",
+  "template": "geofence",
+  "fault": "none",
+  "backend": "mock(defect_rate=0.0)",
+  "success": true,
+  "tree_completed": true,
+  "goals_satisfied": true,
+  "fault_fired": false,
+  "n_fault_events": 0,
+  "recovered_from_fault": false,
+  "replans": 0,
+  "plan_latency_s": 0.017,
+  "replan_latency_s": 0.0,
+  "initial_nodes": 11,
+  "final_nodes": 11,
+  "plan_repairs": 0,
+  "first_attempt_valid": true,
+  "validation_ms": 2.393,
+  "safety_violations": 0,
+  "margin_breaches": 0,
+  "min_center_clearance_m": 1.475,
+  "escalations": 0,
+  "wall_s": 116.83,
+  "message": "mission tree completed"
+ }
+]

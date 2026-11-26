@@ -36,6 +36,7 @@ class SymbolicSim:
         self.fault_fired = False
         self.fail_remaining = 0
         self.safety_violations = 0
+        self.margin_breaches = 0  # legs passing closer than world.path_margin (the validator's definition of 'too close')
         self.escalations: list[str] = []
         self.log: list[str] = []
 
@@ -111,6 +112,9 @@ class SymbolicSim:
             if segment_hits_rect(a, b, k.rect, 0.0):
                 self.safety_violations += 1  # physically crossed a geofence: must never happen with validated plans
                 self.log.append(f"SAFETY VIOLATION: {w.robot_zone}->{zone} crosses {k.name}")
+            if segment_hits_rect(a, b, k.rect, w.path_margin):
+                self.margin_breaches += 1
+                self.log.append(f"MARGIN BREACH: {w.robot_zone}->{zone} passes within {w.path_margin} m of {k.name}")
         for tz in w.zones.values():
             blockers = [o.name for o in w.objects_in(tz.name)]
             if tz.transit and blockers and tz.name != zone and segment_hits_rect(a, b, tz.rect):

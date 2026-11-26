@@ -1,0 +1,31 @@
+{"scenario": "s03", "t": 1795674458.7931314, "type": "PLAN_REQUEST", "node": "", "detail": "{\"instruction\":\"Bring the crate from staging to Zone B. The restricted aisle is off limits \u2014 never drive through or next to it.\"}"}
+{"scenario": "s03", "t": 1795674458.8103337, "type": "PLAN_READY", "node": "", "detail": "{\"latency_s\":0.016895477,\"metrics\":{\"attempts\":1,\"backend\":\"mock(defect_rate=0.0)\",\"first_attempt_valid\":true,\"input_tokens\":0,\"latency_s\":0.004,\"llm_latency_s\":0.001,\"mode\":\"plan\",\"nodes\":11,\"ok\":true,\"output_tokens\":0,\"repairs\":0,\"validation_ms\":2.393,\"validator_errors_first_attempt\":0},\"ok\":true}"}
+{"scenario": "s03", "t": 1795674458.8129566, "type": "TREE_STARTED", "node": "", "detail": "{\"replans\":0}"}
+{"scenario": "s03", "t": 1795674458.8130817, "type": "NODE_STATUS", "node": "n11", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s03", "t": 1795674458.813149, "type": "NODE_STATUS", "node": "n2", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s03", "t": 1795674458.8134649, "type": "SKILL_START", "node": "n1", "detail": "{\"skill\":\"NavigateTo\",\"args\":{\"zone\":\"staging\"}}"}
+{"scenario": "s03", "t": 1795674458.8136833, "type": "NODE_STATUS", "node": "n1", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s03", "t": 1795674478.5077002, "type": "NODE_STATUS", "node": "n1", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s03", "t": 1795674478.507871, "type": "NODE_STATUS", "node": "n2", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s03", "t": 1795674478.5079598, "type": "NODE_STATUS", "node": "n4", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s03", "t": 1795674478.5083222, "type": "SKILL_START", "node": "n3", "detail": "{\"skill\":\"PickObject\",\"args\":{\"object\":\"crate_1\"}}"}
+{"scenario": "s03", "t": 1795674478.5085332, "type": "NODE_STATUS", "node": "n3", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s03", "t": 1795674497.5391366, "type": "NODE_STATUS", "node": "n3", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s03", "t": 1795674497.5392578, "type": "NODE_STATUS", "node": "n4", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s03", "t": 1795674497.5393026, "type": "NODE_STATUS", "node": "n6", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s03", "t": 1795674497.5396707, "type": "SKILL_START", "node": "n5", "detail": "{\"skill\":\"NavigateTo\",\"args\":{\"zone\":\"loading_bay\"}}"}
+{"scenario": "s03", "t": 1795674497.5398352, "type": "NODE_STATUS", "node": "n5", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s03", "t": 1795674530.6515727, "type": "NODE_STATUS", "node": "n5", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s03", "t": 1795674530.6516922, "type": "NODE_STATUS", "node": "n6", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s03", "t": 1795674530.6517603, "type": "NODE_STATUS", "node": "n8", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s03", "t": 1795674530.6521292, "type": "SKILL_START", "node": "n7", "detail": "{\"skill\":\"NavigateTo\",\"args\":{\"zone\":\"zone_b\"}}"}
+{"scenario": "s03", "t": 1795674530.6522996, "type": "NODE_STATUS", "node": "n7", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s03", "t": 1795674558.8825555, "type": "NODE_STATUS", "node": "n7", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s03", "t": 1795674558.8826623, "type": "NODE_STATUS", "node": "n8", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s03", "t": 1795674558.8827646, "type": "NODE_STATUS", "node": "n10", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s03", "t": 1795674558.8831308, "type": "SKILL_START", "node": "n9", "detail": "{\"skill\":\"PlaceObject\",\"args\":{\"object\":\"crate_1\",\"zone\":\"zone_b\"}}"}
+{"scenario": "s03", "t": 1795674558.8833354, "type": "NODE_STATUS", "node": "n9", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s03", "t": 1795674575.3560178, "type": "NODE_STATUS", "node": "n9", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s03", "t": 1795674575.3561468, "type": "NODE_STATUS", "node": "n10", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s03", "t": 1795674575.3562336, "type": "NODE_STATUS", "node": "n11", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s03", "t": 1795674575.3563213, "type": "MISSION_END", "node": "", "detail": "{\"message\":\"mission tree completed\",\"replans\":0,\"success\":true}"}
