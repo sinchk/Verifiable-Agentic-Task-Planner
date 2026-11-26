@@ -163,3 +163,24 @@ def test_planner_rejects_when_model_keeps_failing(server):
     server.script = [ok(bad)] * 3
     res = Planner(backend(server), max_repairs=2).plan(sc.instruction, sc.world, sc.required_goals)
     assert not res.ok and res.xml is None and len(res.attempts) == 3  # nothing would execute
+
+
+def test_thinking_level_is_sent_and_named(server):
+    server.script = [ok({"a": 1}), ok({"a": 1})]
+    b = backend(server, thinking_level="low")
+    assert b.name == "gemini:fake-model[thinking=low]"
+    b.generate(Prompt("s", "u"), SCHEMA)
+    assert server.requests[0]["body"]["generationConfig"]["thinkingConfig"] == {"thinkingLevel": "low"}
+    backend(server).generate(Prompt("s", "u"), SCHEMA)  # unset -> field absent, model default applies
+    assert "thinkingConfig" not in server.requests[1]["body"]["generationConfig"]
+
+
+def test_daily_quota_fails_fast_without_retrying(server):
+    err = {"error": {"message": "quota", "details": [
+        {"@type": "type.googleapis.com/google.rpc.QuotaFailure", "violations": [
+            {"quotaId": "GenerateRequestsPerDayPerProjectPerModel-FreeTier", "quotaValue": "20"}]},
+        {"@type": "type.googleapis.com/google.rpc.RetryInfo", "retryDelay": "12205s"}]}}
+    server.script = [(429, err)]
+    with pytest.raises(LLMError, match="DAILY request quota exhausted.*12205s"):
+        backend(server).generate(Prompt("s", "u"), SCHEMA)
+    assert len(server.requests) == 1  # no pointless retries

@@ -112,6 +112,15 @@ def gemini_schema(schema: Any) -> Any:
     return schema
 
 
+def _daily_quota_exhausted(err: dict[str, Any]) -> bool:
+    return any("PerDay" in str(v.get("quotaId", ""))
+               for d in err.get("details", []) for v in (d.get("violations") or []) if isinstance(v, dict))
+
+
+def _retry_delay(err: dict[str, Any]) -> str:
+    return next((d["retryDelay"] for d in err.get("details", []) if "retryDelay" in d), "unknown time")
+
+
 class GeminiBackend:
     """Google Gemini through the public REST API (standard library only, no extra dependency).
 
@@ -120,9 +129,10 @@ class GeminiBackend:
 
     DEFAULT_URL = "https://generativelanguage.googleapis.com/v1beta"
 
-    def __init__(self, model: str | None = None, max_tokens: int = 8000, temperature: float = 0.0,
+    def __init__(self, model: str | None = None, max_tokens: int = 32768, temperature: float = 0.0,
                  api_key: str | None = None, base_url: str | None = None, retries: int = 4,
-                 timeout: float = 120.0, backoff_s: float = 2.0, effort: str | None = None):
+                 timeout: float = 300.0, backoff_s: float = 2.0, effort: str | None = None,
+                 thinking_level: str | None = None):
         self.api_key = api_key or os.environ.get("GEMINI_API_KEY") or os.environ.get("GOOGLE_API_KEY")
         if not self.api_key:
             raise LLMError("no Gemini API key: set GEMINI_API_KEY")
@@ -130,7 +140,9 @@ class GeminiBackend:
         self.base_url = (base_url or os.environ.get("VATP_GEMINI_URL") or self.DEFAULT_URL).rstrip("/")
         self.max_tokens, self.temperature = max_tokens, temperature
         self.retries, self.timeout, self.backoff_s = retries, timeout, backoff_s
-        self.name = f"gemini:{self.model}"
+        # optional reasoning limit for Gemini 3 models (e.g. "minimal", "low", "medium", "high"); unset = model default
+        self.thinking_level = thinking_level or effort or os.environ.get("VATP_GEMINI_THINKING") or None
+        self.name = f"gemini:{self.model}" + (f"[thinking={self.thinking_level}]" if self.thinking_level else "")
 
     def _post(self, body: dict[str, Any]) -> dict[str, Any]:
         import urllib.error
@@ -146,10 +158,14 @@ class GeminiBackend:
                     return json.loads(r.read().decode())
             except urllib.error.HTTPError as e:
                 try:
-                    msg = json.loads(e.read().decode()).get("error", {}).get("message", "")
+                    err = json.loads(e.read().decode()).get("error", {})
                 except Exception:  # noqa: BLE001 - body may be empty or not JSON
-                    msg = ""
+                    err = {}
+                msg = err.get("message", "")
                 last = f"Gemini HTTP {e.code}: {msg[:300]}".rstrip(": ")
+                if e.code == 429 and _daily_quota_exhausted(err):  # retrying within minutes cannot help
+                    raise LLMError(f"Gemini HTTP 429: free-tier DAILY request quota exhausted for {self.model}; "
+                                   f"retry after ~{_retry_delay(err)}") from None
                 if e.code not in (429, 500, 502, 503, 504):
                     raise LLMError(last) from None
             except (urllib.error.URLError, TimeoutError, ConnectionError) as e:
@@ -165,6 +181,8 @@ class GeminiBackend:
             "generationConfig": {"responseMimeType": "application/json", "responseSchema": gemini_schema(schema),
                                  "temperature": self.temperature, "maxOutputTokens": self.max_tokens},
         }
+        if self.thinking_level:
+            body["generationConfig"]["thinkingConfig"] = {"thinkingLevel": self.thinking_level}
         t0 = time.perf_counter()
         resp = self._post(body)
         dt = time.perf_counter() - t0

@@ -87,7 +87,9 @@ class Bench(Node):
         pm = json.loads(plan_ready["detail"]).get("metrics", {}) if plan_ready else {}
         replan_m = [json.loads(e["detail"]).get("metrics", {}) for e in ev if e["type"] == "REPLAN_READY"]
         faults = [e for e in ev if e["type"] == "FAULT_INJECTED"]
+        infra = (not res.success) and any(m in res.message for m in ("Gemini HTTP", "Gemini request failed", "Anthropic API error"))
         return {
+            "not_evaluated": bool(infra),  # planner service unreachable / quota: says nothing about plan quality
             "id": sc.id, "template": sc.template, "fault": sc.fault.type, "backend": pm.get("backend", ""),
             "success": bool(res.success and goals_ok),
             "tree_completed": bool(res.success), "goals_satisfied": goals_ok,
@@ -118,6 +120,9 @@ def final_nodes(xml: str) -> int:
 
 
 def summarize(rows: list[dict]) -> str:
+    unevaluated = [r for r in rows if r.get("not_evaluated")]
+    rows_all = rows
+    rows = [r for r in rows if not r.get("not_evaluated")]
     ok = [r for r in rows if "error" not in r]
     n = len(rows)
     succ = sum(r["success"] for r in ok)
@@ -131,7 +136,8 @@ def summarize(rows: list[dict]) -> str:
         "# Benchmark summary", "",
         f"| metric | value |", "|---|---|",
         f"| planner backend | {', '.join(sorted({r['backend'] for r in ok if r.get('backend')})) or 'n/a'} |",
-        f"| scenarios | {n} |",
+        f"| scenarios evaluated | {n} of {len(rows_all)} |",
+        f"| not evaluated (planner API unavailable: quota/outage) | {', '.join(r['id'] for r in unevaluated) or 'none'} |",
         f"| mission success rate | {succ}/{n} = {100*succ/max(n,1):.0f}% |",
         f"| fault scenarios recovered | {rec}/{len(faulty)} |",
         f"| scenarios needing replanning | {sum(1 for r in ok if r['replans'])} |",
@@ -144,8 +150,10 @@ def summarize(rows: list[dict]) -> str:
         "| id | template | fault | success | replans | plan s | replan s | nodes | wall s |",
         "|---|---|---|---|---|---|---|---|---|",
     ]
-    for r in rows:
-        if "error" in r:
+    for r in rows_all:
+        if r.get("not_evaluated"):
+            lines.append(f"| {r['id']} | {r.get('template', '')} | {r.get('fault', '')} | NOT EVALUATED (API unavailable) | | | | | |")
+        elif "error" in r:
             lines.append(f"| {r['id']} | – | – | ERROR: {r['error']} | | | | | |")
         else:
             lines.append(f"| {r['id']} | {r['template']} | {r['fault']} | {'✅' if r['success'] else '❌'} | "
