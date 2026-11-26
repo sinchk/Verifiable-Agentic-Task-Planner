@@ -6,7 +6,7 @@ source scripts/env.sh
 ros2 launch vatp_sim mission.launch.py backend:=auto scenario:=0 gui:=true dashboard:=true
 ```
 * `gui:=true` opens the Gazebo window (needs the desktop session; headless is the default and what the benchmark uses).
-* `backend:=anthropic` uses Claude (needs credits on the key); `auto` falls back to the offline planner without a key.
+* `backend:=anthropic` selects the LLM backend (needs an API key); `backend:=mock` is the offline reference planner; `auto` uses the offline planner when no key is present.
 * `dashboard:=true` starts `foxglove_bridge` on `ws://localhost:8765`.
 
 ## 2. Watch the behavior tree live (Groot2)
