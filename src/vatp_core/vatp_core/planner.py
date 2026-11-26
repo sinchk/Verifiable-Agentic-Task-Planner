@@ -94,7 +94,7 @@ class PlanResult:
 
     def metrics(self) -> dict[str, Any]:
         return {
-            "ok": self.ok, "mode": self.mode, "attempts": len(self.attempts),
+            "backend": self.backend, "ok": self.ok, "mode": self.mode, "attempts": len(self.attempts),
             "repairs": self.n_repairs, "latency_s": round(self.total_latency_s, 3),
             "llm_latency_s": round(sum(a.llm_latency_s for a in self.attempts), 3),
             "validation_ms": round(sum(a.validation_ms for a in self.attempts), 3),

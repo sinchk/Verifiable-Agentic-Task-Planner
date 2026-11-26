@@ -88,7 +88,7 @@ class Bench(Node):
         replan_m = [json.loads(e["detail"]).get("metrics", {}) for e in ev if e["type"] == "REPLAN_READY"]
         faults = [e for e in ev if e["type"] == "FAULT_INJECTED"]
         return {
-            "id": sc.id, "template": sc.template, "fault": sc.fault.type,
+            "id": sc.id, "template": sc.template, "fault": sc.fault.type, "backend": pm.get("backend", ""),
             "success": bool(res.success and goals_ok),
             "tree_completed": bool(res.success), "goals_satisfied": goals_ok,
             "fault_fired": bool(stats_.get("fault_fired")), "n_fault_events": len(faults),
@@ -130,6 +130,7 @@ def summarize(rows: list[dict]) -> str:
     lines = [
         "# Benchmark summary", "",
         f"| metric | value |", "|---|---|",
+        f"| planner backend | {', '.join(sorted({r['backend'] for r in ok if r.get('backend')})) or 'n/a'} |",
         f"| scenarios | {n} |",
         f"| mission success rate | {succ}/{n} = {100*succ/max(n,1):.0f}% |",
         f"| fault scenarios recovered | {rec}/{len(faulty)} |",
