@@ -136,7 +136,7 @@ class GeminiBackend:
         self.api_key = api_key or os.environ.get("GEMINI_API_KEY") or os.environ.get("GOOGLE_API_KEY")
         if not self.api_key:
             raise LLMError("no Gemini API key: set GEMINI_API_KEY")
-        self.model = model or os.environ.get("VATP_GEMINI_MODEL", "gemini-2.5-flash")
+        self.model = model or os.environ.get("VATP_GEMINI_MODEL", "gemini-3.1-flash-lite")
         self.base_url = (base_url or os.environ.get("VATP_GEMINI_URL") or self.DEFAULT_URL).rstrip("/")
         self.max_tokens, self.temperature = max_tokens, temperature
         self.retries, self.timeout, self.backoff_s = retries, timeout, backoff_s
