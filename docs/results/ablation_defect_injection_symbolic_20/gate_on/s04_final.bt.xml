@@ -1,0 +1,28 @@
+<root BTCPP_format="4" main_tree_to_execute="MainTree">
+  <BehaviorTree ID="MainTree">
+    <Sequence name="n16">
+      <Fallback name="n5">
+        <CheckZoneClear name="n3" zone="loading_bay" />
+        <Sequence name="n4">
+          <ReportStatus name="n1" message="loading_bay unexpectedly blocked" />
+          <RequestHumanHelp name="n2" reason="loading_bay blocked" />
+        </Sequence>
+      </Fallback>
+      <RetryUntilSuccessful name="n7" num_attempts="2">
+        <NavigateTo name="n6" zone="zone_a" />
+      </RetryUntilSuccessful>
+      <RetryUntilSuccessful name="n9" num_attempts="3">
+        <PickObject name="n8" object="crate_1" />
+      </RetryUntilSuccessful>
+      <RetryUntilSuccessful name="n11" num_attempts="2">
+        <NavigateTo name="n10" zone="loading_bay" />
+      </RetryUntilSuccessful>
+      <RetryUntilSuccessful name="n13" num_attempts="2">
+        <NavigateTo name="n12" zone="zone_b" />
+      </RetryUntilSuccessful>
+      <RetryUntilSuccessful name="n15" num_attempts="2">
+        <PlaceObject name="n14" object="crate_1" zone="zone_b" />
+      </RetryUntilSuccessful>
+    </Sequence>
+  </BehaviorTree>
+</root>

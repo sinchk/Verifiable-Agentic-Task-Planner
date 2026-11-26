@@ -1,0 +1,21 @@
+backend,escalations,fault,fault_fired,final_nodes,first_attempt_valid,goals_satisfied,id,initial_nodes,message,n_fault_events,not_evaluated,plan_latency_s,plan_repairs,recovered_from_fault,replan_latency_s,replans,safety_violations,success,template,tree_completed,validation_ms,wall_s
+mock(defect_rate=1.0),0,none,False,22,False,True,s00,22,mission tree completed,0,False,0.017,1,False,0.0,0,0,True,conditional_clear_deliver,True,3.133,2.13
+mock(defect_rate=1.0),0,none,False,11,False,True,s01,11,mission tree completed,0,False,0.014,1,False,0.0,0,0,True,simple_delivery,True,1.714,0.63
+mock(defect_rate=1.0),0,none,False,20,False,True,s02,20,mission tree completed,0,False,0.023,1,False,0.0,0,0,True,two_item,True,5.551,1.77
+mock(defect_rate=1.0),0,none,False,11,False,True,s03,11,mission tree completed,0,False,0.015,1,False,0.0,0,0,True,geofence,True,2.698,1.12
+mock(defect_rate=1.0),0,none,False,16,False,True,s04,16,mission tree completed,0,False,0.017,1,False,0.0,0,0,True,conditional_clear_deliver,True,2.092,2.2
+mock(defect_rate=1.0),0,none,False,11,False,True,s05,11,mission tree completed,0,False,0.01,1,False,0.0,0,0,True,simple_delivery,True,1.202,4.33
+mock(defect_rate=1.0),0,none,False,20,False,True,s06,20,mission tree completed,0,False,0.009,1,False,0.0,0,0,True,two_item,True,2.129,1.2
+mock(defect_rate=1.0),0,none,False,11,False,True,s07,11,mission tree completed,0,False,0.012,1,False,0.0,0,0,True,geofence,True,2.159,0.83
+mock(defect_rate=1.0),0,obstacle_spawn,True,21,False,True,s08,22,mission tree completed,1,False,0.019,1,True,0.019,1,0,True,conditional_clear_deliver,True,3.882,3.62
+mock(defect_rate=1.0),0,grasp_fail,True,11,False,True,s09,11,mission tree completed,1,False,0.014,1,True,0.0,0,0,True,simple_delivery,True,1.854,1.39
+mock(defect_rate=1.0),0,obstacle_spawn,True,29,False,True,s10,20,mission tree completed,1,False,0.017,1,True,0.029,1,0,True,two_item,True,4.481,3.57
+mock(defect_rate=1.0),0,grasp_fail,True,11,False,True,s11,11,mission tree completed,1,False,0.008,1,True,0.0,0,0,True,geofence,True,1.299,5.5
+mock(defect_rate=1.0),0,nav_block,True,15,False,True,s12,22,mission tree completed,1,False,0.008,1,True,0.008,1,0,True,conditional_clear_deliver,True,1.462,4.25
+mock(defect_rate=1.0),0,place_fail,True,3,False,True,s13,11,mission tree completed,1,False,0.007,1,True,0.007,1,0,True,simple_delivery,True,0.879,1.88
+mock(defect_rate=1.0),0,grasp_fail,True,20,False,True,s14,20,mission tree completed,1,False,0.009,1,True,0.0,0,0,True,two_item,True,2.268,1.89
+mock(defect_rate=1.0),0,obstacle_spawn,True,29,False,True,s15,11,mission tree completed,1,False,0.012,1,True,0.02,1,0,True,geofence,True,2.018,3.86
+mock(defect_rate=1.0),0,nav_block,True,7,False,True,s16,16,mission tree completed,1,False,0.008,1,True,0.008,1,0,True,conditional_clear_deliver,True,1.119,0.95
+mock(defect_rate=1.0),0,place_fail,True,3,False,True,s17,11,mission tree completed,1,False,0.006,1,True,0.006,1,0,True,simple_delivery,True,0.81,5.5
+mock(defect_rate=1.0),0,obstacle_spawn,True,29,False,True,s18,20,mission tree completed,1,False,0.009,1,True,0.011,1,0,True,two_item,True,2.186,6.31
+mock(defect_rate=1.0),0,grasp_fail,True,9,False,True,s19,11,mission tree completed,1,False,0.008,1,True,0.008,1,0,True,geofence,True,1.296,2.98

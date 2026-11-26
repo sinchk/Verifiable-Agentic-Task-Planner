@@ -1,0 +1,9 @@
+<root BTCPP_format="4" main_tree_to_execute="MainTree">
+  <BehaviorTree ID="MainTree">
+    <Sequence name="n3">
+      <RetryUntilSuccessful name="n2" num_attempts="2">
+        <PlaceObject name="n1" object="crate_1" zone="zone_b" />
+      </RetryUntilSuccessful>
+    </Sequence>
+  </BehaviorTree>
+</root>

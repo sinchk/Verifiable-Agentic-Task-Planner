@@ -3,13 +3,13 @@
 # usage: scripts/run_llm_symbolic.sh <gemini-model> <tag> [thinking-level]
 # Needs GEMINI_API_KEY (loaded by scripts/env.sh). Results: runs/llm/<stamp>-<tag>/
 cd "$(dirname "$0")/.."
-MODEL="$1"; TAG="$2"; THINK="${3:-}"
+MODEL="$1"; TAG="$2"; THINK="${3:-}"; ENFORCE="${ENFORCE:-true}"   # ENFORCE=false = validator ablation
 source scripts/env.sh
 export VATP_GEMINI_MODEL="$MODEL"
 [ -n "$THINK" ] && export VATP_GEMINI_THINKING="$THINK"
 OUT=runs/llm; mkdir -p "$OUT"
 bash scripts/stop_all.sh
-ros2 launch vatp_ros symbolic.launch.py backend:=gemini > "$OUT/$TAG.launch.log" 2>&1 &
+ros2 launch vatp_ros symbolic.launch.py backend:=gemini enforce_validator:="$ENFORCE" > "$OUT/$TAG.launch.log" 2>&1 &
 LPID=$!
 sleep 10
 # a slow model response must not be miscounted as an executor timeout

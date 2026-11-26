@@ -1,0 +1,15 @@
+<root BTCPP_format="4" main_tree_to_execute="MainTree">
+  <BehaviorTree ID="MainTree">
+    <Sequence name="n7">
+      <RetryUntilSuccessful name="n2" num_attempts="2">
+        <NavigateTo name="n1" zone="loading_bay" />
+      </RetryUntilSuccessful>
+      <RetryUntilSuccessful name="n4" num_attempts="2">
+        <NavigateTo name="n3" zone="zone_b" />
+      </RetryUntilSuccessful>
+      <RetryUntilSuccessful name="n6" num_attempts="2">
+        <PlaceObject name="n5" object="crate_1" zone="zone_b" />
+      </RetryUntilSuccessful>
+    </Sequence>
+  </BehaviorTree>
+</root>

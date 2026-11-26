@@ -139,6 +139,27 @@ a mission takes seconds and the study isolates planning), scenario seed 0, tempe
   A second model, `gemini-3.5-flash`, stopped after scenario s12 when the free tier's daily request limit ended: 11 of the 12 scenarios it
   planned succeeded and 8 are marked not evaluated ([partial results](docs/results/llm_gemini-3.5-flash_symbolic_partial/summary.md)).
 
+## Validator ablation
+What does the gate buy? The same 20 scenarios and seed, once with the validator **enforced** (reject, feed the errors back, regenerate) and once with its verdict **ignored**
+(the first answer executes as generated; the validator still runs so rejections can be counted). Controlled setup: the offline reference planner with a defect from the seven
+classes injected into the first answer of **every** plan and replan, symbolic skill backend.
+
+| | gate ON | gate OFF |
+|---|---|---|
+| mission success | **20/20** | 1/20 |
+| injected faults recovered | 12/12 | 1/12 |
+| missions where the executor reported the tree complete but the goal was **not** achieved | 0 | 6 |
+| missions stopped because BT.CPP refused a hallucinated skill | 0 | 7 |
+| missions failed on `PLAN_INVALID` after the replan budget | 0 | 5 |
+
+* With the gate off, the most dangerous outcome is the **false success**: 6 missions ended with "tree completed" while the goal was missed. Only the benchmark's independent
+  check against ground truth reveals it.
+* Hallucinated skills are also stopped by BT.CPP's own node registry, a second line of defence; the other defect classes are not caught there.
+* The simulator counted 0 geofence crossings in both conditions, so this experiment does not demonstrate geofence harm.
+* Defects are injected at a 100% rate by a test double: this measures the gate's effect on injected defects, not how often a real LLM errs.
+* Switch: `enforce_validator:=false` on `symbolic.launch.py`; `scripts/run_ablation.sh` runs both conditions. Full tables:
+  [comparison](docs/results/ablation_defect_injection_symbolic_20/summary.md).
+
 ## Limitations (stated up front)
 * The LLM results are one run of one model on the symbolic backend; the Gazebo tables above use the offline reference planner. There is no
   no-validator comparison, so what the rejected plans would have done if executed is not measured.

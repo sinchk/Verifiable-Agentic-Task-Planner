@@ -101,6 +101,8 @@ class PlanResult:
             "input_tokens": sum(a.input_tokens for a in self.attempts),
             "output_tokens": sum(a.output_tokens for a in self.attempts),
             "nodes": self.tree.count() if self.tree else 0,
+            "validator_errors_first_attempt": sum(1 for i in (self.attempts[0].issues if self.attempts else [])
+                                                 if i.severity == "error"),
             "first_attempt_valid": bool(self.attempts and not any(
                 i.severity == "error" for i in self.attempts[0].issues) and self.attempts[0].error is None),
         }
@@ -109,7 +111,10 @@ class PlanResult:
 class Planner:
     def __init__(self, backend: LLMBackend, validator: Validator | None = None,
                  retriever: Retriever | None = None, library: SkillLibrary | None = None,
-                 max_repairs: int = 2):
+                 max_repairs: int = 2, enforce: bool = True):
+        """enforce=False is the *ablation* mode: the validator still runs (so we can count what it
+        would have caught) but its verdict is ignored and the first plan is executed as-is."""
+        self.enforce = enforce
         self.backend = backend
         self.lib = library or load_library()
         self.validator = validator or Validator(self.lib)
@@ -152,14 +157,14 @@ class Planner:
             tree, report = self.validator.validate_plan(plan, world, required)
             attempts.append(Attempt(time.perf_counter() - t0, res.latency_s, res.input_tokens,
                                     res.output_tokens, report.elapsed_ms, list(report.issues), plan))
-            if report.ok:
+            if report.ok or not self.enforce:
                 break
             feedback = (
                 "\n\nYOUR PREVIOUS PLAN WAS REJECTED BY THE VALIDATOR. Fix every error and output a complete new plan.\n"
                 f"Previous plan:\n{json.dumps(plan)}\n"
                 "Validator errors:\n" + "\n".join(f"- {i}" for i in report.errors)
             )
-        ok = bool(report and report.ok and tree is not None)
+        ok = bool(report and tree is not None and (report.ok or not self.enforce))
         return PlanResult(ok, mode, tree if ok else None, btmod.to_xml(tree) if ok else None,
                           plan, report, attempts, time.perf_counter() - t_start,
                           self.backend.name, retrieved)

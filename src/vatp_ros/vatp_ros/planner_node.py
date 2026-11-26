@@ -30,6 +30,7 @@ class PlannerNode(Node):
         self.declare_parameter("defect_rate", 0.0)
         self.declare_parameter("seed", 0)
         self.declare_parameter("max_repairs", 2)
+        self.declare_parameter("enforce_validator", True)  # False = ablation: run plans unvalidated
         kind = self.get_parameter("backend").value
         kw: dict = {}
         if kind == "mock" or (kind == "auto" and not _has_key()):
@@ -42,7 +43,10 @@ class PlannerNode(Node):
             if self.get_parameter("effort").value:
                 kw["effort"] = self.get_parameter("effort").value
         self.backend = make_backend(kind, **kw)
-        self.planner = Planner(self.backend, max_repairs=int(self.get_parameter("max_repairs").value))
+        self.planner = Planner(self.backend, max_repairs=int(self.get_parameter("max_repairs").value),
+                               enforce=bool(self.get_parameter("enforce_validator").value))
+        if not self.planner.enforce:
+            self.get_logger().warn("ABLATION: validator verdicts are IGNORED; plans execute unvalidated")
         self._declared: dict[str, list[dict]] = {}
         cg = ReentrantCallbackGroup()
         self.create_service(PlanMission, "/vatp/plan_mission", self._plan, callback_group=cg)

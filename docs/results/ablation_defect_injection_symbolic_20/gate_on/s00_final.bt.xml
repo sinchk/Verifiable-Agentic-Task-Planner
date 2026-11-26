@@ -1,0 +1,38 @@
+<root BTCPP_format="4" main_tree_to_execute="MainTree">
+  <BehaviorTree ID="MainTree">
+    <Sequence name="n22">
+      <Fallback name="n11">
+        <CheckZoneClear name="n9" zone="loading_bay" />
+        <Sequence name="n10">
+          <RetryUntilSuccessful name="n2" num_attempts="2">
+            <NavigateTo name="n1" zone="loading_bay" />
+          </RetryUntilSuccessful>
+          <RetryUntilSuccessful name="n4" num_attempts="3">
+            <PickObject name="n3" object="small_box_1" />
+          </RetryUntilSuccessful>
+          <RetryUntilSuccessful name="n6" num_attempts="2">
+            <NavigateTo name="n5" zone="staging" />
+          </RetryUntilSuccessful>
+          <RetryUntilSuccessful name="n8" num_attempts="2">
+            <PlaceObject name="n7" object="small_box_1" zone="staging" />
+          </RetryUntilSuccessful>
+        </Sequence>
+      </Fallback>
+      <RetryUntilSuccessful name="n13" num_attempts="2">
+        <NavigateTo name="n12" zone="zone_a" />
+      </RetryUntilSuccessful>
+      <RetryUntilSuccessful name="n15" num_attempts="3">
+        <PickObject name="n14" object="crate_1" />
+      </RetryUntilSuccessful>
+      <RetryUntilSuccessful name="n17" num_attempts="2">
+        <NavigateTo name="n16" zone="loading_bay" />
+      </RetryUntilSuccessful>
+      <RetryUntilSuccessful name="n19" num_attempts="2">
+        <NavigateTo name="n18" zone="zone_b" />
+      </RetryUntilSuccessful>
+      <RetryUntilSuccessful name="n21" num_attempts="2">
+        <PlaceObject name="n20" object="crate_1" zone="zone_b" />
+      </RetryUntilSuccessful>
+    </Sequence>
+  </BehaviorTree>
+</root>

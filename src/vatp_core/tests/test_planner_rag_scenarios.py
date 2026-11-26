@@ -118,3 +118,13 @@ def test_metrics_shape():
 
 def test_rag_object_lost_procedure():
     assert Retriever().search("OBJECT_LOST dropped while driving", k=1, prefix="RP-")[0].id == "RP-07"
+
+
+def test_ablation_mode_executes_defective_plan_but_still_counts_validator_errors():
+    sc = make_scenario(1, seed=0)
+    on = Planner(MockBackend(defect_rate=1.0, seed=3), enforce=True).plan(sc.instruction, sc.world, sc.required_goals)
+    off = Planner(MockBackend(defect_rate=1.0, seed=3), enforce=False).plan(sc.instruction, sc.world, sc.required_goals)
+    assert on.ok and on.n_repairs >= 1                      # enforced: defect repaired
+    assert off.n_repairs == 0                               # ablation: no repair loop
+    assert off.metrics()["validator_errors_first_attempt"] > 0   # ...but we still know it was bad
+    assert not off.ok or off.report is not None

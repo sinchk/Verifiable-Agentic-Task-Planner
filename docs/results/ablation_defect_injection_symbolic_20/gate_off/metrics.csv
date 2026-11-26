@@ -1,0 +1,21 @@
+backend,escalations,fault,fault_fired,final_nodes,first_attempt_valid,goals_satisfied,id,initial_nodes,message,n_fault_events,not_evaluated,plan_latency_s,plan_repairs,recovered_from_fault,replan_latency_s,replans,safety_violations,success,template,tree_completed,validation_ms,wall_s
+mock(defect_rate=1.0),0,none,False,5,False,False,s00,22,tree failed and replan budget exhausted: PLAN_INVALID,0,False,0.014,0,False,0.013,3,0,False,conditional_clear_deliver,False,0.713,9.51
+mock(defect_rate=1.0),0,none,False,11,False,False,s01,11,executor could not build tree: Error at line 8: -> Node not recognized: GraspObject,0,False,0.014,0,False,0.0,0,0,False,simple_delivery,False,0.361,5.21
+mock(defect_rate=1.0),0,none,False,18,False,False,s02,18,mission tree completed,0,False,0.008,0,False,0.0,0,0,False,two_item,True,1.118,8.6
+mock(defect_rate=1.0),0,none,False,9,False,False,s03,9,mission tree completed,0,False,0.007,0,False,0.0,0,0,False,geofence,True,0.7,0.69
+mock(defect_rate=1.0),0,none,False,5,False,False,s04,16,tree failed and replan budget exhausted: PLAN_INVALID,0,False,0.007,0,False,0.008,3,0,False,conditional_clear_deliver,False,0.299,2.36
+mock(defect_rate=1.0),0,none,False,11,False,False,s05,11,executor could not build tree: Error at line 8: -> Node not recognized: GraspObject,0,False,0.011,0,False,0.0,0,0,False,simple_delivery,False,0.413,1.55
+mock(defect_rate=1.0),0,none,False,18,False,False,s06,18,mission tree completed,0,False,0.015,0,False,0.0,0,0,False,two_item,True,2.101,3.58
+mock(defect_rate=1.0),0,none,False,9,False,False,s07,9,mission tree completed,0,False,0.013,0,False,0.0,0,0,False,geofence,True,1.277,2.38
+mock(defect_rate=1.0),0,obstacle_spawn,True,5,False,False,s08,22,tree failed and replan budget exhausted: PLAN_INVALID,1,False,0.013,0,False,0.012,3,0,False,conditional_clear_deliver,False,0.583,2.25
+mock(defect_rate=1.0),0,grasp_fail,False,11,False,False,s09,11,executor could not build tree: Error at line 8: -> Node not recognized: GraspObject,0,False,0.011,0,False,0.0,0,0,False,simple_delivery,False,0.419,0.89
+mock(defect_rate=1.0),0,obstacle_spawn,True,0,False,True,s10,0,,1,False,0.0,0,False,0.0,0,0,False,two_item,False,2.07,17.45
+mock(defect_rate=1.0),0,grasp_fail,True,9,False,False,s11,9,mission tree completed,1,False,0.007,0,False,0.0,0,0,False,geofence,True,0.647,18.43
+mock(defect_rate=1.0),0,nav_block,True,5,False,False,s12,22,tree failed and replan budget exhausted: PLAN_INVALID,1,False,0.007,0,False,0.007,3,0,False,conditional_clear_deliver,False,0.334,2.04
+mock(defect_rate=1.0),0,place_fail,False,11,False,False,s13,11,executor could not build tree: Error at line 8: -> Node not recognized: GraspObject,0,False,0.006,0,False,0.0,0,0,False,simple_delivery,False,0.229,0.74
+mock(defect_rate=1.0),0,grasp_fail,True,18,False,False,s14,18,mission tree completed,1,False,0.01,0,False,0.0,0,0,False,two_item,True,1.631,1.28
+mock(defect_rate=1.0),0,obstacle_spawn,True,29,False,False,s15,9,executor could not build tree: Error at line 14: -> Node not recognized: GraspObject,1,False,0.013,0,False,0.013,1,0,False,geofence,False,1.337,0.84
+mock(defect_rate=1.0),0,nav_block,True,5,False,False,s16,16,tree failed and replan budget exhausted: PLAN_INVALID,1,False,0.012,0,False,0.012,3,0,False,conditional_clear_deliver,False,0.511,2.7
+mock(defect_rate=1.0),0,place_fail,False,11,False,False,s17,11,executor could not build tree: Error at line 8: -> Node not recognized: GraspObject,0,False,0.011,0,False,0.0,0,0,False,simple_delivery,False,0.441,11.38
+mock(defect_rate=1.0),0,obstacle_spawn,True,29,False,True,s18,18,mission tree completed,1,False,0.008,0,True,0.008,1,0,True,two_item,True,1.082,20.99
+mock(defect_rate=1.0),0,grasp_fail,True,9,False,False,s19,9,executor could not build tree: Error at line 5: -> Node not recognized: GraspObject,1,False,0.007,0,False,0.006,1,0,False,geofence,False,0.69,5.83
