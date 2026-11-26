@@ -1,0 +1,22 @@
+<root BTCPP_format="4" main_tree_to_execute="MainTree">
+  <BehaviorTree ID="MainTree">
+    <Sequence name="n0">
+      <Fallback name="n1">
+        <CheckZoneClear name="n2" zone="loading_bay" />
+        <Sequence name="n3">
+          <NavigateTo name="n3_1" zone="loading_bay" />
+          <PickObject name="n3_2" object="small_box_1" />
+          <NavigateTo name="n3_3" zone="staging" />
+          <PlaceObject name="n3_4" object="small_box_1" zone="staging" />
+        </Sequence>
+      </Fallback>
+      <Sequence name="n7">
+        <NavigateTo name="n8" zone="zone_a" />
+        <PickObject name="n9" object="crate_1" />
+        <NavigateTo name="n10" zone="loading_bay" />
+        <NavigateTo name="n11" zone="zone_b" />
+        <PlaceObject name="n12" object="crate_1" zone="zone_b" />
+      </Sequence>
+    </Sequence>
+  </BehaviorTree>
+</root>

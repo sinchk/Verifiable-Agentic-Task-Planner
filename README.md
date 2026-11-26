@@ -33,9 +33,10 @@ Regenerate everything: `scripts/record_demo.sh 8` → `scripts/make_video.py` ·
 
 ### Planner backends
 The planner is pluggable. `mock` is a deterministic offline reference planner (goal regression with geofence-aware routing);
-`anthropic` is an LLM backend that returns schema-constrained JSON. Both feed the same compile → validate → repair loop, so
-the validator, executor and recovery logic are identical for either. **Every demo and benchmark in this README uses the
-offline reference planner**; the LLM backend is not part of the reported results.
+`gemini` and `anthropic` are LLM backends that return schema-constrained JSON. All of them feed the same compile → validate →
+repair loop, so the validator, executor and recovery logic are identical for every backend. The Gazebo demo and the Gazebo
+benchmark tables use the offline reference planner; the LLM results have their own section
+([LLM planner results](#llm-planner-results), symbolic skill backend).
 
 ## What is in the box
 | capability | where |
@@ -69,8 +70,10 @@ ros2 launch vatp_sim mission.launch.py backend:=auto scenario:=0 gui:=false dash
 ros2 run vatp_ros benchmark --n 20 --physical --timeout 900
 python scripts/plot_results.py runs/<stamp>/metrics.json
 ```
-`backend:=anthropic` selects the LLM backend (reads `ANTHROPIC_API_KEY`; model and effort via `VATP_MODEL` / `VATP_EFFORT`).
-`backend:=mock` is the offline reference planner; `auto` uses it whenever no key is present.
+`backend:=gemini` selects the Gemini backend (reads `GEMINI_API_KEY`; model via `VATP_GEMINI_MODEL`, reasoning level via `VATP_GEMINI_THINKING`);
+`backend:=anthropic` selects the Anthropic backend (reads `ANTHROPIC_API_KEY`; model and effort via `VATP_MODEL` / `VATP_EFFORT`).
+`backend:=mock` is the offline reference planner; `auto` uses it whenever no Anthropic key is present.
+`scripts/run_llm_symbolic.sh <gemini-model> <tag>` runs the 20-scenario LLM benchmark end to end.
 
 Tests: `colcon test && colcon test-result` · `pytest src/vatp_core/tests` · `pytest src/vatp_sim/test`.
 
@@ -109,8 +112,36 @@ Each scenario carries one fault, fired when a chosen skill is called for the n-t
   [run 2](docs/results/gazebo_v2_offline_planner_20/summary.md) ·
   [symbolic baseline](docs/results/baseline_offline_planner_symbolic_20.md).
 
+## LLM planner results
+The same 20 scenarios, planned by a real LLM instead of the reference planner. Run on the **symbolic skill backend** (no physics, so
+a mission takes seconds and the study isolates planning), scenario seed 0, temperature 0, at most 2 repairs per plan and 3 replans per mission.
+
+| | offline reference planner | `gemini-3.1-flash-lite` |
+|---|---|---|
+| mission success | 20/20 | **14/20 (70%)** |
+| injected faults recovered | 12/12 | 7/12 |
+| scenarios needing replanning | 9 | 5 |
+| initial plans valid on the first attempt | 20/20 | 10/20 |
+| initial plans accepted after ≤ 2 repairs | 20/20 | 19/20 |
+| replans accepted after ≤ 2 repairs | all accepted | 8/13 |
+| plan / replan latency (median) | ~10 ms | 6.7 s / 7.1 s |
+
+* **The validator was the deciding component.** Of 33 planner calls (20 plans + 13 replans) the model's first answer passed the validator
+  12 times (36%). The other 21 were rejected with specific errors, and the repair loop turned 15 of them into accepted plans. Nothing
+  rejected was executed.
+* **All 6 failed missions are validator rejections**: 1 initial plan and 5 replans still invalid after two repairs. The rejections cite
+  `GRIPPER_BUSY` (picking an obstacle while still holding the crate), `NOT_HOLDING`, `NOT_AT_OBJECT`, `GEOFENCE_PATH` (a straight
+  `zone_b → staging` leg across the keep-out aisle) and `GOAL_NOT_ESTABLISHED`. The mission then ends without running the rejected plan.
+* **Replanning is where the model struggles**: 8 of 13 replans were accepted versus 19 of 20 initial plans, because a replan must account for a held
+  object and a changed scene.
+* Usage: 61 model requests, 138k input and 48k output tokens for the whole suite.
+* Full tables: [`gemini-3.1-flash-lite`, all 20 scenarios](docs/results/llm_gemini-3.1-flash-lite_symbolic_20/summary.md).
+  A second model, `gemini-3.5-flash`, stopped after scenario s12 when the free tier's daily request limit ended: 11 of the 12 scenarios it
+  planned succeeded and 8 are marked not evaluated ([partial results](docs/results/llm_gemini-3.5-flash_symbolic_partial/summary.md)).
+
 ## Limitations (stated up front)
-* All reported results use the offline reference planner; the LLM backend is not benchmarked.
+* The LLM results are one run of one model on the symbolic backend; the Gazebo tables above use the offline reference planner. There is no
+  no-validator comparison, so what the rejected plans would have done if executed is not measured.
 * The 20-scenario suite served both to find the run-1 failures and to confirm the run-2 fixes; it is a regression suite, not a held-out evaluation.
 * Localisation and perception use simulator ground truth (stand-ins for AMCL and a VLM); the VLM hook is the scene graph given to the planner.
 * Grasping uses closed-form IK with a high approach and vertical descent; MoveIt 2 is the planned replacement behind `ArmControl`.

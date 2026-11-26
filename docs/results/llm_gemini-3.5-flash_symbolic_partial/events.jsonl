@@ -1,0 +1,488 @@
+{"scenario": "s00", "t": 1795665771.5894957, "type": "PLAN_REQUEST", "node": "", "detail": "{\"instruction\":\"Check if the loading bay is clear; if blocked, clear the small box first, then deliver the crate to Zone B.\"}"}
+{"scenario": "s00", "t": 1795665826.0514317, "type": "PLAN_READY", "node": "", "detail": "{\"latency_s\":54.461547063,\"metrics\":{\"attempts\":1,\"backend\":\"gemini:gemini-3.5-flash\",\"first_attempt_valid\":true,\"input_tokens\":1926,\"latency_s\":54.449,\"llm_latency_s\":54.446,\"mode\":\"plan\",\"nodes\":14,\"ok\":true,\"output_tokens\":3024,\"repairs\":0,\"validation_ms\":2.897,\"validator_errors_first_attempt\":0},\"ok\":true}"}
+{"scenario": "s00", "t": 1795665826.0541527, "type": "TREE_STARTED", "node": "", "detail": "{\"replans\":0}"}
+{"scenario": "s00", "t": 1795665826.054291, "type": "NODE_STATUS", "node": "n0", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s00", "t": 1795665826.0543783, "type": "NODE_STATUS", "node": "n1", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s00", "t": 1795665826.0546339, "type": "SKILL_START", "node": "n2", "detail": "{\"skill\":\"CheckZoneClear\",\"args\":{\"zone\":\"loading_bay\"}}"}
+{"scenario": "s00", "t": 1795665826.054855, "type": "NODE_STATUS", "node": "n2", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s00", "t": 1795665826.0881233, "type": "NODE_STATUS", "node": "n2", "detail": "{\"status\":\"FAILURE\"}"}
+{"scenario": "s00", "t": 1795665826.0881937, "type": "NODE_STATUS", "node": "n3", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s00", "t": 1795665826.0882897, "type": "SKILL_START", "node": "n3_1", "detail": "{\"skill\":\"NavigateTo\",\"args\":{\"zone\":\"loading_bay\"}}"}
+{"scenario": "s00", "t": 1795665826.088458, "type": "NODE_STATUS", "node": "n3_1", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s00", "t": 1795665826.221387, "type": "NODE_STATUS", "node": "n3_1", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s00", "t": 1795665826.2215314, "type": "SKILL_START", "node": "n3_2", "detail": "{\"skill\":\"PickObject\",\"args\":{\"object\":\"small_box_1\"}}"}
+{"scenario": "s00", "t": 1795665826.2216747, "type": "NODE_STATUS", "node": "n3_2", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s00", "t": 1795665826.321539, "type": "NODE_STATUS", "node": "n3_2", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s00", "t": 1795665826.3216684, "type": "SKILL_START", "node": "n3_3", "detail": "{\"skill\":\"NavigateTo\",\"args\":{\"zone\":\"staging\"}}"}
+{"scenario": "s00", "t": 1795665826.3217928, "type": "NODE_STATUS", "node": "n3_3", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s00", "t": 1795665826.4879923, "type": "NODE_STATUS", "node": "n3_3", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s00", "t": 1795665826.4881425, "type": "SKILL_START", "node": "n3_4", "detail": "{\"skill\":\"PlaceObject\",\"args\":{\"object\":\"small_box_1\",\"zone\":\"staging\"}}"}
+{"scenario": "s00", "t": 1795665826.4883103, "type": "NODE_STATUS", "node": "n3_4", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s00", "t": 1795665826.5880387, "type": "NODE_STATUS", "node": "n3_4", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s00", "t": 1795665826.5881858, "type": "NODE_STATUS", "node": "n3", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s00", "t": 1795665826.58824, "type": "NODE_STATUS", "node": "n1", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s00", "t": 1795665826.5882955, "type": "NODE_STATUS", "node": "n7", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s00", "t": 1795665826.588452, "type": "SKILL_START", "node": "n8", "detail": "{\"skill\":\"NavigateTo\",\"args\":{\"zone\":\"zone_a\"}}"}
+{"scenario": "s00", "t": 1795665826.5886178, "type": "NODE_STATUS", "node": "n8", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s00", "t": 1795665826.6882985, "type": "NODE_STATUS", "node": "n8", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s00", "t": 1795665826.6884735, "type": "SKILL_START", "node": "n9", "detail": "{\"skill\":\"PickObject\",\"args\":{\"object\":\"crate_1\"}}"}
+{"scenario": "s00", "t": 1795665826.6886032, "type": "NODE_STATUS", "node": "n9", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s00", "t": 1795665826.7883162, "type": "NODE_STATUS", "node": "n9", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s00", "t": 1795665826.7884846, "type": "SKILL_START", "node": "n10", "detail": "{\"skill\":\"NavigateTo\",\"args\":{\"zone\":\"loading_bay\"}}"}
+{"scenario": "s00", "t": 1795665826.788621, "type": "NODE_STATUS", "node": "n10", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s00", "t": 1795665826.8883061, "type": "NODE_STATUS", "node": "n10", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s00", "t": 1795665826.8884583, "type": "SKILL_START", "node": "n11", "detail": "{\"skill\":\"NavigateTo\",\"args\":{\"zone\":\"zone_b\"}}"}
+{"scenario": "s00", "t": 1795665826.8885868, "type": "NODE_STATUS", "node": "n11", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s00", "t": 1795665827.054767, "type": "NODE_STATUS", "node": "n11", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s00", "t": 1795665827.054908, "type": "SKILL_START", "node": "n12", "detail": "{\"skill\":\"PlaceObject\",\"args\":{\"object\":\"crate_1\",\"zone\":\"zone_b\"}}"}
+{"scenario": "s00", "t": 1795665827.0550363, "type": "NODE_STATUS", "node": "n12", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s00", "t": 1795665827.1546144, "type": "NODE_STATUS", "node": "n12", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s00", "t": 1795665827.1547103, "type": "NODE_STATUS", "node": "n7", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s00", "t": 1795665827.1547558, "type": "NODE_STATUS", "node": "n0", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s00", "t": 1795665827.154845, "type": "MISSION_END", "node": "", "detail": "{\"message\":\"mission tree completed\",\"replans\":0,\"success\":true}"}
+{"scenario": "s01", "t": 1795665827.4281642, "type": "PLAN_REQUEST", "node": "", "detail": "{\"instruction\":\"Deliver the crate from zone A to zone B.\"}"}
+{"scenario": "s01", "t": 1795665875.854078, "type": "PLAN_READY", "node": "", "detail": "{\"latency_s\":48.425602877,\"metrics\":{\"attempts\":1,\"backend\":\"gemini:gemini-3.5-flash\",\"first_attempt_valid\":true,\"input_tokens\":1889,\"latency_s\":48.413,\"llm_latency_s\":48.411,\"mode\":\"plan\",\"nodes\":7,\"ok\":true,\"output_tokens\":2750,\"repairs\":0,\"validation_ms\":1.634,\"validator_errors_first_attempt\":0},\"ok\":true}"}
+{"scenario": "s01", "t": 1795665875.8554146, "type": "TREE_STARTED", "node": "", "detail": "{\"replans\":0}"}
+{"scenario": "s01", "t": 1795665875.8555255, "type": "NODE_STATUS", "node": "n1", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s01", "t": 1795665875.8557246, "type": "SKILL_START", "node": "n2", "detail": "{\"skill\":\"NavigateTo\",\"args\":{\"zone\":\"zone_a\"}}"}
+{"scenario": "s01", "t": 1795665875.8558629, "type": "NODE_STATUS", "node": "n2", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s01", "t": 1795665875.9887204, "type": "NODE_STATUS", "node": "n2", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s01", "t": 1795665875.9888113, "type": "NODE_STATUS", "node": "n3_retry", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s01", "t": 1795665875.9889736, "type": "SKILL_START", "node": "n3", "detail": "{\"skill\":\"PickObject\",\"args\":{\"object\":\"crate_1\"}}"}
+{"scenario": "s01", "t": 1795665875.9891255, "type": "NODE_STATUS", "node": "n3", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s01", "t": 1795665876.0888894, "type": "NODE_STATUS", "node": "n3", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s01", "t": 1795665876.089004, "type": "NODE_STATUS", "node": "n3_retry", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s01", "t": 1795665876.0891986, "type": "SKILL_START", "node": "n4", "detail": "{\"skill\":\"NavigateTo\",\"args\":{\"zone\":\"loading_bay\"}}"}
+{"scenario": "s01", "t": 1795665876.0893364, "type": "NODE_STATUS", "node": "n4", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s01", "t": 1795665876.189047, "type": "NODE_STATUS", "node": "n4", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s01", "t": 1795665876.189236, "type": "SKILL_START", "node": "n5", "detail": "{\"skill\":\"NavigateTo\",\"args\":{\"zone\":\"zone_b\"}}"}
+{"scenario": "s01", "t": 1795665876.1894095, "type": "NODE_STATUS", "node": "n5", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s01", "t": 1795665876.3557382, "type": "NODE_STATUS", "node": "n5", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s01", "t": 1795665876.3559713, "type": "SKILL_START", "node": "n6", "detail": "{\"skill\":\"PlaceObject\",\"args\":{\"object\":\"crate_1\",\"zone\":\"zone_b\"}}"}
+{"scenario": "s01", "t": 1795665876.3560963, "type": "NODE_STATUS", "node": "n6", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s01", "t": 1795665876.4558377, "type": "NODE_STATUS", "node": "n6", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s01", "t": 1795665876.4560518, "type": "NODE_STATUS", "node": "n1", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s01", "t": 1795665876.4561477, "type": "MISSION_END", "node": "", "detail": "{\"message\":\"mission tree completed\",\"replans\":0,\"success\":true}"}
+{"scenario": "s02", "t": 1795665876.7151742, "type": "PLAN_REQUEST", "node": "", "detail": "{\"instruction\":\"Move the small box to staging, deliver the crate to Zone B, then report status.\"}"}
+{"scenario": "s02", "t": 1795665951.026515, "type": "PLAN_READY", "node": "", "detail": "{\"latency_s\":74.310951435,\"metrics\":{\"attempts\":1,\"backend\":\"gemini:gemini-3.5-flash\",\"first_attempt_valid\":true,\"input_tokens\":1909,\"latency_s\":74.3,\"llm_latency_s\":74.297,\"mode\":\"plan\",\"nodes\":11,\"ok\":true,\"output_tokens\":2812,\"repairs\":0,\"validation_ms\":2.614,\"validator_errors_first_attempt\":0},\"ok\":true}"}
+{"scenario": "s02", "t": 1795665951.027976, "type": "TREE_STARTED", "node": "", "detail": "{\"replans\":0}"}
+{"scenario": "s02", "t": 1795665951.0280921, "type": "NODE_STATUS", "node": "root", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s02", "t": 1795665951.0282896, "type": "SKILL_START", "node": "n1", "detail": "{\"skill\":\"NavigateTo\",\"args\":{\"zone\":\"loading_bay\"}}"}
+{"scenario": "s02", "t": 1795665951.0284925, "type": "NODE_STATUS", "node": "n1", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s02", "t": 1795665951.1614244, "type": "NODE_STATUS", "node": "n1", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s02", "t": 1795665951.1615756, "type": "SKILL_START", "node": "n2", "detail": "{\"skill\":\"PickObject\",\"args\":{\"object\":\"small_box_1\"}}"}
+{"scenario": "s02", "t": 1795665951.161754, "type": "NODE_STATUS", "node": "n2", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s02", "t": 1795665951.261456, "type": "NODE_STATUS", "node": "n2", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s02", "t": 1795665951.2616305, "type": "SKILL_START", "node": "n3", "detail": "{\"skill\":\"NavigateTo\",\"args\":{\"zone\":\"staging\"}}"}
+{"scenario": "s02", "t": 1795665951.2617912, "type": "NODE_STATUS", "node": "n3", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s02", "t": 1795665951.4281838, "type": "NODE_STATUS", "node": "n3", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s02", "t": 1795665951.4283268, "type": "SKILL_START", "node": "n4", "detail": "{\"skill\":\"PlaceObject\",\"args\":{\"object\":\"small_box_1\",\"zone\":\"staging\"}}"}
+{"scenario": "s02", "t": 1795665951.4284925, "type": "NODE_STATUS", "node": "n4", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s02", "t": 1795665951.5281613, "type": "NODE_STATUS", "node": "n4", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s02", "t": 1795665951.5283015, "type": "SKILL_START", "node": "n5", "detail": "{\"skill\":\"NavigateTo\",\"args\":{\"zone\":\"zone_a\"}}"}
+{"scenario": "s02", "t": 1795665951.5284746, "type": "NODE_STATUS", "node": "n5", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s02", "t": 1795665951.6281383, "type": "NODE_STATUS", "node": "n5", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s02", "t": 1795665951.6282778, "type": "SKILL_START", "node": "n6", "detail": "{\"skill\":\"PickObject\",\"args\":{\"object\":\"crate_1\"}}"}
+{"scenario": "s02", "t": 1795665951.628436, "type": "NODE_STATUS", "node": "n6", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s02", "t": 1795665951.7282715, "type": "NODE_STATUS", "node": "n6", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s02", "t": 1795665951.728432, "type": "SKILL_START", "node": "n7", "detail": "{\"skill\":\"NavigateTo\",\"args\":{\"zone\":\"loading_bay\"}}"}
+{"scenario": "s02", "t": 1795665951.7285852, "type": "NODE_STATUS", "node": "n7", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s02", "t": 1795665951.8285315, "type": "NODE_STATUS", "node": "n7", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s02", "t": 1795665951.828888, "type": "SKILL_START", "node": "n8", "detail": "{\"skill\":\"NavigateTo\",\"args\":{\"zone\":\"zone_b\"}}"}
+{"scenario": "s02", "t": 1795665951.8290832, "type": "NODE_STATUS", "node": "n8", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s02", "t": 1795665951.9952517, "type": "NODE_STATUS", "node": "n8", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s02", "t": 1795665951.9954119, "type": "SKILL_START", "node": "n9", "detail": "{\"skill\":\"PlaceObject\",\"args\":{\"object\":\"crate_1\",\"zone\":\"zone_b\"}}"}
+{"scenario": "s02", "t": 1795665951.9955647, "type": "NODE_STATUS", "node": "n9", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s02", "t": 1795665952.0955734, "type": "NODE_STATUS", "node": "n9", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s02", "t": 1795665952.0957062, "type": "SKILL_START", "node": "n10", "detail": "{\"skill\":\"ReportStatus\",\"args\":{\"message\":\"Successfully relocated small_box_1 to staging and delivered crate_1 to zone_b.\"}}"}
+{"scenario": "s02", "t": 1795665952.0958478, "type": "NODE_STATUS", "node": "n10", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s02", "t": 1795665952.129152, "type": "NODE_STATUS", "node": "n10", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s02", "t": 1795665952.1292787, "type": "NODE_STATUS", "node": "root", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s02", "t": 1795665952.1293507, "type": "MISSION_END", "node": "", "detail": "{\"message\":\"mission tree completed\",\"replans\":0,\"success\":true}"}
+{"scenario": "s03", "t": 1795665952.8021996, "type": "PLAN_REQUEST", "node": "", "detail": "{\"instruction\":\"Bring the crate from staging to Zone B. The restricted aisle is off limits \u2014 never drive through or next to it.\"}"}
+{"scenario": "s03", "t": 1795665989.7073274, "type": "PLAN_READY", "node": "", "detail": "{\"latency_s\":36.90476945,\"metrics\":{\"attempts\":1,\"backend\":\"gemini:gemini-3.5-flash\",\"first_attempt_valid\":true,\"input_tokens\":1901,\"latency_s\":36.894,\"llm_latency_s\":36.892,\"mode\":\"plan\",\"nodes\":6,\"ok\":true,\"output_tokens\":1863,\"repairs\":0,\"validation_ms\":1.439,\"validator_errors_first_attempt\":0},\"ok\":true}"}
+{"scenario": "s03", "t": 1795665989.7087245, "type": "TREE_STARTED", "node": "", "detail": "{\"replans\":0}"}
+{"scenario": "s03", "t": 1795665989.7088625, "type": "NODE_STATUS", "node": "node_root", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s03", "t": 1795665989.709052, "type": "SKILL_START", "node": "node_nav_staging", "detail": "{\"skill\":\"NavigateTo\",\"args\":{\"zone\":\"staging\"}}"}
+{"scenario": "s03", "t": 1795665989.7091978, "type": "NODE_STATUS", "node": "node_nav_staging", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s03", "t": 1795665989.9084992, "type": "NODE_STATUS", "node": "node_nav_staging", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s03", "t": 1795665989.9087448, "type": "SKILL_START", "node": "node_pick_crate", "detail": "{\"skill\":\"PickObject\",\"args\":{\"object\":\"crate_1\"}}"}
+{"scenario": "s03", "t": 1795665989.9089065, "type": "NODE_STATUS", "node": "node_pick_crate", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s03", "t": 1795665990.0086045, "type": "NODE_STATUS", "node": "node_pick_crate", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s03", "t": 1795665990.0088284, "type": "SKILL_START", "node": "node_nav_loading", "detail": "{\"skill\":\"NavigateTo\",\"args\":{\"zone\":\"loading_bay\"}}"}
+{"scenario": "s03", "t": 1795665990.0089805, "type": "NODE_STATUS", "node": "node_nav_loading", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s03", "t": 1795665990.1750343, "type": "NODE_STATUS", "node": "node_nav_loading", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s03", "t": 1795665990.1752253, "type": "SKILL_START", "node": "node_nav_zone_b", "detail": "{\"skill\":\"NavigateTo\",\"args\":{\"zone\":\"zone_b\"}}"}
+{"scenario": "s03", "t": 1795665990.1754086, "type": "NODE_STATUS", "node": "node_nav_zone_b", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s03", "t": 1795665990.3415487, "type": "NODE_STATUS", "node": "node_nav_zone_b", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s03", "t": 1795665990.3417795, "type": "SKILL_START", "node": "node_place_crate", "detail": "{\"skill\":\"PlaceObject\",\"args\":{\"object\":\"crate_1\",\"zone\":\"zone_b\"}}"}
+{"scenario": "s03", "t": 1795665990.34192, "type": "NODE_STATUS", "node": "node_place_crate", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s03", "t": 1795665990.4415166, "type": "NODE_STATUS", "node": "node_place_crate", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s03", "t": 1795665990.4416301, "type": "NODE_STATUS", "node": "node_root", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s03", "t": 1795665990.4417036, "type": "MISSION_END", "node": "", "detail": "{\"message\":\"mission tree completed\",\"replans\":0,\"success\":true}"}
+{"scenario": "s04", "t": 1795665993.012905, "type": "PLAN_REQUEST", "node": "", "detail": "{\"instruction\":\"Check if the loading bay is clear; if blocked, clear the small box first, then deliver the crate to Zone B.\"}"}
+{"scenario": "s04", "t": 1795666110.4679332, "type": "PLAN_READY", "node": "", "detail": "{\"latency_s\":117.454701652,\"metrics\":{\"attempts\":1,\"backend\":\"gemini:gemini-3.5-flash\",\"first_attempt_valid\":true,\"input_tokens\":1924,\"latency_s\":117.443,\"llm_latency_s\":117.441,\"mode\":\"plan\",\"nodes\":13,\"ok\":true,\"output_tokens\":4718,\"repairs\":0,\"validation_ms\":1.724,\"validator_errors_first_attempt\":0},\"ok\":true}"}
+{"scenario": "s04", "t": 1795666110.4695168, "type": "TREE_STARTED", "node": "", "detail": "{\"replans\":0}"}
+{"scenario": "s04", "t": 1795666110.4696512, "type": "NODE_STATUS", "node": "root", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s04", "t": 1795666110.4697132, "type": "NODE_STATUS", "node": "fb_clear_lb", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s04", "t": 1795666110.4698994, "type": "SKILL_START", "node": "check_lb_clear", "detail": "{\"skill\":\"CheckZoneClear\",\"args\":{\"zone\":\"loading_bay\"}}"}
+{"scenario": "s04", "t": 1795666110.470048, "type": "NODE_STATUS", "node": "check_lb_clear", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s04", "t": 1795666110.5033507, "type": "NODE_STATUS", "node": "check_lb_clear", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s04", "t": 1795666110.5034666, "type": "NODE_STATUS", "node": "fb_clear_lb", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s04", "t": 1795666110.5035646, "type": "SKILL_START", "node": "nav_zone_a", "detail": "{\"skill\":\"NavigateTo\",\"args\":{\"zone\":\"zone_a\"}}"}
+{"scenario": "s04", "t": 1795666110.5037124, "type": "NODE_STATUS", "node": "nav_zone_a", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s04", "t": 1795666110.636548, "type": "NODE_STATUS", "node": "nav_zone_a", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s04", "t": 1795666110.636724, "type": "SKILL_START", "node": "pick_crate", "detail": "{\"skill\":\"PickObject\",\"args\":{\"object\":\"crate_1\"}}"}
+{"scenario": "s04", "t": 1795666110.636839, "type": "NODE_STATUS", "node": "pick_crate", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s04", "t": 1795666110.7365227, "type": "NODE_STATUS", "node": "pick_crate", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s04", "t": 1795666110.7366636, "type": "SKILL_START", "node": "nav_lb_transit", "detail": "{\"skill\":\"NavigateTo\",\"args\":{\"zone\":\"loading_bay\"}}"}
+{"scenario": "s04", "t": 1795666110.7367866, "type": "NODE_STATUS", "node": "nav_lb_transit", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s04", "t": 1795666110.8364685, "type": "NODE_STATUS", "node": "nav_lb_transit", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s04", "t": 1795666110.8366103, "type": "SKILL_START", "node": "nav_zone_b", "detail": "{\"skill\":\"NavigateTo\",\"args\":{\"zone\":\"zone_b\"}}"}
+{"scenario": "s04", "t": 1795666110.8367221, "type": "NODE_STATUS", "node": "nav_zone_b", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s04", "t": 1795666111.0028026, "type": "NODE_STATUS", "node": "nav_zone_b", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s04", "t": 1795666111.0029411, "type": "SKILL_START", "node": "place_crate", "detail": "{\"skill\":\"PlaceObject\",\"args\":{\"object\":\"crate_1\",\"zone\":\"zone_b\"}}"}
+{"scenario": "s04", "t": 1795666111.0030751, "type": "NODE_STATUS", "node": "place_crate", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s04", "t": 1795666111.1026995, "type": "NODE_STATUS", "node": "place_crate", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s04", "t": 1795666111.1027877, "type": "NODE_STATUS", "node": "root", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s04", "t": 1795666111.1028597, "type": "MISSION_END", "node": "", "detail": "{\"message\":\"mission tree completed\",\"replans\":0,\"success\":true}"}
+{"scenario": "s05", "t": 1795666115.6978986, "type": "PLAN_REQUEST", "node": "", "detail": "{\"instruction\":\"Deliver the crate from zone A to zone B.\"}"}
+{"scenario": "s05", "t": 1795666208.9661496, "type": "PLAN_READY", "node": "", "detail": "{\"latency_s\":93.267864928,\"metrics\":{\"attempts\":1,\"backend\":\"gemini:gemini-3.5-flash\",\"first_attempt_valid\":true,\"input_tokens\":1889,\"latency_s\":93.257,\"llm_latency_s\":93.255,\"mode\":\"plan\",\"nodes\":7,\"ok\":true,\"output_tokens\":3496,\"repairs\":0,\"validation_ms\":1.78,\"validator_errors_first_attempt\":0},\"ok\":true}"}
+{"scenario": "s05", "t": 1795666208.9675398, "type": "TREE_STARTED", "node": "", "detail": "{\"replans\":0}"}
+{"scenario": "s05", "t": 1795666208.9676402, "type": "NODE_STATUS", "node": "n1", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s05", "t": 1795666208.967815, "type": "SKILL_START", "node": "n2", "detail": "{\"skill\":\"NavigateTo\",\"args\":{\"zone\":\"zone_a\"}}"}
+{"scenario": "s05", "t": 1795666208.967941, "type": "NODE_STATUS", "node": "n2", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s05", "t": 1795666209.1010551, "type": "NODE_STATUS", "node": "n2", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s05", "t": 1795666209.1011677, "type": "NODE_STATUS", "node": "n3", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s05", "t": 1795666209.1013436, "type": "SKILL_START", "node": "n3_pick", "detail": "{\"skill\":\"PickObject\",\"args\":{\"object\":\"crate_1\"}}"}
+{"scenario": "s05", "t": 1795666209.1015172, "type": "NODE_STATUS", "node": "n3_pick", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s05", "t": 1795666209.20181, "type": "NODE_STATUS", "node": "n3_pick", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s05", "t": 1795666209.2020066, "type": "NODE_STATUS", "node": "n3", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s05", "t": 1795666209.2022374, "type": "SKILL_START", "node": "n4", "detail": "{\"skill\":\"NavigateTo\",\"args\":{\"zone\":\"loading_bay\"}}"}
+{"scenario": "s05", "t": 1795666209.202481, "type": "NODE_STATUS", "node": "n4", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s05", "t": 1795666209.30219, "type": "NODE_STATUS", "node": "n4", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s05", "t": 1795666209.3023255, "type": "SKILL_START", "node": "n5", "detail": "{\"skill\":\"NavigateTo\",\"args\":{\"zone\":\"zone_b\"}}"}
+{"scenario": "s05", "t": 1795666209.3024707, "type": "NODE_STATUS", "node": "n5", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s05", "t": 1795666209.4687467, "type": "NODE_STATUS", "node": "n5", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s05", "t": 1795666209.468894, "type": "SKILL_START", "node": "n6", "detail": "{\"skill\":\"PlaceObject\",\"args\":{\"object\":\"crate_1\",\"zone\":\"zone_b\"}}"}
+{"scenario": "s05", "t": 1795666209.4690237, "type": "NODE_STATUS", "node": "n6", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s05", "t": 1795666209.5687032, "type": "NODE_STATUS", "node": "n6", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s05", "t": 1795666209.568843, "type": "NODE_STATUS", "node": "n1", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s05", "t": 1795666209.5689278, "type": "MISSION_END", "node": "", "detail": "{\"message\":\"mission tree completed\",\"replans\":0,\"success\":true}"}
+{"scenario": "s06", "t": 1795666226.9568367, "type": "PLAN_REQUEST", "node": "", "detail": "{\"instruction\":\"Move the small box to staging, deliver the crate to Zone B, then report status.\"}"}
+{"scenario": "s06", "t": 1795666354.9323869, "type": "PLAN_READY", "node": "", "detail": "{\"latency_s\":127.975241202,\"metrics\":{\"attempts\":1,\"backend\":\"gemini:gemini-3.5-flash\",\"first_attempt_valid\":true,\"input_tokens\":1908,\"latency_s\":127.969,\"llm_latency_s\":127.966,\"mode\":\"plan\",\"nodes\":11,\"ok\":true,\"output_tokens\":2582,\"repairs\":0,\"validation_ms\":2.279,\"validator_errors_first_attempt\":0},\"ok\":true}"}
+{"scenario": "s06", "t": 1795666354.933775, "type": "TREE_STARTED", "node": "", "detail": "{\"replans\":0}"}
+{"scenario": "s06", "t": 1795666354.9338825, "type": "NODE_STATUS", "node": "node_root", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s06", "t": 1795666354.9341068, "type": "SKILL_START", "node": "n1", "detail": "{\"skill\":\"NavigateTo\",\"args\":{\"zone\":\"loading_bay\"}}"}
+{"scenario": "s06", "t": 1795666354.934254, "type": "NODE_STATUS", "node": "n1", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s06", "t": 1795666355.0670514, "type": "NODE_STATUS", "node": "n1", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s06", "t": 1795666355.0672736, "type": "SKILL_START", "node": "n2", "detail": "{\"skill\":\"PickObject\",\"args\":{\"object\":\"small_box_1\"}}"}
+{"scenario": "s06", "t": 1795666355.0674498, "type": "NODE_STATUS", "node": "n2", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s06", "t": 1795666355.1671176, "type": "NODE_STATUS", "node": "n2", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s06", "t": 1795666355.1672792, "type": "SKILL_START", "node": "n3", "detail": "{\"skill\":\"NavigateTo\",\"args\":{\"zone\":\"staging\"}}"}
+{"scenario": "s06", "t": 1795666355.1674695, "type": "NODE_STATUS", "node": "n3", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s06", "t": 1795666355.3336644, "type": "NODE_STATUS", "node": "n3", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s06", "t": 1795666355.3338625, "type": "SKILL_START", "node": "n4", "detail": "{\"skill\":\"PlaceObject\",\"args\":{\"object\":\"small_box_1\",\"zone\":\"staging\"}}"}
+{"scenario": "s06", "t": 1795666355.3340564, "type": "NODE_STATUS", "node": "n4", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s06", "t": 1795666355.4336388, "type": "NODE_STATUS", "node": "n4", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s06", "t": 1795666355.4337702, "type": "SKILL_START", "node": "n5", "detail": "{\"skill\":\"NavigateTo\",\"args\":{\"zone\":\"zone_a\"}}"}
+{"scenario": "s06", "t": 1795666355.433929, "type": "NODE_STATUS", "node": "n5", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s06", "t": 1795666355.5336034, "type": "NODE_STATUS", "node": "n5", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s06", "t": 1795666355.533727, "type": "SKILL_START", "node": "n6", "detail": "{\"skill\":\"PickObject\",\"args\":{\"object\":\"crate_1\"}}"}
+{"scenario": "s06", "t": 1795666355.5338297, "type": "NODE_STATUS", "node": "n6", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s06", "t": 1795666355.6334598, "type": "NODE_STATUS", "node": "n6", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s06", "t": 1795666355.633587, "type": "SKILL_START", "node": "n7", "detail": "{\"skill\":\"NavigateTo\",\"args\":{\"zone\":\"loading_bay\"}}"}
+{"scenario": "s06", "t": 1795666355.6337197, "type": "NODE_STATUS", "node": "n7", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s06", "t": 1795666355.7334182, "type": "NODE_STATUS", "node": "n7", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s06", "t": 1795666355.7335522, "type": "SKILL_START", "node": "n8", "detail": "{\"skill\":\"NavigateTo\",\"args\":{\"zone\":\"zone_b\"}}"}
+{"scenario": "s06", "t": 1795666355.7337115, "type": "NODE_STATUS", "node": "n8", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s06", "t": 1795666355.899899, "type": "NODE_STATUS", "node": "n8", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s06", "t": 1795666355.9000704, "type": "SKILL_START", "node": "n9", "detail": "{\"skill\":\"PlaceObject\",\"args\":{\"object\":\"crate_1\",\"zone\":\"zone_b\"}}"}
+{"scenario": "s06", "t": 1795666355.90024, "type": "NODE_STATUS", "node": "n9", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s06", "t": 1795666355.9999182, "type": "NODE_STATUS", "node": "n9", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s06", "t": 1795666356.0000603, "type": "SKILL_START", "node": "n10", "detail": "{\"skill\":\"ReportStatus\",\"args\":{\"message\":\"Mission completed successfully\"}}"}
+{"scenario": "s06", "t": 1795666356.0002024, "type": "NODE_STATUS", "node": "n10", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s06", "t": 1795666356.0335395, "type": "NODE_STATUS", "node": "n10", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s06", "t": 1795666356.0336776, "type": "NODE_STATUS", "node": "node_root", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s06", "t": 1795666356.0337706, "type": "MISSION_END", "node": "", "detail": "{\"message\":\"mission tree completed\",\"replans\":0,\"success\":true}"}
+{"scenario": "s07", "t": 1795666357.1650252, "type": "PLAN_REQUEST", "node": "", "detail": "{\"instruction\":\"Bring the crate from staging to Zone B. The restricted aisle is off limits \u2014 never drive through or next to it.\"}"}
+{"scenario": "s07", "t": 1795666400.1876779, "type": "PLAN_READY", "node": "", "detail": "{\"latency_s\":43.022282055,\"metrics\":{\"attempts\":1,\"backend\":\"gemini:gemini-3.5-flash\",\"first_attempt_valid\":true,\"input_tokens\":1900,\"latency_s\":43.012,\"llm_latency_s\":43.01,\"mode\":\"plan\",\"nodes\":6,\"ok\":true,\"output_tokens\":2277,\"repairs\":0,\"validation_ms\":1.477,\"validator_errors_first_attempt\":0},\"ok\":true}"}
+{"scenario": "s07", "t": 1795666400.189126, "type": "TREE_STARTED", "node": "", "detail": "{\"replans\":0}"}
+{"scenario": "s07", "t": 1795666400.1892564, "type": "NODE_STATUS", "node": "n0", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s07", "t": 1795666400.189467, "type": "SKILL_START", "node": "n1", "detail": "{\"skill\":\"NavigateTo\",\"args\":{\"zone\":\"staging\"}}"}
+{"scenario": "s07", "t": 1795666400.1896026, "type": "NODE_STATUS", "node": "n1", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s07", "t": 1795666400.3896801, "type": "NODE_STATUS", "node": "n1", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s07", "t": 1795666400.390024, "type": "SKILL_START", "node": "n2", "detail": "{\"skill\":\"PickObject\",\"args\":{\"object\":\"crate_1\"}}"}
+{"scenario": "s07", "t": 1795666400.3901522, "type": "NODE_STATUS", "node": "n2", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s07", "t": 1795666400.4898803, "type": "NODE_STATUS", "node": "n2", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s07", "t": 1795666400.4901288, "type": "SKILL_START", "node": "n3", "detail": "{\"skill\":\"NavigateTo\",\"args\":{\"zone\":\"loading_bay\"}}"}
+{"scenario": "s07", "t": 1795666400.490287, "type": "NODE_STATUS", "node": "n3", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s07", "t": 1795666400.6563294, "type": "NODE_STATUS", "node": "n3", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s07", "t": 1795666400.6565359, "type": "SKILL_START", "node": "n4", "detail": "{\"skill\":\"NavigateTo\",\"args\":{\"zone\":\"zone_b\"}}"}
+{"scenario": "s07", "t": 1795666400.656672, "type": "NODE_STATUS", "node": "n4", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s07", "t": 1795666400.8228374, "type": "NODE_STATUS", "node": "n4", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s07", "t": 1795666400.8229997, "type": "SKILL_START", "node": "n5", "detail": "{\"skill\":\"PlaceObject\",\"args\":{\"object\":\"crate_1\",\"zone\":\"zone_b\"}}"}
+{"scenario": "s07", "t": 1795666400.82312, "type": "NODE_STATUS", "node": "n5", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s07", "t": 1795666400.9228084, "type": "NODE_STATUS", "node": "n5", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s07", "t": 1795666400.922925, "type": "NODE_STATUS", "node": "n0", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s07", "t": 1795666400.9230015, "type": "MISSION_END", "node": "", "detail": "{\"message\":\"mission tree completed\",\"replans\":0,\"success\":true}"}
+{"scenario": "s08", "t": 1795666404.642277, "type": "PLAN_REQUEST", "node": "", "detail": "{\"instruction\":\"Check if the loading bay is clear; if blocked, clear the small box first, then deliver the crate to Zone B.\"}"}
+{"scenario": "s08", "t": 1795666508.2452848, "type": "PLAN_READY", "node": "", "detail": "{\"latency_s\":103.602680385,\"metrics\":{\"attempts\":1,\"backend\":\"gemini:gemini-3.5-flash\",\"first_attempt_valid\":true,\"input_tokens\":1926,\"latency_s\":103.592,\"llm_latency_s\":103.589,\"mode\":\"plan\",\"nodes\":13,\"ok\":true,\"output_tokens\":4106,\"repairs\":0,\"validation_ms\":2.733,\"validator_errors_first_attempt\":0},\"ok\":true}"}
+{"scenario": "s08", "t": 1795666508.2466192, "type": "TREE_STARTED", "node": "", "detail": "{\"replans\":0}"}
+{"scenario": "s08", "t": 1795666508.2467446, "type": "NODE_STATUS", "node": "n0", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s08", "t": 1795666508.2467868, "type": "NODE_STATUS", "node": "n1", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s08", "t": 1795666508.246983, "type": "SKILL_START", "node": "n2", "detail": "{\"skill\":\"CheckZoneClear\",\"args\":{\"zone\":\"loading_bay\"}}"}
+{"scenario": "s08", "t": 1795666508.2471097, "type": "NODE_STATUS", "node": "n2", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s08", "t": 1795666508.2804556, "type": "NODE_STATUS", "node": "n2", "detail": "{\"status\":\"FAILURE\"}"}
+{"scenario": "s08", "t": 1795666508.2805367, "type": "NODE_STATUS", "node": "n3", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s08", "t": 1795666508.2806447, "type": "SKILL_START", "node": "n4", "detail": "{\"skill\":\"NavigateTo\",\"args\":{\"zone\":\"loading_bay\"}}"}
+{"scenario": "s08", "t": 1795666508.280795, "type": "NODE_STATUS", "node": "n4", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s08", "t": 1795666508.284121, "type": "FAULT_INJECTED", "node": "NavigateTo", "detail": "obstacle_1 appeared in loading_bay"}
+{"scenario": "s08", "t": 1795666508.4136205, "type": "NODE_STATUS", "node": "n4", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s08", "t": 1795666508.4137495, "type": "SKILL_START", "node": "n5", "detail": "{\"skill\":\"PickObject\",\"args\":{\"object\":\"small_box_1\"}}"}
+{"scenario": "s08", "t": 1795666508.4138541, "type": "NODE_STATUS", "node": "n5", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s08", "t": 1795666508.51353, "type": "NODE_STATUS", "node": "n5", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s08", "t": 1795666508.5137105, "type": "SKILL_START", "node": "n6", "detail": "{\"skill\":\"NavigateTo\",\"args\":{\"zone\":\"staging\"}}"}
+{"scenario": "s08", "t": 1795666508.5138278, "type": "NODE_STATUS", "node": "n6", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s08", "t": 1795666508.680004, "type": "NODE_STATUS", "node": "n6", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s08", "t": 1795666508.6801596, "type": "SKILL_START", "node": "n7", "detail": "{\"skill\":\"PlaceObject\",\"args\":{\"object\":\"small_box_1\",\"zone\":\"staging\"}}"}
+{"scenario": "s08", "t": 1795666508.680292, "type": "NODE_STATUS", "node": "n7", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s08", "t": 1795666508.7799609, "type": "NODE_STATUS", "node": "n7", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s08", "t": 1795666508.780056, "type": "NODE_STATUS", "node": "n3", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s08", "t": 1795666508.7801104, "type": "NODE_STATUS", "node": "n1", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s08", "t": 1795666508.780232, "type": "SKILL_START", "node": "n8", "detail": "{\"skill\":\"NavigateTo\",\"args\":{\"zone\":\"zone_a\"}}"}
+{"scenario": "s08", "t": 1795666508.7803955, "type": "NODE_STATUS", "node": "n8", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s08", "t": 1795666508.8801625, "type": "NODE_STATUS", "node": "n8", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s08", "t": 1795666508.8803115, "type": "SKILL_START", "node": "n9", "detail": "{\"skill\":\"PickObject\",\"args\":{\"object\":\"crate_1\"}}"}
+{"scenario": "s08", "t": 1795666508.8804615, "type": "NODE_STATUS", "node": "n9", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s08", "t": 1795666508.980163, "type": "NODE_STATUS", "node": "n9", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s08", "t": 1795666508.9802973, "type": "SKILL_START", "node": "n10", "detail": "{\"skill\":\"NavigateTo\",\"args\":{\"zone\":\"loading_bay\"}}"}
+{"scenario": "s08", "t": 1795666508.9804726, "type": "NODE_STATUS", "node": "n10", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s08", "t": 1795666509.0801928, "type": "NODE_STATUS", "node": "n10", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s08", "t": 1795666509.08033, "type": "SKILL_START", "node": "n11", "detail": "{\"skill\":\"NavigateTo\",\"args\":{\"zone\":\"zone_b\"}}"}
+{"scenario": "s08", "t": 1795666509.0804882, "type": "NODE_STATUS", "node": "n11", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s08", "t": 1795666509.1802454, "type": "SKILL_FAILED", "node": "n11", "detail": "{\"code\":\"UNEXPECTED_OBSTACLE\",\"message\":\"path to zone_b blocked in loading_bay by ['obstacle_1']\",\"skill\":\"NavigateTo\"}"}
+{"scenario": "s08", "t": 1795666509.1803732, "type": "NODE_STATUS", "node": "n11", "detail": "{\"status\":\"FAILURE\"}"}
+{"scenario": "s08", "t": 1795666509.1804647, "type": "NODE_STATUS", "node": "n0", "detail": "{\"status\":\"FAILURE\"}"}
+{"scenario": "s08", "t": 1795666509.1805847, "type": "FALLBACK_TRIGGERED", "node": "n11", "detail": "{\"code\":\"UNEXPECTED_OBSTACLE\",\"message\":\"path to zone_b blocked in loading_bay by ['obstacle_1']\",\"skill\":\"NavigateTo\"}"}
+{"scenario": "s08", "t": 1795666509.1861687, "type": "REPLAN_REQUEST", "node": "n11", "detail": "{\"code\":\"UNEXPECTED_OBSTACLE\"}"}
+{"scenario": "s08", "t": 1795666525.9766629, "type": "REPLAN_READY", "node": "n11", "detail": "{\"latency_s\":16.790156051,\"metrics\":{\"attempts\":1,\"backend\":\"gemini:gemini-3.5-flash\",\"first_attempt_valid\":true,\"input_tokens\":2088,\"latency_s\":16.778,\"llm_latency_s\":16.775,\"mode\":\"replan\",\"nodes\":12,\"ok\":true,\"output_tokens\":4798,\"repairs\":0,\"validation_ms\":2.917,\"validator_errors_first_attempt\":0},\"ok\":true}"}
+{"scenario": "s08", "t": 1795666525.9768095, "type": "TREE_SWAPPED", "node": "n11", "detail": "{\"replans\":1}"}
+{"scenario": "s08", "t": 1795666525.982761, "type": "TREE_STARTED", "node": "", "detail": "{\"replans\":1}"}
+{"scenario": "s08", "t": 1795666525.9828978, "type": "NODE_STATUS", "node": "root_seq", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s08", "t": 1795666525.9830837, "type": "SKILL_START", "node": "nav_za_1", "detail": "{\"skill\":\"NavigateTo\",\"args\":{\"zone\":\"zone_a\"}}"}
+{"scenario": "s08", "t": 1795666525.9832287, "type": "NODE_STATUS", "node": "nav_za_1", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s08", "t": 1795666526.0829275, "type": "NODE_STATUS", "node": "nav_za_1", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s08", "t": 1795666526.083231, "type": "SKILL_START", "node": "place_crate_za", "detail": "{\"skill\":\"PlaceObject\",\"args\":{\"object\":\"crate_1\",\"zone\":\"zone_a\"}}"}
+{"scenario": "s08", "t": 1795666526.0833993, "type": "NODE_STATUS", "node": "place_crate_za", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s08", "t": 1795666526.1831565, "type": "NODE_STATUS", "node": "place_crate_za", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s08", "t": 1795666526.1833436, "type": "SKILL_START", "node": "nav_lb_1", "detail": "{\"skill\":\"NavigateTo\",\"args\":{\"zone\":\"loading_bay\"}}"}
+{"scenario": "s08", "t": 1795666526.1834927, "type": "NODE_STATUS", "node": "nav_lb_1", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s08", "t": 1795666526.2832901, "type": "NODE_STATUS", "node": "nav_lb_1", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s08", "t": 1795666526.2834377, "type": "SKILL_START", "node": "pick_obs", "detail": "{\"skill\":\"PickObject\",\"args\":{\"object\":\"obstacle_1\"}}"}
+{"scenario": "s08", "t": 1795666526.2835426, "type": "NODE_STATUS", "node": "pick_obs", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s08", "t": 1795666526.3836446, "type": "NODE_STATUS", "node": "pick_obs", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s08", "t": 1795666526.3840172, "type": "SKILL_START", "node": "nav_staging", "detail": "{\"skill\":\"NavigateTo\",\"args\":{\"zone\":\"staging\"}}"}
+{"scenario": "s08", "t": 1795666526.3842075, "type": "NODE_STATUS", "node": "nav_staging", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s08", "t": 1795666526.5502856, "type": "NODE_STATUS", "node": "nav_staging", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s08", "t": 1795666526.550477, "type": "SKILL_START", "node": "place_obs", "detail": "{\"skill\":\"PlaceObject\",\"args\":{\"object\":\"obstacle_1\",\"zone\":\"staging\"}}"}
+{"scenario": "s08", "t": 1795666526.550602, "type": "NODE_STATUS", "node": "place_obs", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s08", "t": 1795666526.6502593, "type": "NODE_STATUS", "node": "place_obs", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s08", "t": 1795666526.6504278, "type": "SKILL_START", "node": "nav_za_2", "detail": "{\"skill\":\"NavigateTo\",\"args\":{\"zone\":\"zone_a\"}}"}
+{"scenario": "s08", "t": 1795666526.650584, "type": "NODE_STATUS", "node": "nav_za_2", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s08", "t": 1795666526.7502503, "type": "NODE_STATUS", "node": "nav_za_2", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s08", "t": 1795666526.7504072, "type": "SKILL_START", "node": "pick_crate", "detail": "{\"skill\":\"PickObject\",\"args\":{\"object\":\"crate_1\"}}"}
+{"scenario": "s08", "t": 1795666526.7505548, "type": "NODE_STATUS", "node": "pick_crate", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s08", "t": 1795666526.850299, "type": "NODE_STATUS", "node": "pick_crate", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s08", "t": 1795666526.8504968, "type": "SKILL_START", "node": "nav_lb_2", "detail": "{\"skill\":\"NavigateTo\",\"args\":{\"zone\":\"loading_bay\"}}"}
+{"scenario": "s08", "t": 1795666526.8506246, "type": "NODE_STATUS", "node": "nav_lb_2", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s08", "t": 1795666526.9503405, "type": "NODE_STATUS", "node": "nav_lb_2", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s08", "t": 1795666526.9504998, "type": "SKILL_START", "node": "nav_zb", "detail": "{\"skill\":\"NavigateTo\",\"args\":{\"zone\":\"zone_b\"}}"}
+{"scenario": "s08", "t": 1795666526.9506583, "type": "NODE_STATUS", "node": "nav_zb", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s08", "t": 1795666527.1167576, "type": "NODE_STATUS", "node": "nav_zb", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s08", "t": 1795666527.1169322, "type": "SKILL_START", "node": "place_crate_zb", "detail": "{\"skill\":\"PlaceObject\",\"args\":{\"object\":\"crate_1\",\"zone\":\"zone_b\"}}"}
+{"scenario": "s08", "t": 1795666527.1170537, "type": "NODE_STATUS", "node": "place_crate_zb", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s08", "t": 1795666527.2167962, "type": "NODE_STATUS", "node": "place_crate_zb", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s08", "t": 1795666527.2169218, "type": "NODE_STATUS", "node": "root_seq", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s08", "t": 1795666527.2170205, "type": "MISSION_END", "node": "", "detail": "{\"message\":\"mission tree completed\",\"replans\":1,\"success\":true}"}
+{"scenario": "s09", "t": 1795666532.2616203, "type": "PLAN_REQUEST", "node": "", "detail": "{\"instruction\":\"Deliver the crate from zone A to zone B.\"}"}
+{"scenario": "s09", "t": 1795666622.066896, "type": "PLAN_READY", "node": "", "detail": "{\"latency_s\":89.804958773,\"metrics\":{\"attempts\":1,\"backend\":\"gemini:gemini-3.5-flash\",\"first_attempt_valid\":true,\"input_tokens\":1889,\"latency_s\":89.794,\"llm_latency_s\":89.792,\"mode\":\"plan\",\"nodes\":6,\"ok\":true,\"output_tokens\":2328,\"repairs\":0,\"validation_ms\":1.549,\"validator_errors_first_attempt\":0},\"ok\":true}"}
+{"scenario": "s09", "t": 1795666622.0681555, "type": "TREE_STARTED", "node": "", "detail": "{\"replans\":0}"}
+{"scenario": "s09", "t": 1795666622.068269, "type": "NODE_STATUS", "node": "n1", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s09", "t": 1795666622.0684485, "type": "SKILL_START", "node": "n2", "detail": "{\"skill\":\"NavigateTo\",\"args\":{\"zone\":\"zone_a\"}}"}
+{"scenario": "s09", "t": 1795666622.068655, "type": "NODE_STATUS", "node": "n2", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s09", "t": 1795666622.2015128, "type": "NODE_STATUS", "node": "n2", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s09", "t": 1795666622.2016604, "type": "SKILL_START", "node": "n3", "detail": "{\"skill\":\"PickObject\",\"args\":{\"object\":\"crate_1\"}}"}
+{"scenario": "s09", "t": 1795666622.2017581, "type": "NODE_STATUS", "node": "n3", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s09", "t": 1795666622.2045603, "type": "FAULT_INJECTED", "node": "PickObject", "detail": "grasp_fail: next 2 PickObject call(s) will fail"}
+{"scenario": "s09", "t": 1795666622.3014872, "type": "SKILL_FAILED", "node": "n3", "detail": "{\"code\":\"GRASP_FAILED\",\"message\":\"injected grasp_fail\",\"skill\":\"PickObject\"}"}
+{"scenario": "s09", "t": 1795666622.3015788, "type": "NODE_STATUS", "node": "n3", "detail": "{\"status\":\"FAILURE\"}"}
+{"scenario": "s09", "t": 1795666622.3016322, "type": "NODE_STATUS", "node": "n1", "detail": "{\"status\":\"FAILURE\"}"}
+{"scenario": "s09", "t": 1795666622.3017182, "type": "FALLBACK_TRIGGERED", "node": "n3", "detail": "{\"code\":\"GRASP_FAILED\",\"message\":\"injected grasp_fail\",\"skill\":\"PickObject\"}"}
+{"scenario": "s09", "t": 1795666622.3098562, "type": "REPLAN_REQUEST", "node": "n3", "detail": "{\"code\":\"GRASP_FAILED\"}"}
+{"scenario": "s09", "t": 1795666836.0324194, "type": "REPLAN_READY", "node": "n3", "detail": "{\"latency_s\":213.722223514,\"metrics\":{\"attempts\":3,\"backend\":\"gemini:gemini-3.5-flash\",\"first_attempt_valid\":false,\"input_tokens\":4456,\"latency_s\":213.711,\"llm_latency_s\":213.707,\"mode\":\"replan\",\"nodes\":0,\"ok\":false,\"output_tokens\":7544,\"repairs\":2,\"validation_ms\":3.533,\"validator_errors_first_attempt\":1},\"ok\":false}"}
+{"scenario": "s09", "t": 1795666836.0325665, "type": "MISSION_END", "node": "", "detail": "{\"message\":\"replan REJECTED by validator: [{\\\"code\\\": \\\"LLM_ERROR\\\", \\\"message\\\": \\\"response truncated at max_tokens; raise max_tokens or simplify the task\\\", \\\"node\\\": null, \\\"severity\\\": \\\"error\\\"}]\",\"replans\":0,\"success\":false}"}
+{"scenario": "s10", "t": 1795666837.6507652, "type": "PLAN_REQUEST", "node": "", "detail": "{\"instruction\":\"Move the small box to staging, deliver the crate to Zone B, then report status.\"}"}
+{"scenario": "s10", "t": 1795666878.5176115, "type": "PLAN_READY", "node": "", "detail": "{\"latency_s\":40.866526232,\"metrics\":{\"attempts\":1,\"backend\":\"gemini:gemini-3.5-flash\",\"first_attempt_valid\":true,\"input_tokens\":1910,\"latency_s\":40.856,\"llm_latency_s\":40.853,\"mode\":\"plan\",\"nodes\":11,\"ok\":true,\"output_tokens\":3242,\"repairs\":0,\"validation_ms\":2.309,\"validator_errors_first_attempt\":0},\"ok\":true}"}
+{"scenario": "s10", "t": 1795666878.518936, "type": "TREE_STARTED", "node": "", "detail": "{\"replans\":0}"}
+{"scenario": "s10", "t": 1795666878.5190582, "type": "NODE_STATUS", "node": "root_seq", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s10", "t": 1795666878.519246, "type": "SKILL_START", "node": "nav_lb", "detail": "{\"skill\":\"NavigateTo\",\"args\":{\"zone\":\"loading_bay\"}}"}
+{"scenario": "s10", "t": 1795666878.5194082, "type": "NODE_STATUS", "node": "nav_lb", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s10", "t": 1795666878.5230422, "type": "FAULT_INJECTED", "node": "NavigateTo", "detail": "obstacle_1 appeared in loading_bay"}
+{"scenario": "s10", "t": 1795666878.652288, "type": "NODE_STATUS", "node": "nav_lb", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s10", "t": 1795666878.6525736, "type": "SKILL_START", "node": "pick_box", "detail": "{\"skill\":\"PickObject\",\"args\":{\"object\":\"small_box_1\"}}"}
+{"scenario": "s10", "t": 1795666878.6527512, "type": "NODE_STATUS", "node": "pick_box", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s10", "t": 1795666878.752454, "type": "NODE_STATUS", "node": "pick_box", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s10", "t": 1795666878.7525961, "type": "SKILL_START", "node": "nav_staging", "detail": "{\"skill\":\"NavigateTo\",\"args\":{\"zone\":\"staging\"}}"}
+{"scenario": "s10", "t": 1795666878.7527413, "type": "NODE_STATUS", "node": "nav_staging", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s10", "t": 1795666878.9187965, "type": "NODE_STATUS", "node": "nav_staging", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s10", "t": 1795666878.9189286, "type": "SKILL_START", "node": "place_box", "detail": "{\"skill\":\"PlaceObject\",\"args\":{\"object\":\"small_box_1\",\"zone\":\"staging\"}}"}
+{"scenario": "s10", "t": 1795666878.9190307, "type": "NODE_STATUS", "node": "place_box", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s10", "t": 1795666879.01866, "type": "NODE_STATUS", "node": "place_box", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s10", "t": 1795666879.0187936, "type": "SKILL_START", "node": "nav_zone_a", "detail": "{\"skill\":\"NavigateTo\",\"args\":{\"zone\":\"zone_a\"}}"}
+{"scenario": "s10", "t": 1795666879.018917, "type": "NODE_STATUS", "node": "nav_zone_a", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s10", "t": 1795666879.118649, "type": "NODE_STATUS", "node": "nav_zone_a", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s10", "t": 1795666879.1187973, "type": "SKILL_START", "node": "pick_crate", "detail": "{\"skill\":\"PickObject\",\"args\":{\"object\":\"crate_1\"}}"}
+{"scenario": "s10", "t": 1795666879.1189294, "type": "NODE_STATUS", "node": "pick_crate", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s10", "t": 1795666879.21862, "type": "NODE_STATUS", "node": "pick_crate", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s10", "t": 1795666879.218757, "type": "SKILL_START", "node": "nav_lb_waypoint", "detail": "{\"skill\":\"NavigateTo\",\"args\":{\"zone\":\"loading_bay\"}}"}
+{"scenario": "s10", "t": 1795666879.218894, "type": "NODE_STATUS", "node": "nav_lb_waypoint", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s10", "t": 1795666879.3189385, "type": "NODE_STATUS", "node": "nav_lb_waypoint", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s10", "t": 1795666879.3193464, "type": "SKILL_START", "node": "nav_zone_b", "detail": "{\"skill\":\"NavigateTo\",\"args\":{\"zone\":\"zone_b\"}}"}
+{"scenario": "s10", "t": 1795666879.3195784, "type": "NODE_STATUS", "node": "nav_zone_b", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s10", "t": 1795666879.4192789, "type": "SKILL_FAILED", "node": "nav_zone_b", "detail": "{\"code\":\"UNEXPECTED_OBSTACLE\",\"message\":\"path to zone_b blocked in loading_bay by ['obstacle_1']\",\"skill\":\"NavigateTo\"}"}
+{"scenario": "s10", "t": 1795666879.4193857, "type": "NODE_STATUS", "node": "nav_zone_b", "detail": "{\"status\":\"FAILURE\"}"}
+{"scenario": "s10", "t": 1795666879.4194803, "type": "NODE_STATUS", "node": "root_seq", "detail": "{\"status\":\"FAILURE\"}"}
+{"scenario": "s10", "t": 1795666879.4195833, "type": "FALLBACK_TRIGGERED", "node": "nav_zone_b", "detail": "{\"code\":\"UNEXPECTED_OBSTACLE\",\"message\":\"path to zone_b blocked in loading_bay by ['obstacle_1']\",\"skill\":\"NavigateTo\"}"}
+{"scenario": "s10", "t": 1795666879.4249094, "type": "REPLAN_REQUEST", "node": "nav_zone_b", "detail": "{\"code\":\"UNEXPECTED_OBSTACLE\"}"}
+{"scenario": "s10", "t": 1795666974.7905657, "type": "REPLAN_READY", "node": "nav_zone_b", "detail": "{\"latency_s\":95.365347163,\"metrics\":{\"attempts\":1,\"backend\":\"gemini:gemini-3.5-flash\",\"first_attempt_valid\":true,\"input_tokens\":2083,\"latency_s\":95.353,\"llm_latency_s\":95.35,\"mode\":\"replan\",\"nodes\":13,\"ok\":true,\"output_tokens\":4736,\"repairs\":0,\"validation_ms\":2.893,\"validator_errors_first_attempt\":0},\"ok\":true}"}
+{"scenario": "s10", "t": 1795666974.7906888, "type": "TREE_SWAPPED", "node": "nav_zone_b", "detail": "{\"replans\":1}"}
+{"scenario": "s10", "t": 1795666974.8016675, "type": "TREE_STARTED", "node": "", "detail": "{\"replans\":1}"}
+{"scenario": "s10", "t": 1795666974.8017967, "type": "NODE_STATUS", "node": "n1", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s10", "t": 1795666974.801996, "type": "SKILL_START", "node": "n2", "detail": "{\"skill\":\"NavigateTo\",\"args\":{\"zone\":\"zone_a\"}}"}
+{"scenario": "s10", "t": 1795666974.80213, "type": "NODE_STATUS", "node": "n2", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s10", "t": 1795666974.9018214, "type": "NODE_STATUS", "node": "n2", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s10", "t": 1795666974.901986, "type": "SKILL_START", "node": "n3", "detail": "{\"skill\":\"PlaceObject\",\"args\":{\"object\":\"crate_1\",\"zone\":\"zone_a\"}}"}
+{"scenario": "s10", "t": 1795666974.9021628, "type": "NODE_STATUS", "node": "n3", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s10", "t": 1795666975.0018747, "type": "NODE_STATUS", "node": "n3", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s10", "t": 1795666975.0020177, "type": "SKILL_START", "node": "n4", "detail": "{\"skill\":\"NavigateTo\",\"args\":{\"zone\":\"loading_bay\"}}"}
+{"scenario": "s10", "t": 1795666975.002187, "type": "NODE_STATUS", "node": "n4", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s10", "t": 1795666975.1018677, "type": "NODE_STATUS", "node": "n4", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s10", "t": 1795666975.1020021, "type": "SKILL_START", "node": "n5", "detail": "{\"skill\":\"PickObject\",\"args\":{\"object\":\"obstacle_1\"}}"}
+{"scenario": "s10", "t": 1795666975.1021328, "type": "NODE_STATUS", "node": "n5", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s10", "t": 1795666975.2018075, "type": "NODE_STATUS", "node": "n5", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s10", "t": 1795666975.2019513, "type": "SKILL_START", "node": "n6", "detail": "{\"skill\":\"NavigateTo\",\"args\":{\"zone\":\"staging\"}}"}
+{"scenario": "s10", "t": 1795666975.2021077, "type": "NODE_STATUS", "node": "n6", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s10", "t": 1795666975.3682237, "type": "NODE_STATUS", "node": "n6", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s10", "t": 1795666975.36841, "type": "SKILL_START", "node": "n7", "detail": "{\"skill\":\"PlaceObject\",\"args\":{\"object\":\"obstacle_1\",\"zone\":\"staging\"}}"}
+{"scenario": "s10", "t": 1795666975.3685677, "type": "NODE_STATUS", "node": "n7", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s10", "t": 1795666975.468295, "type": "NODE_STATUS", "node": "n7", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s10", "t": 1795666975.46844, "type": "SKILL_START", "node": "n8", "detail": "{\"skill\":\"NavigateTo\",\"args\":{\"zone\":\"zone_a\"}}"}
+{"scenario": "s10", "t": 1795666975.4685938, "type": "NODE_STATUS", "node": "n8", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s10", "t": 1795666975.568322, "type": "NODE_STATUS", "node": "n8", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s10", "t": 1795666975.5685425, "type": "SKILL_START", "node": "n9", "detail": "{\"skill\":\"PickObject\",\"args\":{\"object\":\"crate_1\"}}"}
+{"scenario": "s10", "t": 1795666975.5687046, "type": "NODE_STATUS", "node": "n9", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s10", "t": 1795666975.668381, "type": "NODE_STATUS", "node": "n9", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s10", "t": 1795666975.6685324, "type": "SKILL_START", "node": "n10", "detail": "{\"skill\":\"NavigateTo\",\"args\":{\"zone\":\"loading_bay\"}}"}
+{"scenario": "s10", "t": 1795666975.6686633, "type": "NODE_STATUS", "node": "n10", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s10", "t": 1795666975.768397, "type": "NODE_STATUS", "node": "n10", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s10", "t": 1795666975.7686644, "type": "SKILL_START", "node": "n11", "detail": "{\"skill\":\"NavigateTo\",\"args\":{\"zone\":\"zone_b\"}}"}
+{"scenario": "s10", "t": 1795666975.7689147, "type": "NODE_STATUS", "node": "n11", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s10", "t": 1795666975.934998, "type": "NODE_STATUS", "node": "n11", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s10", "t": 1795666975.9352105, "type": "SKILL_START", "node": "n12", "detail": "{\"skill\":\"PlaceObject\",\"args\":{\"object\":\"crate_1\",\"zone\":\"zone_b\"}}"}
+{"scenario": "s10", "t": 1795666975.9354327, "type": "NODE_STATUS", "node": "n12", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s10", "t": 1795666976.0351808, "type": "NODE_STATUS", "node": "n12", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s10", "t": 1795666976.0353372, "type": "SKILL_START", "node": "n13", "detail": "{\"skill\":\"ReportStatus\",\"args\":{\"message\":\"Mission completed successfully\"}}"}
+{"scenario": "s10", "t": 1795666976.0354815, "type": "NODE_STATUS", "node": "n13", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s10", "t": 1795666976.0687892, "type": "NODE_STATUS", "node": "n13", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s10", "t": 1795666976.0689294, "type": "NODE_STATUS", "node": "n1", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s10", "t": 1795666976.0690339, "type": "MISSION_END", "node": "", "detail": "{\"message\":\"mission tree completed\",\"replans\":1,\"success\":true}"}
+{"scenario": "s11", "t": 1795666979.4245234, "type": "PLAN_REQUEST", "node": "", "detail": "{\"instruction\":\"Bring the crate from staging to Zone B. The restricted aisle is off limits \u2014 never drive through or next to it.\"}"}
+{"scenario": "s11", "t": 1795667014.5130224, "type": "PLAN_READY", "node": "", "detail": "{\"latency_s\":35.08815187,\"metrics\":{\"attempts\":1,\"backend\":\"gemini:gemini-3.5-flash\",\"first_attempt_valid\":true,\"input_tokens\":1901,\"latency_s\":35.078,\"llm_latency_s\":35.076,\"mode\":\"plan\",\"nodes\":6,\"ok\":true,\"output_tokens\":2479,\"repairs\":0,\"validation_ms\":1.501,\"validator_errors_first_attempt\":0},\"ok\":true}"}
+{"scenario": "s11", "t": 1795667014.5145454, "type": "TREE_STARTED", "node": "", "detail": "{\"replans\":0}"}
+{"scenario": "s11", "t": 1795667014.51465, "type": "NODE_STATUS", "node": "n1", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s11", "t": 1795667014.5148296, "type": "SKILL_START", "node": "n2", "detail": "{\"skill\":\"NavigateTo\",\"args\":{\"zone\":\"staging\"}}"}
+{"scenario": "s11", "t": 1795667014.5149543, "type": "NODE_STATUS", "node": "n2", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s11", "t": 1795667014.7141767, "type": "NODE_STATUS", "node": "n2", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s11", "t": 1795667014.7143703, "type": "SKILL_START", "node": "n3", "detail": "{\"skill\":\"PickObject\",\"args\":{\"object\":\"crate_1\"}}"}
+{"scenario": "s11", "t": 1795667014.7145672, "type": "NODE_STATUS", "node": "n3", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s11", "t": 1795667014.7175658, "type": "FAULT_INJECTED", "node": "PickObject", "detail": "grasp_fail: next 2 PickObject call(s) will fail"}
+{"scenario": "s11", "t": 1795667014.8143172, "type": "SKILL_FAILED", "node": "n3", "detail": "{\"code\":\"GRASP_FAILED\",\"message\":\"injected grasp_fail\",\"skill\":\"PickObject\"}"}
+{"scenario": "s11", "t": 1795667014.81442, "type": "NODE_STATUS", "node": "n3", "detail": "{\"status\":\"FAILURE\"}"}
+{"scenario": "s11", "t": 1795667014.814488, "type": "NODE_STATUS", "node": "n1", "detail": "{\"status\":\"FAILURE\"}"}
+{"scenario": "s11", "t": 1795667014.8145673, "type": "FALLBACK_TRIGGERED", "node": "n3", "detail": "{\"code\":\"GRASP_FAILED\",\"message\":\"injected grasp_fail\",\"skill\":\"PickObject\"}"}
+{"scenario": "s11", "t": 1795667014.8197386, "type": "REPLAN_REQUEST", "node": "n3", "detail": "{\"code\":\"GRASP_FAILED\"}"}
+{"scenario": "s11", "t": 1795667317.2342916, "type": "REPLAN_READY", "node": "n3", "detail": "{\"latency_s\":302.414253476,\"metrics\":{\"attempts\":2,\"backend\":\"gemini:gemini-3.5-flash\",\"first_attempt_valid\":false,\"input_tokens\":4504,\"latency_s\":302.404,\"llm_latency_s\":302.4,\"mode\":\"replan\",\"nodes\":9,\"ok\":true,\"output_tokens\":8507,\"repairs\":1,\"validation_ms\":3.447,\"validator_errors_first_attempt\":1},\"ok\":true}"}
+{"scenario": "s11", "t": 1795667317.2344494, "type": "TREE_SWAPPED", "node": "n3", "detail": "{\"replans\":1}"}
+{"scenario": "s11", "t": 1795667317.2379243, "type": "TREE_STARTED", "node": "", "detail": "{\"replans\":1}"}
+{"scenario": "s11", "t": 1795667317.238045, "type": "NODE_STATUS", "node": "node_seq", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s11", "t": 1795667317.238088, "type": "NODE_STATUS", "node": "node_pick_fallback", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s11", "t": 1795667317.2381406, "type": "NODE_STATUS", "node": "node_retry_pick", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s11", "t": 1795667317.238305, "type": "SKILL_START", "node": "node_pick", "detail": "{\"skill\":\"PickObject\",\"args\":{\"object\":\"crate_1\"}}"}
+{"scenario": "s11", "t": 1795667317.2384496, "type": "NODE_STATUS", "node": "node_pick", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s11", "t": 1795667317.338375, "type": "SKILL_FAILED", "node": "node_pick", "detail": "{\"code\":\"GRASP_FAILED\",\"message\":\"injected grasp_fail\",\"skill\":\"PickObject\"}"}
+{"scenario": "s11", "t": 1795667317.338491, "type": "NODE_STATUS", "node": "node_pick", "detail": "{\"status\":\"FAILURE\"}"}
+{"scenario": "s11", "t": 1795667317.338678, "type": "SKILL_START", "node": "node_pick", "detail": "{\"skill\":\"PickObject\",\"args\":{\"object\":\"crate_1\"}}"}
+{"scenario": "s11", "t": 1795667317.3388274, "type": "NODE_STATUS", "node": "node_pick", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s11", "t": 1795667317.43854, "type": "NODE_STATUS", "node": "node_pick", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s11", "t": 1795667317.4386318, "type": "NODE_STATUS", "node": "node_retry_pick", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s11", "t": 1795667317.438679, "type": "NODE_STATUS", "node": "node_pick_fallback", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s11", "t": 1795667317.438813, "type": "SKILL_START", "node": "node_nav_lb", "detail": "{\"skill\":\"NavigateTo\",\"args\":{\"zone\":\"loading_bay\"}}"}
+{"scenario": "s11", "t": 1795667317.4389157, "type": "NODE_STATUS", "node": "node_nav_lb", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s11", "t": 1795667317.604939, "type": "NODE_STATUS", "node": "node_nav_lb", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s11", "t": 1795667317.6051233, "type": "SKILL_START", "node": "node_nav_zb", "detail": "{\"skill\":\"NavigateTo\",\"args\":{\"zone\":\"zone_b\"}}"}
+{"scenario": "s11", "t": 1795667317.6053066, "type": "NODE_STATUS", "node": "node_nav_zb", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s11", "t": 1795667317.771443, "type": "NODE_STATUS", "node": "node_nav_zb", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s11", "t": 1795667317.7716486, "type": "SKILL_START", "node": "node_place", "detail": "{\"skill\":\"PlaceObject\",\"args\":{\"object\":\"crate_1\",\"zone\":\"zone_b\"}}"}
+{"scenario": "s11", "t": 1795667317.7718413, "type": "NODE_STATUS", "node": "node_place", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s11", "t": 1795667317.8714995, "type": "NODE_STATUS", "node": "node_place", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s11", "t": 1795667317.8715959, "type": "NODE_STATUS", "node": "node_seq", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s11", "t": 1795667317.8716815, "type": "MISSION_END", "node": "", "detail": "{\"message\":\"mission tree completed\",\"replans\":1,\"success\":true}"}
+{"scenario": "s12", "t": 1795667319.04127, "type": "PLAN_REQUEST", "node": "", "detail": "{\"instruction\":\"Check if the loading bay is clear; if blocked, clear the small box first, then deliver the crate to Zone B.\"}"}
+{"scenario": "s12", "t": 1795667365.1537585, "type": "PLAN_READY", "node": "", "detail": "{\"latency_s\":46.112159438,\"metrics\":{\"attempts\":1,\"backend\":\"gemini:gemini-3.5-flash\",\"first_attempt_valid\":true,\"input_tokens\":1926,\"latency_s\":46.101,\"llm_latency_s\":46.098,\"mode\":\"plan\",\"nodes\":13,\"ok\":true,\"output_tokens\":4009,\"repairs\":0,\"validation_ms\":2.392,\"validator_errors_first_attempt\":0},\"ok\":true}"}
+{"scenario": "s12", "t": 1795667365.155121, "type": "TREE_STARTED", "node": "", "detail": "{\"replans\":0}"}
+{"scenario": "s12", "t": 1795667365.155234, "type": "NODE_STATUS", "node": "root", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s12", "t": 1795667365.1552837, "type": "NODE_STATUS", "node": "n_clear_lb", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s12", "t": 1795667365.155488, "type": "SKILL_START", "node": "n_chk_lb", "detail": "{\"skill\":\"CheckZoneClear\",\"args\":{\"zone\":\"loading_bay\"}}"}
+{"scenario": "s12", "t": 1795667365.1556418, "type": "NODE_STATUS", "node": "n_chk_lb", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s12", "t": 1795667365.1889303, "type": "NODE_STATUS", "node": "n_chk_lb", "detail": "{\"status\":\"FAILURE\"}"}
+{"scenario": "s12", "t": 1795667365.1890152, "type": "NODE_STATUS", "node": "n_seq_clear", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s12", "t": 1795667365.1891086, "type": "SKILL_START", "node": "n_nav_lb1", "detail": "{\"skill\":\"NavigateTo\",\"args\":{\"zone\":\"loading_bay\"}}"}
+{"scenario": "s12", "t": 1795667365.1892214, "type": "NODE_STATUS", "node": "n_nav_lb1", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s12", "t": 1795667365.3230197, "type": "NODE_STATUS", "node": "n_nav_lb1", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s12", "t": 1795667365.323426, "type": "SKILL_START", "node": "n_pick_box", "detail": "{\"skill\":\"PickObject\",\"args\":{\"object\":\"small_box_1\"}}"}
+{"scenario": "s12", "t": 1795667365.3236425, "type": "NODE_STATUS", "node": "n_pick_box", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s12", "t": 1795667365.4235682, "type": "NODE_STATUS", "node": "n_pick_box", "detail": "{\"status\":\"SUCCESS\"}"}
+{"scenario": "s12", "t": 1795667365.4239318, "type": "SKILL_START", "node": "n_nav_stg", "detail": "{\"skill\":\"NavigateTo\",\"args\":{\"zone\":\"staging\"}}"}
+{"scenario": "s12", "t": 1795667365.4241536, "type": "NODE_STATUS", "node": "n_nav_stg", "detail": "{\"status\":\"RUNNING\"}"}
+{"scenario": "s12", "t": 1795667365.4278336, "type": "FAULT_INJECTED", "node": "NavigateTo", "detail": "nav_block: next 2 NavigateTo call(s) will fail"}
+{"scenario": "s12", "t": 1795667365.4906723, "type": "SKILL_FAILED", "node": "n_nav_stg", "detail": "{\"code\":\"NAV_BLOCKED\",\"message\":\"injected nav_block\",\"skill\":\"NavigateTo\"}"}
+{"scenario": "s12", "t": 1795667365.4907603, "type": "NODE_STATUS", "node": "n_nav_stg", "detail": "{\"status\":\"FAILURE\"}"}
+{"scenario": "s12", "t": 1795667365.4908133, "type": "NODE_STATUS", "node": "n_seq_clear", "detail": "{\"status\":\"FAILURE\"}"}
+{"scenario": "s12", "t": 1795667365.4908872, "type": "NODE_STATUS", "node": "n_clear_lb", "detail": "{\"status\":\"FAILURE\"}"}
+{"scenario": "s12", "t": 1795667365.4909484, "type": "NODE_STATUS", "node": "root", "detail": "{\"status\":\"FAILURE\"}"}
+{"scenario": "s12", "t": 1795667365.49102, "type": "FALLBACK_TRIGGERED", "node": "n_nav_stg", "detail": "{\"code\":\"NAV_BLOCKED\",\"message\":\"injected nav_block\",\"skill\":\"NavigateTo\"}"}
+{"scenario": "s12", "t": 1795667365.4960206, "type": "REPLAN_REQUEST", "node": "n_nav_stg", "detail": "{\"code\":\"NAV_BLOCKED\"}"}
+{"scenario": "s12", "t": 1795667518.1449564, "type": "REPLAN_READY", "node": "n_nav_stg", "detail": "{\"latency_s\":152.648645482,\"metrics\":{\"attempts\":2,\"backend\":\"gemini:gemini-3.5-flash\",\"first_attempt_valid\":false,\"input_tokens\":2060,\"latency_s\":152.638,\"llm_latency_s\":152.635,\"mode\":\"replan\",\"nodes\":0,\"ok\":false,\"output_tokens\":4281,\"repairs\":1,\"validation_ms\":2.526,\"validator_errors_first_attempt\":1},\"ok\":false}"}
+{"scenario": "s12", "t": 1795667518.1451125, "type": "MISSION_END", "node": "", "detail": "{\"message\":\"replan REJECTED by validator: [{\\\"code\\\": \\\"LLM_ERROR\\\", \\\"message\\\": \\\"Gemini HTTP 429: You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://aistudio.google.com/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\\\n* Quota exceeded for metric: generativelanguage.googleapis.com/g (gave up after 5 attempts)\\\", \\\"node\\\": null, \\\"severity\\\": \\\"error\\\"}]\",\"replans\":0,\"success\":false}"}
+{"scenario": "s13", "t": 1795667521.176971, "type": "PLAN_REQUEST", "node": "", "detail": "{\"instruction\":\"Deliver the crate from zone A to zone B.\"}"}
+{"scenario": "s13", "t": 1795667554.3959312, "type": "PLAN_READY", "node": "", "detail": "{\"latency_s\":33.218601778,\"metrics\":{\"attempts\":1,\"backend\":\"gemini:gemini-3.5-flash\",\"first_attempt_valid\":false,\"input_tokens\":0,\"latency_s\":33.207,\"llm_latency_s\":33.207,\"mode\":\"plan\",\"nodes\":0,\"ok\":false,\"output_tokens\":0,\"repairs\":0,\"validation_ms\":0.0,\"validator_errors_first_attempt\":1},\"ok\":false}"}
+{"scenario": "s13", "t": 1795667554.3960834, "type": "MISSION_END", "node": "", "detail": "{\"message\":\"plan REJECTED by validator: [{\\\"code\\\": \\\"LLM_ERROR\\\", \\\"message\\\": \\\"Gemini HTTP 429: You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://aistudio.google.com/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\\\n* Quota exceeded for metric: generativelanguage.googleapis.com/g (gave up after 5 attempts)\\\", \\\"node\\\": null, \\\"severity\\\": \\\"error\\\"}]\",\"replans\":0,\"success\":false}"}
+{"scenario": "s14", "t": 1795667561.28291, "type": "PLAN_REQUEST", "node": "", "detail": "{\"instruction\":\"Move the small box to staging, deliver the crate to Zone B, then report status.\"}"}
+{"scenario": "s14", "t": 1795667594.1286366, "type": "PLAN_READY", "node": "", "detail": "{\"latency_s\":32.845450836,\"metrics\":{\"attempts\":1,\"backend\":\"gemini:gemini-3.5-flash\",\"first_attempt_valid\":false,\"input_tokens\":0,\"latency_s\":32.834,\"llm_latency_s\":32.834,\"mode\":\"plan\",\"nodes\":0,\"ok\":false,\"output_tokens\":0,\"repairs\":0,\"validation_ms\":0.0,\"validator_errors_first_attempt\":1},\"ok\":false}"}
+{"scenario": "s14", "t": 1795667594.128752, "type": "MISSION_END", "node": "", "detail": "{\"message\":\"plan REJECTED by validator: [{\\\"code\\\": \\\"LLM_ERROR\\\", \\\"message\\\": \\\"Gemini HTTP 429: You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://aistudio.google.com/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\\\n* Quota exceeded for metric: generativelanguage.googleapis.com/g (gave up after 5 attempts)\\\", \\\"node\\\": null, \\\"severity\\\": \\\"error\\\"}]\",\"replans\":0,\"success\":false}"}
+{"scenario": "s15", "t": 1795667594.6165638, "type": "PLAN_REQUEST", "node": "", "detail": "{\"instruction\":\"Bring the crate from staging to Zone B. The restricted aisle is off limits \u2014 never drive through or next to it.\"}"}
+{"scenario": "s15", "t": 1795667627.0988839, "type": "PLAN_READY", "node": "", "detail": "{\"latency_s\":32.482012264,\"metrics\":{\"attempts\":1,\"backend\":\"gemini:gemini-3.5-flash\",\"first_attempt_valid\":false,\"input_tokens\":0,\"latency_s\":32.47,\"llm_latency_s\":32.47,\"mode\":\"plan\",\"nodes\":0,\"ok\":false,\"output_tokens\":0,\"repairs\":0,\"validation_ms\":0.0,\"validator_errors_first_attempt\":1},\"ok\":false}"}
+{"scenario": "s15", "t": 1795667627.0990398, "type": "MISSION_END", "node": "", "detail": "{\"message\":\"plan REJECTED by validator: [{\\\"code\\\": \\\"LLM_ERROR\\\", \\\"message\\\": \\\"Gemini HTTP 429: You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://aistudio.google.com/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\\\n* Quota exceeded for metric: generativelanguage.googleapis.com/g (gave up after 5 attempts)\\\", \\\"node\\\": null, \\\"severity\\\": \\\"error\\\"}]\",\"replans\":0,\"success\":false}"}
+{"scenario": "s16", "t": 1795667629.9845598, "type": "PLAN_REQUEST", "node": "", "detail": "{\"instruction\":\"Check if the loading bay is clear; if blocked, clear the small box first, then deliver the crate to Zone B.\"}"}
+{"scenario": "s16", "t": 1795667662.0812945, "type": "PLAN_READY", "node": "", "detail": "{\"latency_s\":32.096380017,\"metrics\":{\"attempts\":1,\"backend\":\"gemini:gemini-3.5-flash\",\"first_attempt_valid\":false,\"input_tokens\":0,\"latency_s\":32.084,\"llm_latency_s\":32.084,\"mode\":\"plan\",\"nodes\":0,\"ok\":false,\"output_tokens\":0,\"repairs\":0,\"validation_ms\":0.0,\"validator_errors_first_attempt\":1},\"ok\":false}"}
+{"scenario": "s16", "t": 1795667662.0814862, "type": "MISSION_END", "node": "", "detail": "{\"message\":\"plan REJECTED by validator: [{\\\"code\\\": \\\"LLM_ERROR\\\", \\\"message\\\": \\\"Gemini HTTP 429: You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://aistudio.google.com/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\\\n* Quota exceeded for metric: generativelanguage.googleapis.com/g (gave up after 5 attempts)\\\", \\\"node\\\": null, \\\"severity\\\": \\\"error\\\"}]\",\"replans\":0,\"success\":false}"}
+{"scenario": "s17", "t": 1795667664.2389338, "type": "PLAN_REQUEST", "node": "", "detail": "{\"instruction\":\"Deliver the crate from zone A to zone B.\"}"}
+{"scenario": "s17", "t": 1795667696.3283498, "type": "PLAN_READY", "node": "", "detail": "{\"latency_s\":32.089095871,\"metrics\":{\"attempts\":1,\"backend\":\"gemini:gemini-3.5-flash\",\"first_attempt_valid\":false,\"input_tokens\":0,\"latency_s\":32.074,\"llm_latency_s\":32.074,\"mode\":\"plan\",\"nodes\":0,\"ok\":false,\"output_tokens\":0,\"repairs\":0,\"validation_ms\":0.0,\"validator_errors_first_attempt\":1},\"ok\":false}"}
+{"scenario": "s17", "t": 1795667696.3285384, "type": "MISSION_END", "node": "", "detail": "{\"message\":\"plan REJECTED by validator: [{\\\"code\\\": \\\"LLM_ERROR\\\", \\\"message\\\": \\\"Gemini HTTP 429: You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://aistudio.google.com/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\\\n* Quota exceeded for metric: generativelanguage.googleapis.com/g (gave up after 5 attempts)\\\", \\\"node\\\": null, \\\"severity\\\": \\\"error\\\"}]\",\"replans\":0,\"success\":false}"}
+{"scenario": "s18", "t": 1795667698.5045624, "type": "PLAN_REQUEST", "node": "", "detail": "{\"instruction\":\"Move the small box to staging, deliver the crate to Zone B, then report status.\"}"}
+{"scenario": "s18", "t": 1795667730.941343, "type": "PLAN_READY", "node": "", "detail": "{\"latency_s\":32.436469952,\"metrics\":{\"attempts\":1,\"backend\":\"gemini:gemini-3.5-flash\",\"first_attempt_valid\":false,\"input_tokens\":0,\"latency_s\":32.425,\"llm_latency_s\":32.425,\"mode\":\"plan\",\"nodes\":0,\"ok\":false,\"output_tokens\":0,\"repairs\":0,\"validation_ms\":0.0,\"validator_errors_first_attempt\":1},\"ok\":false}"}
+{"scenario": "s18", "t": 1795667730.9415903, "type": "MISSION_END", "node": "", "detail": "{\"message\":\"plan REJECTED by validator: [{\\\"code\\\": \\\"LLM_ERROR\\\", \\\"message\\\": \\\"Gemini HTTP 429: You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://aistudio.google.com/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\\\n* Quota exceeded for metric: generativelanguage.googleapis.com/g (gave up after 5 attempts)\\\", \\\"node\\\": null, \\\"severity\\\": \\\"error\\\"}]\",\"replans\":0,\"success\":false}"}
+{"scenario": "s19", "t": 1795667732.7253993, "type": "PLAN_REQUEST", "node": "", "detail": "{\"instruction\":\"Bring the crate from staging to Zone B. The restricted aisle is off limits \u2014 never drive through or next to it.\"}"}
+{"scenario": "s19", "t": 1795667764.9393127, "type": "PLAN_READY", "node": "", "detail": "{\"latency_s\":32.213580911,\"metrics\":{\"attempts\":1,\"backend\":\"gemini:gemini-3.5-flash\",\"first_attempt_valid\":false,\"input_tokens\":0,\"latency_s\":32.202,\"llm_latency_s\":32.202,\"mode\":\"plan\",\"nodes\":0,\"ok\":false,\"output_tokens\":0,\"repairs\":0,\"validation_ms\":0.0,\"validator_errors_first_attempt\":1},\"ok\":false}"}
+{"scenario": "s19", "t": 1795667764.9395535, "type": "MISSION_END", "node": "", "detail": "{\"message\":\"plan REJECTED by validator: [{\\\"code\\\": \\\"LLM_ERROR\\\", \\\"message\\\": \\\"Gemini HTTP 429: You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://aistudio.google.com/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\\\n* Quota exceeded for metric: generativelanguage.googleapis.com/g (gave up after 5 attempts)\\\", \\\"node\\\": null, \\\"severity\\\": \\\"error\\\"}]\",\"replans\":0,\"success\":false}"}

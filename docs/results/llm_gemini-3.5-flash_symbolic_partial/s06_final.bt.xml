@@ -1,0 +1,16 @@
+<root BTCPP_format="4" main_tree_to_execute="MainTree">
+  <BehaviorTree ID="MainTree">
+    <Sequence name="node_root">
+      <NavigateTo name="n1" zone="loading_bay" />
+      <PickObject name="n2" object="small_box_1" />
+      <NavigateTo name="n3" zone="staging" />
+      <PlaceObject name="n4" object="small_box_1" zone="staging" />
+      <NavigateTo name="n5" zone="zone_a" />
+      <PickObject name="n6" object="crate_1" />
+      <NavigateTo name="n7" zone="loading_bay" />
+      <NavigateTo name="n8" zone="zone_b" />
+      <PlaceObject name="n9" object="crate_1" zone="zone_b" />
+      <ReportStatus name="n10" message="Mission completed successfully" />
+    </Sequence>
+  </BehaviorTree>
+</root>

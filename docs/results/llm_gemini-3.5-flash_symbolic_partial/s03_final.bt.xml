@@ -1,0 +1,11 @@
+<root BTCPP_format="4" main_tree_to_execute="MainTree">
+  <BehaviorTree ID="MainTree">
+    <Sequence name="node_root">
+      <NavigateTo name="node_nav_staging" zone="staging" />
+      <PickObject name="node_pick_crate" object="crate_1" />
+      <NavigateTo name="node_nav_loading" zone="loading_bay" />
+      <NavigateTo name="node_nav_zone_b" zone="zone_b" />
+      <PlaceObject name="node_place_crate" object="crate_1" zone="zone_b" />
+    </Sequence>
+  </BehaviorTree>
+</root>

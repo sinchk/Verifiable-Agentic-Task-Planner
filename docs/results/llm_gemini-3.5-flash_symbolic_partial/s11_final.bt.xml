@@ -1,0 +1,17 @@
+<root BTCPP_format="4" main_tree_to_execute="MainTree">
+  <BehaviorTree ID="MainTree">
+    <Sequence name="node_seq">
+      <Fallback name="node_pick_fallback">
+        <RetryUntilSuccessful name="node_retry_pick" num_attempts="3">
+          <PickObject name="node_pick" object="crate_1" />
+        </RetryUntilSuccessful>
+        <Inverter name="node_inverter_help">
+          <RequestHumanHelp name="node_help" reason="Failed to grasp crate_1 after 3 attempts" />
+        </Inverter>
+      </Fallback>
+      <NavigateTo name="node_nav_lb" zone="loading_bay" />
+      <NavigateTo name="node_nav_zb" zone="zone_b" />
+      <PlaceObject name="node_place" object="crate_1" zone="zone_b" />
+    </Sequence>
+  </BehaviorTree>
+</root>
