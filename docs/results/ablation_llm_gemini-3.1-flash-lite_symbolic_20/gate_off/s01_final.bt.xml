@@ -1,0 +1,16 @@
+<root BTCPP_format="4" main_tree_to_execute="MainTree">
+  <BehaviorTree ID="MainTree">
+    <Sequence name="n1">
+      <NavigateTo name="n2" zone="zone_a" />
+      <RetryUntilSuccessful name="n3" num_attempts="3">
+        <Fallback name="n7">
+          <PickObject name="n8" object="crate_1" />
+          <RequestHumanHelp name="n9" reason="Grasp failed after 3 attempts" />
+        </Fallback>
+      </RetryUntilSuccessful>
+      <NavigateTo name="n4" zone="loading_bay" />
+      <NavigateTo name="n5" zone="zone_b" />
+      <PlaceObject name="n6" object="crate_1" zone="zone_b" />
+    </Sequence>
+  </BehaviorTree>
+</root>

@@ -126,7 +126,7 @@ a mission takes seconds and the study isolates planning), scenario seed 0, tempe
 | replans accepted after ≤ 2 repairs | all accepted | 8/13 |
 | plan / replan latency (median) | ~10 ms | 6.7 s / 7.1 s |
 
-* **The validator was the deciding component.** Of 33 planner calls (20 plans + 13 replans) the model's first answer passed the validator
+* **Every plan was gated by the validator.** Of 33 planner calls (20 plans + 13 replans) the model's first answer passed the validator
   12 times (36%). The other 21 were rejected with specific errors, and the repair loop turned 15 of them into accepted plans. Nothing
   rejected was executed.
 * **All 6 failed missions are validator rejections**: 1 initial plan and 5 replans still invalid after two repairs. The rejections cite
@@ -159,6 +159,25 @@ classes injected into the first answer of **every** plan and replan, symbolic sk
 * Defects are injected at a 100% rate by a test double: this measures the gate's effect on injected defects, not how often a real LLM errs.
 * Switch: `enforce_validator:=false` on `symbolic.launch.py`; `scripts/run_ablation.sh` runs both conditions. Full tables:
   [comparison](docs/results/ablation_defect_injection_symbolic_20/summary.md).
+
+### The same ablation with a real LLM
+`gemini-3.1-flash-lite`, same prompt, scenarios and seed (symbolic backend, one run each). Gate OFF means the first answer and every replan execute as generated.
+
+| | gate ON | gate OFF |
+|---|---|---|
+| mission success (goals verified from ground truth) | 14/20 | **17/20** |
+| missions the executor reported as complete | 14 | 20 |
+| **false successes** (reported complete, goal not achieved) | 0 | 3 |
+| keep-out crossings counted by the simulator | 0 | 2 |
+| missions stopped by a validator rejection | 6 | 0 |
+
+* **The gate lowered the success rate by 3 missions in this run.** The ablation does not show the gate improving completion; it shows what it trades for.
+* Most of the cost is a stricter standard. Of the 13 first answers that ran without a replan, the validator flags 8; **7 are one near-miss**: a straight `zone_a → zone_b` leg passing
+  about 0.24–0.28 m from the keep-out aisle, inside the validator's 0.3 m clearance margin. The simulator counts a crossing only on contact, so those plans succeeded.
+* What the gate buys is **certainty and safety**: with it, all 14 missions reported complete really were. Without it the executor reported 20/20 complete and 17 were; two replans drove
+  straight across the keep-out aisle (2 counted crossings) and 3 missions ended as false successes.
+* The symbolic backend makes a bad plan cheap to execute (a failed skill just triggers a replan); on a physical robot it is not. One run of one model: a 3-mission difference is not statistically established.
+* Full tables: [comparison](docs/results/ablation_llm_gemini-3.1-flash-lite_symbolic_20/summary.md).
 
 ## Limitations (stated up front)
 * The LLM results are one run of one model on the symbolic backend; the Gazebo tables above use the offline reference planner. There is no

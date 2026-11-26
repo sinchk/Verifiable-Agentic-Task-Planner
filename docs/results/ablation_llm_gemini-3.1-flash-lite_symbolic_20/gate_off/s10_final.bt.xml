@@ -1,0 +1,19 @@
+<root BTCPP_format="4" main_tree_to_execute="MainTree">
+  <BehaviorTree ID="MainTree">
+    <Sequence name="n1">
+      <Sequence name="n2">
+        <NavigateTo name="n3" zone="loading_bay" />
+        <PickObject name="n4" object="small_box_1" />
+        <NavigateTo name="n5" zone="staging" />
+        <PlaceObject name="n6" object="small_box_1" zone="staging" />
+      </Sequence>
+      <Sequence name="n7">
+        <NavigateTo name="n8" zone="zone_a" />
+        <PickObject name="n9" object="crate_1" />
+        <NavigateTo name="n10" zone="zone_b" />
+        <PlaceObject name="n11" object="crate_1" zone="zone_b" />
+      </Sequence>
+      <ReportStatus name="n12" message="Mission complete: small box in staging, crate in zone_b." />
+    </Sequence>
+  </BehaviorTree>
+</root>

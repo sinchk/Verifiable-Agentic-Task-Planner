@@ -1,0 +1,17 @@
+<root BTCPP_format="4" main_tree_to_execute="MainTree">
+  <BehaviorTree ID="MainTree">
+    <Sequence name="n1">
+      <RetryUntilSuccessful name="n2" num_attempts="3">
+        <Fallback name="n3">
+          <PickObject name="n4" object="crate_1" />
+          <RequestHumanHelp name="n5" reason="GRASP_FAILED_RETRY_EXHAUSTED" />
+        </Fallback>
+      </RetryUntilSuccessful>
+      <Sequence name="n6">
+        <NavigateTo name="n8" zone="loading_bay" />
+        <NavigateTo name="n9" zone="zone_b" />
+      </Sequence>
+      <PlaceObject name="n7" object="crate_1" zone="zone_b" />
+    </Sequence>
+  </BehaviorTree>
+</root>

@@ -1,0 +1,15 @@
+<root BTCPP_format="4" main_tree_to_execute="MainTree">
+  <BehaviorTree ID="MainTree">
+    <Fallback name="n1">
+      <Sequence name="n2">
+        <NavigateTo name="n3" zone="zone_b" />
+        <PlaceObject name="n4" object="crate_1" zone="zone_b" />
+      </Sequence>
+      <Sequence name="n5">
+        <NavigateTo name="n6" zone="staging" />
+        <PlaceObject name="n7" object="crate_1" zone="staging" />
+        <RequestHumanHelp name="n8" reason="Placement failed twice at zone_b; object moved to staging." />
+      </Sequence>
+    </Fallback>
+  </BehaviorTree>
+</root>

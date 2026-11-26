@@ -1,0 +1,19 @@
+<root BTCPP_format="4" main_tree_to_execute="MainTree">
+  <BehaviorTree ID="MainTree">
+    <Sequence name="n1">
+      <Fallback name="n2">
+        <CheckZoneClear name="n4" zone="loading_bay" />
+        <Sequence name="n5">
+          <NavigateTo name="n6" zone="staging" />
+          <RetryUntilSuccessful name="n7" num_attempts="3">
+            <PickObject name="n11" object="small_box_1" />
+          </RetryUntilSuccessful>
+          <NavigateTo name="n8" zone="staging" />
+          <PlaceObject name="n9" object="small_box_1" zone="staging" />
+          <ReportStatus name="n10" message="Loading bay cleared." />
+        </Sequence>
+      </Fallback>
+      <ReportStatus name="n3" message="Mission complete." />
+    </Sequence>
+  </BehaviorTree>
+</root>

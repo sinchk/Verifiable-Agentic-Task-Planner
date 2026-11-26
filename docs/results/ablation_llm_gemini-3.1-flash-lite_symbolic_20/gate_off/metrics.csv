@@ -1,0 +1,21 @@
+backend,escalations,fault,fault_fired,final_nodes,first_attempt_valid,goals_satisfied,id,initial_nodes,message,n_fault_events,not_evaluated,plan_latency_s,plan_repairs,recovered_from_fault,replan_latency_s,replans,safety_violations,success,template,tree_completed,validation_ms,wall_s
+gemini:gemini-3.1-flash-lite,0,none,False,14,False,True,s00,14,mission tree completed,0,False,2.497,0,False,0.0,0,0,True,conditional_clear_deliver,True,3.761,3.6
+gemini:gemini-3.1-flash-lite,0,none,False,9,False,True,s01,9,mission tree completed,0,False,2.849,0,False,0.0,0,0,True,simple_delivery,True,2.27,3.48
+gemini:gemini-3.1-flash-lite,0,none,False,14,False,True,s02,14,mission tree completed,0,False,2.604,0,False,0.0,0,0,True,two_item,True,2.526,4.06
+gemini:gemini-3.1-flash-lite,0,none,False,7,True,True,s03,7,mission tree completed,0,False,2.39,0,False,0.0,0,0,True,geofence,True,1.527,5.74
+gemini:gemini-3.1-flash-lite,0,none,False,14,False,True,s04,14,mission tree completed,0,False,10.34,0,False,0.0,0,0,True,conditional_clear_deliver,True,1.81,14.17
+gemini:gemini-3.1-flash-lite,0,none,False,7,True,True,s05,7,mission tree completed,0,False,51.016,0,False,0.0,0,0,True,simple_delivery,True,1.654,52.57
+gemini:gemini-3.1-flash-lite,0,none,False,14,False,True,s06,14,mission tree completed,0,False,3.122,0,False,0.0,0,0,True,two_item,True,2.23,9.11
+gemini:gemini-3.1-flash-lite,0,none,False,8,True,True,s07,8,mission tree completed,0,False,9.732,0,False,0.0,0,0,True,geofence,True,1.033,10.49
+gemini:gemini-3.1-flash-lite,0,obstacle_spawn,True,14,False,False,s08,14,mission tree completed,1,False,3.108,0,False,0.0,0,0,False,conditional_clear_deliver,True,1.766,6.09
+gemini:gemini-3.1-flash-lite,0,grasp_fail,True,8,True,True,s09,8,mission tree completed,1,False,2.112,0,True,0.0,0,0,True,simple_delivery,True,1.052,8.14
+gemini:gemini-3.1-flash-lite,0,obstacle_spawn,True,12,False,True,s10,12,mission tree completed,1,False,2.572,0,True,0.0,0,0,True,two_item,True,1.497,11.68
+gemini:gemini-3.1-flash-lite,0,grasp_fail,True,7,True,True,s11,7,mission tree completed,1,False,2.516,0,True,0.0,0,0,True,geofence,True,1.019,3.53
+gemini:gemini-3.1-flash-lite,0,nav_block,True,16,True,True,s12,15,mission tree completed,1,False,5.328,0,True,3.68,2,0,True,conditional_clear_deliver,True,1.313,16.35
+gemini:gemini-3.1-flash-lite,1,place_fail,True,8,True,False,s13,7,mission tree completed,1,False,2.249,0,False,2.093,1,1,False,simple_delivery,True,1.256,10.93
+gemini:gemini-3.1-flash-lite,0,grasp_fail,True,13,False,True,s14,14,mission tree completed,1,False,2.761,0,True,105.645,1,0,True,two_item,True,1.677,111.03
+gemini:gemini-3.1-flash-lite,0,obstacle_spawn,True,4,True,True,s15,7,mission tree completed,1,False,2.093,0,True,2.578,2,0,True,geofence,True,0.776,13.52
+gemini:gemini-3.1-flash-lite,0,nav_block,True,11,False,True,s16,14,mission tree completed,1,False,2.642,0,True,2.784,3,0,True,conditional_clear_deliver,True,1.4,19.02
+gemini:gemini-3.1-flash-lite,1,place_fail,True,8,True,False,s17,7,mission tree completed,1,False,1.848,0,False,2.918,1,1,False,simple_delivery,True,1.083,15.42
+gemini:gemini-3.1-flash-lite,0,obstacle_spawn,True,13,False,True,s18,13,mission tree completed,1,False,2.386,0,True,0.0,0,0,True,two_item,True,1.716,5.13
+gemini:gemini-3.1-flash-lite,0,grasp_fail,True,9,True,True,s19,7,mission tree completed,1,False,2.141,0,True,2.774,1,0,True,geofence,True,0.78,13.28

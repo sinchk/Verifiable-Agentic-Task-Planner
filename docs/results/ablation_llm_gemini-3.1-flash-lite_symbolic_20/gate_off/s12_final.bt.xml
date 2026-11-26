@@ -1,0 +1,26 @@
+<root BTCPP_format="4" main_tree_to_execute="MainTree">
+  <BehaviorTree ID="MainTree">
+    <Sequence name="n1">
+      <Sequence name="n2">
+        <NavigateTo name="n3" zone="staging" />
+        <RetryUntilSuccessful name="n4" num_attempts="2">
+          <PlaceObject name="n6" object="small_box_1" zone="staging" />
+        </RetryUntilSuccessful>
+        <Fallback name="n5">
+          <CheckHolding name="n7" object="small_box_1" />
+          <ReportStatus name="n12" message="Small box placed in staging." />
+        </Fallback>
+      </Sequence>
+      <Fallback name="n8">
+        <CheckZoneClear name="n9" zone="loading_bay" />
+        <RequestHumanHelp name="n10" reason="Loading bay blocked and cannot be cleared automatically." />
+      </Fallback>
+      <Sequence name="n13">
+        <NavigateTo name="n14" zone="zone_a" />
+        <PickObject name="n15" object="crate_1" />
+        <NavigateTo name="n16" zone="zone_b" />
+        <PlaceObject name="n17" object="crate_1" zone="zone_b" />
+      </Sequence>
+    </Sequence>
+  </BehaviorTree>
+</root>
